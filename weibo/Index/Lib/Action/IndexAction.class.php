@@ -68,13 +68,14 @@ class IndexAction extends CommonAction {
 		}
 		//原微博ID
 		$id = $this->_post('id', 'intval');
+		$tid = $this->_post('tid', 'intval');
 		//转发内容
 		$content = $this->_post('content');
 
 		//提取插入数据
 		$data = array(
 			'content' => $content,
-			'isturn' => $id,
+			'isturn' => $tid ? $tid : $id,
 			'time' => time(),
 			'uid' => session('uid')
 			);
@@ -84,6 +85,10 @@ class IndexAction extends CommonAction {
 		if($db->data($data)->add()) {
 			//原微博转发数+1
 			$db->where(array('id' => $id))->setInc('turn');
+			if($tid) {
+				$db->where(array('id' => $tid))->setInc('turn');
+			}
+
 			//用户发布微博数+1
 			M('userinfo')->where(array('uid' => session('uid')))->setInc('weibo');
 
