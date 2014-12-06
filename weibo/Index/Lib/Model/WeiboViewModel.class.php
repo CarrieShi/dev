@@ -24,10 +24,11 @@ Class WeiboViewModel extends ViewModel {
 	/**
 	 * 返回查询所有记录
 	 * @param array $where 查询条件
+	 * @param string $limit 限制条件
 	 * @return
 	 */
-	public function getAll($where) {
-		$result = $this->where($where)->order('time DESC')->select();
+	public function getAll($where, $limit) {
+		$result = $this->where($where)->order('time DESC')->limit($limit)->select();
 		//echo $this->getLastSql(); //查看sql
 		
 		//重组结果集数组，得到转发微博

@@ -10,7 +10,8 @@ class IndexAction extends CommonAction {
 	public function index () {		
 		//实例化微博视图模型
 		$db = D('WeiboView');
-		
+		import('ORG.Util.Page');// 导入分页类
+
 		//获取当前用自身ID于当前用户所有关注好友的ID
 		$uid = array(session('uid'));
 		$where = array('fans' => session('uid'));
@@ -22,11 +23,16 @@ class IndexAction extends CommonAction {
 		}
 		//组合WHERE条件，条件为当前用自身ID于当前用户所有关注好友的ID
 		$where = array('uid' => array('IN', implode(',',$uid)));
+		//统计总条数，用于分页
+		$count = $db->where($where)->count();
+		$page = new Page($count,20);// 实例化分页类 传入总记录数和每页显示的记录数
+		$limit = $page->firstRow.','.$page->listRows;
 
 		//读取所有微博
-		$result = $db->getAll($where);
+		$result = $db->getAll($where, $limit);
 
 		$this->weibo = $result;
+		$this->page = $page->show();// 分页显示输出
 		$this->display();
 	}
 
