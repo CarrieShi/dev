@@ -404,6 +404,8 @@ function check (str) {
 
 /**
  * 替换微博内容，去除 <a> 链接与表情图片
+ * js 正则：括号括起来的是原子组，用$n代替
+ * ig(全文查找、忽略大小写)
  */
 function replace_weibo (content) {
 	content = content.replace(/<img.*?title=['"](.*?)['"].*?\/?>/ig, '[$1]');

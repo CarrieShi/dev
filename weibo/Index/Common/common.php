@@ -72,7 +72,8 @@ function replace_weibo ($content) {
 	$preg = '/(?:http:\/\/)?([\w.]+[\w\/]*\.[\w.]+[\w\/]*\??[\S=\&\+\%]*)/is';
 	$content = preg_replace($preg, '<a href="http://\\1" target="_blank">\\1</a>', $content);
 	
-	//给用户加上 <a> 链接
+	//给用户加上 <a> 链接 
+	//todo：如果以@user结尾，不加空格，会@不到
 	$preg = '/@(\S+)\s/is';//\S 表示除空格以外的字符 \s 表示空格
 	$content = preg_replace($preg, '<a href="' . __APP__ . '/User/\\1">\\1</a>', $content);
 
