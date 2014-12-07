@@ -119,6 +119,48 @@ class IndexAction extends CommonAction {
 	}
 
 	/**
+	 * 评论
+	 */
+	public function comment () {
+		if(!$this->isAjax()) {
+			halt('页面不存在！');
+		}
+		//提取评论数据
+		$data = array(
+			'content' => $this->_post('content'),
+			'time' => time(),
+			'uid' => $this->_post('uid'),//session('uid')
+			'wid' => $this->_post('wid', 'intval')
+			);
+
+		//读取评论用户信息
+		$fields = array('username', 'face50' => 'face', 'uid');
+		$where = array('uid' => $data['uid']);
+		$user = M('userinfo')->where($where)->field($fields)->find();
+		
+		//组合评论样式并以字符串返回
+		$str = '';
+		$str .= '<dl class="comment_content">';
+		$str .= '<dt><a href="' . U('/' . $data['uid']) . '">';
+		$str .= '<img src="';
+		$str .= __ROOT__;
+		if($user['face']) {
+			$str .= '/Uploads/Face/' . $user['face']; 
+		} else {
+			$str .= '/Public/Images/noface.gif';
+		}
+		$str .= '" alt="' . $user['username'] . '" width="30" height="30"/>';
+		$str .= '</a></dt><dd>';
+		$str .= '<a href="' . U('/' . $data['uid']) . '" class="comment_name">';
+		$str .= $user['username'] . '</a> : ' . $data['content'];
+		$str .= '&nbsp;&nbsp;( ' . time_format($data['time']) . ' )';
+		$str .= '<div class="reply">';
+		$str .= '<a href="">回复</a>';
+		$str .= '</div></dd></dl>';
+		echo $str;
+	}
+
+	/**
 	 * 退出登录
 	 */
 	public function loginOut () {		
