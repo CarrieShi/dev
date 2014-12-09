@@ -359,7 +359,8 @@ $(function () {
             for (var i = 0; i < phizImg.length; i++){
             	phizImg[i].onclick = function () {
 				var content = $('textarea[sign = '+sign+']');
-				content.val(content.val() + '[' + $(this).attr('title') + ']');
+				//content.val(content.val() + '[' + $(this).attr('title') + ']');
+				insertText(content[0],'[' + $(this).attr('title') + ']');
 				$('#phiz').hide();
             	}
             }
@@ -411,4 +412,26 @@ function replace_weibo (content) {
 	content = content.replace(/<img.*?title=['"](.*?)['"].*?\/?>/ig, '[$1]');
 	content = content.replace(/<a.*?>(.*?)<\/a>/ig, '$1');
 	return content.replace(/<span.*?>\&nbsp;(\/\/)\&nbsp;<\/span>/ig, '$1');
+}
+
+/**
+ * textarea 从光标处插入
+ * IE支持document.selection
+ * Firefox，Chrome,Safari以及Opera都有selectionStart和selectionEnd属性
+ */
+function insertText(obj,str) {
+    if (document.selection) {
+        var sel = document.selection.createRange();
+        sel.text = str;
+    } else if (typeof obj.selectionStart === 'number' && typeof obj.selectionEnd === 'number') {
+        var startPos = obj.selectionStart,
+            endPos = obj.selectionEnd,
+            cursorPos = startPos,
+            tmpStr = obj.value;
+        obj.value = tmpStr.substring(0, startPos) + str + tmpStr.substring(endPos, tmpStr.length);
+        cursorPos += str.length;
+        obj.selectionStart = obj.selectionEnd = cursorPos;
+    } else {
+        obj.value += str;
+    }
 }
