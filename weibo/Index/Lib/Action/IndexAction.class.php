@@ -213,10 +213,19 @@ class IndexAction extends CommonAction {
 		if(!$this->isAjax()) {
 			halt('页面不存在！');
 		}
-		sleep(1);
+		//sleep(1);
 		$wid = $this->_post('wid', 'intval');
 		$where = array('wid' => $wid);
-		$result = D('CommentView')->where($where)->select();
+
+		//数据总条数
+		$count = M('comment')->where($where)->count();
+		//每页显示条数
+		$p = 2;
+		//数据可分的总页数
+		$total = ceil($count / $p);
+		$page = isset($_POST['page']) ? $this->_post('page', 'intval') : 1;
+		$limit  = $page < 2 ? '0,' . $p : $p * ($page - 1) . ',' . $p;
+		$result = D('CommentView')->where($where)->order('time DESC')->limit($limit)->select();
 
 		if($result) {
 			$str = '';
@@ -239,6 +248,24 @@ class IndexAction extends CommonAction {
 				$str .= '<a href="">回复</a>';
 				$str .= '</div></dd></dl>';
 			}
+
+			if($total > 1) {
+				$str .= '<dl class="comment-page">';
+				switch ($page) {
+					case $page > 1 && $page < $total :
+						$str .= '<dd page="'. ($page - 1) .'" wid="' . $wid . '">上一页</dd>';
+						$str .= '<dd page="'. ($page + 1) .'" wid="' . $wid . '">下一页</dd>';
+						break;
+					case $page == 1 :
+						$str .= '<dd page="'. ($page + 1) .'" wid="' . $wid . '">下一页</dd>';
+						break;
+					case $page == $total :
+						$str .= '<dd page="'. ($page - 1) .'" wid="' . $wid . '">上一页</dd>';
+						break;
+				}
+				$str .= '</dl>';
+			}
+
 			echo $str;
 		} else {
 			echo 'false';

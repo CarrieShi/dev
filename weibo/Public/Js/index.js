@@ -285,6 +285,8 @@ $(function () {
 
 	/**
 	 * 评论异步分类处理
+	 * 
+	 * 将来的事件——live
 	 */
 	$('.comment-page dd').live('click', function () {
 		var commentList = $(this).parents('.comment_list');
