@@ -78,7 +78,10 @@ function replace_weibo ($content) {
 	$content = preg_replace($preg, '<a href="' . __APP__ . '/User/\\1">\\1</a>', $content);
 
 	//提取微博内容中所有表情文件
-	$preg = '/\[(\S+)\]/is';
+	//原模式'/\[(\S]+)\]/is'，在多个表情时会有些问题...
+	//+ 贪婪性 引擎会匹配到最后，回溯，返回第一个和最后一个匹配到的之间的内容
+	//? 懒惰性 比配最少的内容，如果后面还有符合模式的内容，也不会被返回
+	$preg = '/\[(\S[^\]]+)\]/is';
 	preg_match_all($preg, $content, $arr);
 	
 	//载入表情包数组文件
