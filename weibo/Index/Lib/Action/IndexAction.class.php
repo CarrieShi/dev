@@ -15,6 +15,13 @@ class IndexAction extends CommonAction {
 		//获取当前用自身ID于当前用户所有关注好友的ID
 		$uid = array(session('uid'));
 		$where = array('fans' => session('uid'));
+
+		if(isset($_GET['gid'])) {
+			$gid = $this->_get('gid', 'intval');
+			$where['gid'] = $gid;
+			$uid = array();
+		}
+
 		$result = M('follow')->field('follow')->where($where)->select();
 		if($result) {
 			foreach ($result as $v) {
