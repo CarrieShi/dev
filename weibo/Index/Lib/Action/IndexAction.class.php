@@ -207,6 +207,45 @@ class IndexAction extends CommonAction {
 	}
 
 	/**
+	 * 异步获取评论
+	 */
+	public function getComment() {
+		if(!$this->isAjax()) {
+			halt('页面不存在！');
+		}
+		sleep(1);
+		$wid = $this->_post('wid', 'intval');
+		$where = array('wid' => $wid);
+		$result = D('CommentView')->where($where)->select();
+
+		if($result) {
+			$str = '';
+			foreach ($result as $v) {
+				$str .= '<dl class="comment_content">';
+				$str .= '<dt><a href="' . U('/' . $v['uid']) . '">';
+				$str .= '<img src="';
+				$str .= __ROOT__;
+				if($user['face']) {
+					$str .= '/Uploads/Face/' . $v['face']; 
+				} else {
+					$str .= '/Public/Images/noface.gif';
+				}
+				$str .= '" alt="' . $v['username'] . '" width="30" height="30"/>';
+				$str .= '</a></dt><dd>';
+				$str .= '<a href="' . U('/' . $v['uid']) . '" class="comment_name">';
+				$str .= $v['username'] . '</a> : ' . replace_weibo($v['content']);
+				$str .= '&nbsp;&nbsp;( ' . time_format($v['time']) . ' )';
+				$str .= '<div class="reply">';
+				$str .= '<a href="">回复</a>';
+				$str .= '</div></dd></dl>';
+			}
+			echo $str;
+		} else {
+			echo 'false';
+		}
+	}
+
+	/**
 	 * 退出登录
 	 */
 	public function loginOut () {		
