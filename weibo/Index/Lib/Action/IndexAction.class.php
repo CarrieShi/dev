@@ -126,7 +126,42 @@ class IndexAction extends CommonAction {
 		} else {
 			$this->error('转发失败，请重试...');
 		}
+	}
 
+	/**
+	 * 收藏微博
+	 */
+	public function keep () {
+		if(! $this->isAjax()) {
+			halt('页面不存在！');
+		}
+
+		$wid = $this->_post('wid', 'intval');
+		$uid = session('uid');
+		
+		$db = M('keep');
+
+		//检测用户是否收藏过该微博
+		$where = array('wid' => $wid, 'uid' => $uid);
+		if($db->where($where)->getField('id')) {
+			echo -1;
+			exit();
+		}
+
+		//keep表记录收藏的用户
+		$data = array(
+			'uid' => $uid,
+			'time' => time(),//$_SERVER['REQUEST_TIME']
+			'wid' => $wid
+			);
+
+		if($db->data($data)->add()) {
+			//收藏成功时，该微博的收藏数keep+1
+			M('weibo')->where(array('id' => $wid))->setInc('keep');//setDec() : -1
+			echo 1;
+		} else {
+			echo 0;
+		}
 	}
 
 	/**
