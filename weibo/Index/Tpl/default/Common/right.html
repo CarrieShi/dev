@@ -26,22 +26,44 @@
 </userinfo>
     <div class="maybe">
         <fieldset>
-            
+            <php>
+                $db = M('follow');
+                $where = array('fans' => session('uid'));
+                $follow = $db->where($where)->field('follow')->select();
+
+                foreach ($follow as $k => $v) {
+                    $follow[$k] = $v['follow'];
+                }
+                
+                $sql = 'SELECT uid, username, face50 AS face, COUNT(f.follow) AS `count`
+                        FROM hd_follow f LEFT JOIN hd_userinfo u ON u.uid = f.follow
+                        WHERE f.fans IN ('. implode(',', $follow) .') /*我关注的ID-->关注的用户*/
+                            AND f.follow NOT IN ('. implode(',', $follow) .') /*而不是关注 我关注的ID 的用户*/
+                            AND f.follow <> '. session('uid') .' /*也不是我关注的其他用户*/
+                        GROUP BY uid
+                        ORDER BY `count` DESC LIMIT 4';
+
+                $friend = $db->query($sql);
+
+                //echo $db->getLastSql();
+            </php>
             <legend>可能感兴趣的人</legend>
             <ul>
                 <maybe uid='$_SESSION["uid"]'>
+                    <foreach name='friend' item='v'>
                     <li>
                         <dl>
                             <dt>
-                                <a href="{:U('/' . $uid)}">
-                                    <img src="<if condition='$face'>__ROOT__/Uploads/Face/{$face}<else/>__PUBLIC__/Images/noface.gif</if>" width='30' height='30'/>
+                                <a href="{:U('/' . $v['uid'])}">
+                                    <img src="<if condition='$v.face'>__ROOT__/Uploads/Face/{$v.face}<else/>__PUBLIC__/Images/noface.gif</if>" width='30' height='30'/>
                                 </a>
                             </dt>
-                            <dd><a href="{:U('/' . $uid)}">{$username}</a></dd>
-                            <dd>共{$count}个共同好友</dd>
+                            <dd><a href="{:U('/' . $v['uid'])}">{$result.username}</a></dd>
+                            <dd>共{$v.count}个共同好友</dd>
                         </dl>
-                        <span class='heed_btn add-fl' uid='{$uid}'><strong>+&nbsp;</strong>关注</span>
+                        <span class='heed_btn add-fl' uid='{$v.uid}'><strong>+&nbsp;</strong>关注</span>
                     </li>
+                    </foreach>
                 </maybe>
             </ul>
         </fieldset>
