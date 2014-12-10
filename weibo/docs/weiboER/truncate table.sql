@@ -1,0 +1,10 @@
+TRUNCATE TABLE `hd_atme`;
+TRUNCATE TABLE `hd_comment`;
+TRUNCATE TABLE `hd_follow`;
+TRUNCATE TABLE `hd_group`;
+TRUNCATE TABLE `hd_keep`;
+TRUNCATE TABLE `hd_letter`;
+TRUNCATE TABLE `hd_picture`;
+TRUNCATE TABLE `hd_user`;
+TRUNCATE TABLE `hd_userinfo`;
+TRUNCATE TABLE `hd_weibo`;
