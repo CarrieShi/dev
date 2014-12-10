@@ -1,21 +1,26 @@
 <div id="right">
     <div class="edit_tpl"><a href="" class='set_model'></a></div> 
 <userinfo id='$_SESSION["uid"]'>
+    <php>
+        $where = array('uid' => session('uid'));
+        $field = array('username', 'face80' => 'face', 'follow', 'fans', 'weibo', 'weibo', 'uid');
+        $userinfo = M('userinfo')->where($where)->field($field)->find();
+    </php>
     <dl class="user_face">
         <dt>
-            <a href="{:U('/' . $uid)}">
-                <img src="<if condition='$face'>__ROOT__/Uploads/Face/{$face}<else/>__PUBLIC__/Images/noface.gif</if>" width='80' height='80' alt="{$username}" />
+            <a href="{:U('/' . $userinfo['uid'])}">
+                <img src="<if condition='$userinfo.face'>__ROOT__/Uploads/Face/{$userinfo.face}<else/>__PUBLIC__/Images/noface.gif</if>" width='80' height='80' alt="{$username}" />
             </a>
         </dt>
         <dd>
-            <a href="{:U('/' . $uid)}">{$username}</a>
+            <a href="{:U('/' . $userinfo['uid'])}">{$userinfo.username}</a>
         </dd>
     </dl>
     <ul class='num_list'>
-        <li><a href="{:U('follow/' . $uid)}"><strong>{$follow}</strong><span>关注</span></a></li>
-        <li><a href="{:U('fans/' . $uid)}"><strong>{$fans}</strong><span>粉丝</span></a></li>
+        <li><a href="{:U('follow/' . $userinfo['uid'])}"><strong>{$userinfo.follow}</strong><span>关注</span></a></li>
+        <li><a href="{:U('fans/' . $userinfo['uid'])}"><strong>{$userinfo.fans}</strong><span>粉丝</span></a></li>
         <li class='noborder'>
-            <a href="{:U('/' . $uid)}"><strong>{$weibo}</strong><span>微博</span></a>
+            <a href="{:U('/' . $userinfo['uid'])}"><strong>{$userinfo.weibo}</strong><span>微博</span></a>
         </li>
     </ul>
 </userinfo>
