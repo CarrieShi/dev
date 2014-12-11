@@ -31,5 +31,11 @@ return array(
     'URL_ROUTE_RULES' => array(    //定义路由规则
         ':id\d' => 'User/index',
         ),
+
+    //自定义标签
+    'TAGLIB_LOAD' => true, //加载自定义标签库
+    'APP_AUTOLOAD_PATH' =>'@.Taglib', //自动加载 @.会映射到weibo/Index/Lib
+    'TAGLIB_BUILD_IN' => 'Cx,Hdtags', //加入系统标签库 
+
 );
 ?>
