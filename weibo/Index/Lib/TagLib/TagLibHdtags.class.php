@@ -39,7 +39,13 @@ class TagLibHdtags extends Taglib {
 		$str .= 'foreach ($follow as $k => $v) :';
 		$str .= '$follow[$k] = $v["follow"];';
 		$str .= 'endforeach;';
-		$str .= '$sql = "SELECT uid, username, face50 AS face, COUNT(f.follow) AS `count`  FROM hd_follow f LEFT JOIN hd_userinfo u ON u.uid = f.follow WHERE f.fans IN (". implode(\',\', $follow) .") AND f.follow NOT IN (". implode(\',\', $follow) .") AND f.follow <> ". $uid ." GROUP BY uid ORDER BY `count` DESC LIMIT 4";';
+		$str .= '$sql = "SELECT uid, username, face50 AS face, COUNT(f.follow) AS `count`  
+						FROM hd_follow f LEFT JOIN hd_userinfo u ON u.uid = f.follow 
+						WHERE f.fans IN (". implode(\',\', $follow) .")  /*我关注的ID-->关注的用户*/
+							AND f.follow NOT IN (". implode(\',\', $follow) .")  /*而不是关注 我关注的ID 的用户*/
+							AND f.follow <> ". $uid ."  /*也不是我关注的其他用户*/
+						GROUP BY uid 
+						ORDER BY `count` DESC LIMIT 4";';
 		$str .= '$friend = $db->query($sql);';
 		$str .= 'foreach ($friend as $v) :';		
 		$str .= 'extract($v);?>';
