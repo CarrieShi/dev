@@ -11,7 +11,33 @@ Class UserAction extends CommonAction {
 	public function index () {
 		$id = $this->_get('id', 'intval');
 
-		echo $id;
+		//读取用户个人信息
+		$where = array('uid'=>$id);
+		$userinfo = M('userinfo')->where($where)->field('truename,face50,face80,style', true)->find();
+		
+		if(!$userinfo) {
+			header('Content-Type:text/html;Charset=UTF-8');
+			redirect(__ROOT__, 3, '用户不存在，正在为您跳转到首页');
+			exit();
+		}
+
+		//实例化微博视图模型
+		$db = D('WeiboView');
+		import('ORG.Util.Page');// 导入分页类
+
+		//统计总条数，用于分页
+		$count = $db->where($where)->count();
+		$page = new Page($count,20);// 实例化分页类 传入总记录数和每页显示的记录数
+		$limit = $page->firstRow.','.$page->listRows;
+
+		//读取所有微博
+		$result = $db->getAll($where, $limit);
+
+		$this->userinfo = $userinfo;
+		$this->weibo = $result;
+		$this->page = $page->show();// 分页显示输出
+		
+		$this->display();
 	}
 
 	/**
