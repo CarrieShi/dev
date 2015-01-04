@@ -17,7 +17,7 @@ Class WeiboViewModel extends ViewModel {
 			),
 		'picture' => array(
 			'mini', 'medium', 'max',
-			'_on' => 'weibo.id = picture.wid'//1)结合面的left join， 添加关联的字段
+			'_on' => 'weibo.id = picture.wid'//1）结合前面的left join， 添加关联的字段
 			)
 		);
 

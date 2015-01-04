@@ -21,20 +21,18 @@ Class UserAction extends CommonAction {
 			exit();
 		}
 
-		//实例化微博视图模型
-		$db = D('WeiboView');
-		import('ORG.Util.Page');// 导入分页类
+		$this->userinfo = $userinfo;
+
+		// 导入分页类
+		import('ORG.Util.Page');
 
 		//统计总条数，用于分页
-		$count = $db->where($where)->count();
+		$count = M('weibo')->where($where)->count();
 		$page = new Page($count,20);// 实例化分页类 传入总记录数和每页显示的记录数
 		$limit = $page->firstRow.','.$page->listRows;
 
 		//读取所有微博
-		$result = $db->getAll($where, $limit);
-
-		$this->userinfo = $userinfo;
-		$this->weibo = $result;
+		$this->weibo = D('WeiboView')->getAll($where, $limit);
 		$this->page = $page->show();// 分页显示输出
 		
 		$this->display();

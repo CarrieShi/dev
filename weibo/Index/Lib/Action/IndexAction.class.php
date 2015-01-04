@@ -66,7 +66,7 @@ class IndexAction extends CommonAction {
 				M('picture')->data($img)->add();
 			}
 			M('userinfo')->where(array('uid' => session('uid')))->setInc('weibo');
-			$this->success('发布成功', U('index'));
+			$this->success('发布成功', $_SERVER['HTTP_REFERER']);
 		} else {
 			$this->error('发布失败，请重试...');
 		}
@@ -122,7 +122,7 @@ class IndexAction extends CommonAction {
 					$db->where(array('id' => $id))->setInc('comment');
 				}
 			}
-			$this->success('转发成功', U('index'));
+			$this->success('转发成功', $_SERVER['HTTP_REFERER']);
 		} else {
 			$this->error('转发失败，请重试...');
 		}
