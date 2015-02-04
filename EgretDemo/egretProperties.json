@@ -1,7 +1,7 @@
 {
-    "document_class": "MaskTest",
+    "document_class": "GUIControlTest",
     "modules": [
-        { "name": "core"},
+        {"name": "core"},
         {"name": "socket"},
         {"name": "gui"}
     ],

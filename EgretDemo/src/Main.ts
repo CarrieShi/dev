@@ -41,7 +41,7 @@ class Main extends egret.DisplayObjectContainer{
         //注入自定义的素材解析器*****************GUI
         egret.Injector.mapClass("egret.gui.IAssetAdapter",AssetAdapter);
         //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。***************GUI
-        egret.gui.Theme.load("resource/theme.thm");
+        egret.gui.Theme.load("resource/theme/theme.thm");
         //设置加载进度界面
         this.loadingView  = new LoadingUI();
         this.stage.addChild(this.loadingView);
@@ -50,7 +50,7 @@ class Main extends egret.DisplayObjectContainer{
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE,this.onConfigComplete,this);
         RES.loadConfig("resource/resource.json","resource/");
         //初始化themeResource资源加载库***************GUI
-        RES.loadConfig("resource/themeResource.json","resource/");
+        RES.loadConfig("resource/resource_simple.json","resource/");
     }
     /**
      * 配置文件加载完成,开始预加载preload资源组。
