@@ -315,6 +315,38 @@ class IndexAction extends CommonAction {
 	}
 
 	/**
+	 * 异步删除微博
+	 */
+	public function delWeibo () {
+		if(! $this->isAjax()) {
+			halt('页面不存在！');
+		}
+
+		//获取删除微博的ID
+		$wid = $this->_post('wid', 'intval');
+		if(M('weibo')->delete($wid)) {
+			//如果删除的微博含有图片
+			$db = M('picture');
+			$img = $db->where(array('wid' => $wid))->find();
+
+			//对图片表记录进行删除
+			if($img) {
+				$db->delete($img['id']);
+
+				//删除图片文件
+				@unlink('./Uploads/Pic/' . $img['mini']);
+				@unlink('./Uploads/Pic/' . $img['medium']);
+				@unlink('./Uploads/Pic/' . $img['max']);
+			}
+
+			echo 1;
+		} else {
+			echo 0;
+		}
+	}
+
+
+	/**
 	 * 退出登录
 	 */
 	public function loginOut () {		
