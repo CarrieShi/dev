@@ -109,9 +109,36 @@ Class UserAction extends CommonAction {
 			$where = array('uid' => array('IN', $uids));
 			$field = array('face50' => 'face', 'username', 'sex', 'location', 'follow', 'fans', 'weibo', 'uid');
 			$users = M('userinfo')->where($where)->field($field)->select();
-			p($users);exit;
+
+			//分配用户信息到视图
+			$this->users = $users;
 		}
+
+
+		//重复请求？查看登陆用户的好友的好友和登陆用户的关系
+		$where = array('fans' => session('uid'));
+		$follow = $db->field('follow')->where($where)->select();
+
+		if($follow) {
+			foreach ($follow as $k => $v) {
+				$follow[$k] = $v['follow'];
+			}
+		}
+
+		$where = array('follow' => session('uid'));
+		$fans = $db->field('fans')->where($where)->select();
+
+		if($fans) {
+			foreach ($fans as $k => $v) {
+				$fans[$k] = $v['fans'];
+			}
+		}
+
+		$this->follow = $follow;
+		$this->fans = $fans;
 		
+		$this->type = $type;
+		$this->count = $count;
 		$this->page = $page->show();// 分页显示输出
 		$this->display();
 	}
