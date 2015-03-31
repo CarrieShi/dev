@@ -101,6 +101,38 @@ Class CommonAction extends Action {
 		}
 
 	}
+
+	/**
+	 * 异步移除关注与粉丝
+	 */
+	public function delFollow() {
+		if( ! $this->isAjax()) {
+			halt('页面不存在！');
+		}
+		
+		$uid = $this->_post('uid', 'intval');
+		$type = $this->_post('type', 'intval');
+		$where = $type ? array('follow' => $uid, 'fans' => session('uid')) : array('follow' => session('uid'), 'fans' => $uid);
+		
+		if(M('follow')->where($where)->delete()) {
+			$db = M('userinfo');
+			$where1 = array('uid' => session('uid'));
+			$where2 = array('uid' => $uid);
+
+			if($type) {
+				$db->where($where1)->setDec('follow');
+				$db->where($where2)->setDec('fans');
+			} else {
+				$db->where($where1)->setDec('fans');
+				$db->where($where2)->setDec('follow');
+			}
+
+			echo 1;
+		} else {
+			echo 0;
+		}
+	}
+
 	/**
 	 * 图片上传处理
 	 * @param  [String] $path   [保存文件夹名称]
