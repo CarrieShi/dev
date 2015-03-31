@@ -30,6 +30,8 @@ return array(
     'URL_ROUTER_ON' => true,        //开启URL路由功能
     'URL_ROUTE_RULES' => array(    //定义路由规则
         ':id\d' => 'User/index',
+        'follow/:uid\d' => array('User/followList', 'type=1'),
+        'fans/:uid\d' => array('User/followList', 'type=0')
         ),
 
     //自定义标签

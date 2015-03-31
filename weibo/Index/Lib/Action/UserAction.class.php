@@ -77,6 +77,46 @@ Class UserAction extends CommonAction {
 	}
 
 	/**
+	 * 用户关注和粉丝列表
+	 */
+	public function followList() {
+		$uid = $this->_get('uid', 'intval');
+
+		//区分关注与粉丝(1:关注；2:粉丝)
+		$type = $this->_get('type', 'intval');
+
+		// 导入分页类
+		import('ORG.Util.Page');
+		$db = M('follow');
+
+		//根据type，读取用户关注与粉丝ID
+		$where = $type ? array('fans' => $uid) : array('follow' => $uid);
+		$field = $type ? 'follow' : 'fans';
+		$count = $db->where($where)->count();
+		$page = new Page($count,20);// 实例化分页类 传入总记录数和每页显示的记录数
+		$limit = $page->firstRow.','.$page->listRows;
+
+		//读取所有微博
+		$uids = $db->field($field)->where($where)->limit($limit)->select();
+
+		if($uids) {
+			//把用户关注或者粉丝ID重组为一维数组
+			foreach ($uids as $k => $v) {
+				$uids[$k] = $v[$field];
+			}
+
+			//提取用户信息
+			$where = array('uid' => array('IN', $uids));
+			$field = array('face50' => 'face', 'username', 'sex', 'location', 'follow', 'fans', 'weibo', 'uid');
+			$users = M('userinfo')->where($where)->field($field)->select();
+			p($users);exit;
+		}
+		
+		$this->page = $page->show();// 分页显示输出
+		$this->display();
+	}
+
+	/**
 	 * 空操作
 	 */
 	public function _empty($name) {
