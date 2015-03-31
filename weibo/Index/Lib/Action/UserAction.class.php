@@ -34,7 +34,45 @@ Class UserAction extends CommonAction {
 		//读取所有微博
 		$this->weibo = D('WeiboView')->getAll($where, $limit);
 		$this->page = $page->show();// 分页显示输出
-		
+
+		//我的关注
+		if(S('follow_' . $id)) {
+			//缓存已成功并且未过期
+			$follow = S('follow_' . $id);
+		} else {
+			//生成缓存
+			$where = array('fans' => $id);
+			$follow = M('follow')->where($where)->field('follow')->select();
+			foreach ($follow as $k => $v) {
+				$follow[$k] = $v['follow'];
+			}
+			$where = array('uid' => array('IN', $follow));
+			$field = array('username', 'face50' => 'face', 'uid');
+			$follow = M('userinfo')->field($field)->where($where)->limit(8)->select();
+
+			S('follow_' . $id, $follow, 3600);
+		}
+		$this->follow = $follow;
+
+		//我的粉丝
+		if(S('fans_' . $id)) {
+			//缓存已成功并且未过期
+			$fans = S('fans_' . $id);
+		} else {
+			//生成缓存
+			$where = array('follow' => $id);
+			$fans = M('follow')->where($where)->field('fans')->select();
+			foreach ($fans as $k => $v) {
+				$fans[$k] = $v['fans'];
+			}
+			$where = array('uid' => array('IN', $fans));
+			$field = array('username', 'face50' => 'face', 'uid');
+			$fans = M('userinfo')->field($field)->where($where)->limit(8)->select();
+
+			S('fans_' . $id, $fans, 3600);
+		}
+		$this->fans = $fans;
+
 		$this->display();
 	}
 
