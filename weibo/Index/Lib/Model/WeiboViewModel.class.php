@@ -37,7 +37,9 @@ Class WeiboViewModel extends ViewModel {
 				if($v['isturn']) {
 					//$where = array('id' => $v['isturn']);
 					//$result[$k]['isturn'] = $this->where($where)->find();
-					$result[$k]['isturn'] = $this->find($v['isturn']);//相当于上面的两行
+					//$result[$k]['isturn'] = $this->find($v['isturn']);//相当于上面的两行
+					$tmp = $this->find($v['isturn']);
+					$result[$k]['isturn'] = $tmp ? $tmp : -1;
 				}
 			}
 		}
