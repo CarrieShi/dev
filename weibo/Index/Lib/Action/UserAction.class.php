@@ -144,6 +144,23 @@ Class UserAction extends CommonAction {
 	}
 
 	/**
+	 * 收藏列表
+	 */
+	public function keep () {
+		import('ORG.Util.Page');
+		$uid = session('uid');
+
+		$count = M('keep')->where(array('uid' => $uid))->count();
+		$page = new Page($count, 20);
+		$limit = $page->firstRow . ',' . $page->listRows;
+
+		$where = array('keep.uid' => $uid);
+		$this->weibo = D('KeepView')->getAll($where, $limit);
+		$this->page = $page->show();;
+		$this->display('weiboList');
+	}
+
+	/**
 	 * 空操作
 	 */
 	public function _empty($name) {
