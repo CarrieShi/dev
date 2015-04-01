@@ -181,6 +181,71 @@ Class UserAction extends CommonAction {
 	}
 
 	/**
+	 * 私信列表
+	 */
+	public function letter() {
+		import('ORG.Util.Page');
+
+		$uid = session('uid');
+		$count = M('letter')->where(array('uid' => $uid))->count();
+		$page = new Page($count, 20);
+		$limit = $page->firstRow . ',' . $page->listRows;
+
+		$where = array('letter.uid' => $uid);
+		$letter = D('LetterView')->where($where)->order('time DESC')->limit($limit)->select();
+
+		$this->letter = $letter;
+		$this->count = $count;
+		$this->page = $page->show();
+		$this->display();
+	}
+
+	/**
+	 * 私信表单处理
+	 */
+	public function letterSend () {
+		if( ! $this->isPost()) {
+			halt('页面不存在!');
+		}
+
+		$name = $this->_post('name');
+		$uid = M('userinfo')->where(array('username' => $name))->getField('uid');
+		
+		if(! $uid) {
+			$this->error('用户不存在!');
+		}
+
+		$data = array(
+			'from' => session('uid'),
+			'content' => $this->_post('content'),
+			'time' => time(),
+			'uid' => $uid
+			);
+
+		if(M('letter')->data($data)->add()) {
+			$this->success('私信已发送', U('letter'));
+		} else {
+			$this->error('发送失败，请重试...');
+		}
+	}
+
+	/**
+	 * 异步删除私信
+	 */
+	public function delLetter () {
+		if( ! $this->isAjax()) {
+			halt('页面不存在！');
+		}
+
+		$lid = $this->_post('lid', 'intval');
+		if(M('letter')->delete($lid)) {
+			echo 1;
+		} else {
+			echo 0;
+		}
+	}
+
+	/**
 	 * 空操作
 	 */
 	public function _empty($name) {
