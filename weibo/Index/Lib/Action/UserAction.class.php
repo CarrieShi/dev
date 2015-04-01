@@ -161,6 +161,26 @@ Class UserAction extends CommonAction {
 	}
 
 	/**
+	 * 取消收藏
+	 */
+	public function cancelKeep() {
+		if( ! $this->isAjax()) {
+			halt('页面不存在!');
+		}
+
+		$kid = $this->_post('kid', 'intval');
+		$wid = $this->_post('wid', 'intval');
+
+		if(M('keep')->delete($kid)) {
+			M('weibo')->where(array('id' => $wid))->setDec('keep');
+
+			echo 1;
+		} else {
+			echo 0;
+		}
+	}
+
+	/**
 	 * 空操作
 	 */
 	public function _empty($name) {
