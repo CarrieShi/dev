@@ -246,6 +246,69 @@ Class UserAction extends CommonAction {
 	}
 
 	/**
+	 * 评论列表
+	 */
+	public function comment() {
+		import('ORG.Util.Page');
+
+		$where = array('uid' => session('uid'));
+		$count = M('comment')->where($where)->count();
+		$page = new Page($count, 20);
+		$limit = $page->firstRow . ',' . $page->listRows;
+
+		$comment = D('CommentView')->where($where)->order('time DESC')->limit($limit)->select();
+
+		$this->comment = $comment;
+		$this->count = $count;
+		$this->page = $page->show();
+		$this->display();
+	}
+
+	/**
+	 * 回复评论
+	 */
+	public function reply () {
+		if( ! $this->isAjax()) {
+			halt('页面不存在！');
+		}
+
+		$wid = $this->_post('wid', 'intval');
+		$data = array(
+			'content' => $this->_post('content'),
+			'time' => time(),
+			'uid' => session('uid'),
+			'wid' => $wid
+			);
+		if(M('comment')->data($data)->add()) {
+			M('weibo')->where(array('id' => $wid))->setInc('comment');
+
+			echo 1;
+		} else {
+			echo 0;
+		}
+	}
+
+	/**
+	 * 删除评论
+	 */
+	public function delComment () {
+		if( ! $this->isAjax()) {
+			halt('页面不存在！');
+		}
+
+		$wid = $this->_post('wid', 'intval');
+		$cid = $this->_post('cid', 'intval');
+
+		if(M('comment')->delete($cid)) {
+			M('weibo')->where(array('id' => $wid))->setDec('comment');
+
+			echo 1;
+		} else {
+			echo 0;
+		}
+	}
+
+	/**
 	 * 空操作
 	 */
 	public function _empty($name) {

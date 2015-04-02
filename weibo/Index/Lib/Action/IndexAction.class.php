@@ -339,6 +339,7 @@ class IndexAction extends CommonAction {
 				@unlink('./Uploads/Pic/' . $img['max']);
 			}
 			M('userinfo')->where(array('uid' => session('uid')))->setDec('weibo');
+			M('comment')->where(array('wid' => $wid))->delete();
 
 			echo 1;
 		} else {

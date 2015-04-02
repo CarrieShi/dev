@@ -5,7 +5,7 @@
 Class CommentViewModel extends ViewModel {
 	protected $viewFields = array(
 		'comment' => array(
-			'id', 'content', 'time',
+			'id', 'content', 'time', 'wid',
 			'_type' => 'LEFT'
 			),
 		'userinfo' => array(
