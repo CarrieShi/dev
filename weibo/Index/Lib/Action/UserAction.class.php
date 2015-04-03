@@ -309,6 +309,33 @@ Class UserAction extends CommonAction {
 	}
 
 	/**
+	 * @提到我的
+	 */
+	public function atme () {
+		$where = array('uid' => session('uid'));
+		$wid = M('atme')->where($where)->field('wid')->select();
+		if($wid) {
+			foreach ($wid as $k => $v) {
+				$wid[$k] = $v['wid'];
+			}
+		}
+
+		import('ORG.Util.Page');
+		$count = count($wid);
+		$page = new Page($count, 20);
+		$limit = $page->firstRow . ',' . $page->listRows;
+
+		$where = array('id' => array('IN', $wid));
+		$weibo = D('WeiboView')->getAll($where, $limit);
+		
+		$this->weibo = $weibo;
+		$this->count = $count;
+		$this->page = $page->show();
+		$this->atme = 1;
+		$this->display('weiboList');
+	}
+
+	/**
 	 * 空操作
 	 */
 	public function _empty($name) {
