@@ -75,7 +75,7 @@ function replace_weibo ($content) {
 	//给用户加上 <a> 链接 
 	//todo：如果以@user结尾，不加空格，会@不到
 	$preg = '/@(\S+)\s/is';//\S 表示除空格以外的字符 \s 表示空格
-	$content = preg_replace($preg, '<a href="' . __APP__ . '/User/\\1">\\1</a>', $content);
+	$content = preg_replace($preg, '<a href="' . __APP__ . '/User/\\1">\\1 </a>', $content);
 
 	//提取微博内容中所有表情文件
 	//原模式'/\[(\S]+)\]/is'，在多个表情时会有些问题...

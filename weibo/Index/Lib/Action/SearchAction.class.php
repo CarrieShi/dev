@@ -40,6 +40,34 @@ class SearchAction extends CommonAction {
 	}
 
 	/**
+	 * 搜索微博
+	 */
+	public function sechWeibo () {
+		$keyword = $this->_getKeyword();
+		
+		if ($keyword) {
+			//检索出含有关键字的微博
+			$where = array('content' => array('LIKE', '%' . $keyword . '%'));
+			$db = D('WeiboView');
+			import('ORG.Util.Page');// 导入分页类
+			$count      = M('weibo')->where($where)->count();// 查询满足要求的总记录数
+			$Page       = new Page($count,20);// 实例化分页类 传入总记录数和每页显示的记录数
+			$limit 		= $Page->firstRow.','.$Page->listRows;
+			$show       = $Page->show();// 分页显示输出
+			// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+			$weibo = $db->getAll($where, $limit);
+
+			$this->weibo = $weibo ? $weibo : false;
+
+			$this->assign('page',$show);// 赋值分页输出
+		}
+
+		$this->keyword = $keyword;
+		$this->count = $count;
+		$this->display();
+	}
+
+	/**
 	 * 返回搜索关键字
 	 */
 	private function _getKeyword () {

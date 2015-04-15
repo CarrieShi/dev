@@ -55,6 +55,7 @@ class IndexAction extends CommonAction {
 			'time' => time(),
 			'uid' => session('uid')
 			);
+
 		if($wid = M('weibo')->data($data)->add()) {
 			if(!empty($_POST['max'])) {
 				$img = array(
@@ -66,9 +67,35 @@ class IndexAction extends CommonAction {
 				M('picture')->data($img)->add();
 			}
 			M('userinfo')->where(array('uid' => session('uid')))->setInc('weibo');
+
+			//处理 @用户
+			$this->_atmeHandle($data['content'], $wid);
 			$this->success('发布成功', $_SERVER['HTTP_REFERER']);
 		} else {
 			$this->error('发布失败，请重试...');
+		}
+	}
+
+	/**
+	 * @用户处理
+	 */
+	private function _atmeHandle($content, $wid){
+		$preg = '/@(\S+?)\s/is';
+		preg_match_all($preg, $content, $arr);
+
+		if( ! empty($arr[1])) {
+			$db = M('userinfo');
+			$atme = M('atme');
+			foreach ($arr[1] as $k => $v) {
+				$uid = $db->where(array('username' => $v))->getField();
+				if($uid) {
+					$data = array(
+						'wid' => $wid,
+						'uid' => $uid
+						);
+					$atme->data($data)->add();
+				}
+			}
 		}
 	}
 
@@ -99,7 +126,7 @@ class IndexAction extends CommonAction {
 
 		//插入数据到微博表
 		$db = M('weibo');
-		if($db->data($data)->add()) {
+		if($wid = $db->data($data)->add()) {
 			//原微博转发数+1
 			$db->where(array('id' => $id))->setInc('turn');
 			if($tid) {
@@ -108,6 +135,9 @@ class IndexAction extends CommonAction {
 
 			//用户发布微博数+1
 			M('userinfo')->where(array('uid' => session('uid')))->setInc('weibo');
+
+			//处理 @用户
+			$this->_atmeHandle($data['content'], $wid);
 
 			//如果点击了同时评论，插入内容到评论表
 			if(isset($_POST['becomment'])) {
@@ -122,6 +152,7 @@ class IndexAction extends CommonAction {
 					$db->where(array('id' => $id))->setInc('comment');
 				}
 			}
+
 			$this->success('转发成功', $_SERVER['HTTP_REFERER']);
 		} else {
 			$this->error('转发失败，请重试...');
@@ -313,6 +344,40 @@ class IndexAction extends CommonAction {
 			echo 'false';
 		}
 	}
+
+	/**
+	 * 异步删除微博
+	 */
+	public function delWeibo () {
+		if(! $this->isAjax()) {
+			halt('页面不存在！');
+		}
+
+		//获取删除微博的ID
+		$wid = $this->_post('wid', 'intval');
+		if(M('weibo')->delete($wid)) {
+			//如果删除的微博含有图片
+			$db = M('picture');
+			$img = $db->where(array('wid' => $wid))->find();
+
+			//对图片表记录进行删除
+			if($img) {
+				$db->delete($img['id']);
+
+				//删除图片文件
+				@unlink('./Uploads/Pic/' . $img['mini']);
+				@unlink('./Uploads/Pic/' . $img['medium']);
+				@unlink('./Uploads/Pic/' . $img['max']);
+			}
+			M('userinfo')->where(array('uid' => session('uid')))->setDec('weibo');
+			M('comment')->where(array('wid' => $wid))->delete();
+
+			echo 1;
+		} else {
+			echo 0;
+		}
+	}
+
 
 	/**
 	 * 退出登录

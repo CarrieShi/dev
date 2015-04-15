@@ -134,6 +134,23 @@ Class CommonAction extends Action {
 	}
 
 	/**
+	 * 异步修改模板风格
+	 */
+	public function editStyle() {
+		if(!$this->isAjax()) {
+			halt('页面不存在');
+		}
+
+		$style = $this->_post('style');
+		$where = array('uid' => session('uid'));
+		if(M('userinfo')->where($where)->save(array('style' => $style))) {
+				echo 1;
+		} else {
+			echo 0;
+		}
+	}
+
+	/**
 	 * 图片上传处理
 	 * @param  [String] $path   [保存文件夹名称]
 	 * @param  [String] $width  [缩略图宽度多个用，号分隔]

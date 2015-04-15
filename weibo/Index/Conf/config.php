@@ -30,6 +30,8 @@ return array(
     'URL_ROUTER_ON' => true,        //开启URL路由功能
     'URL_ROUTE_RULES' => array(    //定义路由规则
         ':id\d' => 'User/index',
+        'follow/:uid\d' => array('User/followList', 'type=1'),
+        'fans/:uid\d' => array('User/followList', 'type=0')
         ),
 
     //自定义标签
@@ -37,5 +39,8 @@ return array(
     'APP_AUTOLOAD_PATH' =>'@.Taglib', //自动加载 @.会映射到weibo/Index/Lib
     'TAGLIB_BUILD_IN' => 'Cx,Hdtags', //加入系统标签库 
 
+    //缓存设置
+    'DATA_CACHE_SUBDIR' => true, //开启以哈希等形式生成缓存目录
+    'DATA_PATH_LEVEL'  => 2, //目录层次
 );
 ?>
