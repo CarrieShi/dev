@@ -103,16 +103,30 @@ Class CommonAction extends Action {
 	}
 
 	/**
-	 * 异步修改模板风格
+	 * 异步移除关注与粉丝
 	 */
-	public function editStyle() {
-		if(!$this->isAjax()) {
-			halt('页面不存在');
+	public function delFollow() {
+		if( ! $this->isAjax()) {
+			halt('页面不存在！');
 		}
+		
+		$uid = $this->_post('uid', 'intval');
+		$type = $this->_post('type', 'intval');
+		$where = $type ? array('follow' => $uid, 'fans' => session('uid')) : array('follow' => session('uid'), 'fans' => $uid);
+		
+		if(M('follow')->where($where)->delete()) {
+			$db = M('userinfo');
+			$where1 = array('uid' => session('uid'));
+			$where2 = array('uid' => $uid);
 
-		$style = $this->_post('style');
-		$where = array('uid' => session('uid'));
-		if(M('userinfo')->where($where)->save(array('style' => $style))) {
+			if($type) {
+				$db->where($where1)->setDec('follow');
+				$db->where($where2)->setDec('fans');
+			} else {
+				$db->where($where1)->setDec('fans');
+				$db->where($where2)->setDec('follow');
+			}
+
 			echo 1;
 		} else {
 			echo 0;
