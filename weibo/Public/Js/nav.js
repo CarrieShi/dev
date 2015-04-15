@@ -254,7 +254,7 @@ $(function () {
 	 drag($('#model'), $('.model_text'));  //拖拽模版框
 
 	 //选中模版风格
-	 $('#model ul li').click(function () {
+	 $('#model ul li').click(function () {//siblings()同级节点
 	 	$(this).addClass('theme-cur').siblings().removeClass('theme-cur');
 	 });
 
