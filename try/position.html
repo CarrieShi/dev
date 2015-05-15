@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>CSS position</title>
+<style type="text/css">
+/*当设置sub1为的position为relative后，
+* 将根据top，right，bottom，left的值按照它理应所在的位置进行偏移
+* sub2不会因为sub1增加了position的属性而发生改变。
+* 注意relative的偏移是基于对象的margin的左上侧的。
+*/
+#sub1_1 {
+    position : relative;
+    padding : 5px;
+    top : 10px;
+    left : 25px;
+}
+/**
+* 当sub1的父对象(或曾祖父，只要是父级对象)parent也设置了position属性，
+* 且position的属性值为absolute或者relative时，
+* 也就是说，不是默认值的情况，此时sub1按照这个parent来进行定位。
+* 如果parent设定了margin，border，padding等属性，
+* 那么这个定位点将忽略padding，将会从padding开始的地方(即只从padding的左上角开始)进行定位，
+* 这与我们会想当然的以为会以margin的左上端开始定位的想法是不同的。
+* sub2的位置到哪里去了呢？由于当position设置为absolute后，会导致sub1溢出正常的文档流，
+* 就像它不属于 parent一样，它漂浮了起来。
+* 此时sub2将获得sub1的位置，它的文档流不再基于 sub1，而是直接从parent开始。
+*
+* 如果sub1不存在一个有着position属性的父对象，
+* 那么那就会以body为定位对象，按照浏览器的窗口进行定位，这个比较容易理解。
+*/
+#parent2 {
+	position : relative;
+	padding : 10px;
+	top : 50px;
+	left : 100px;
+}
+#sub1_2 {
+	position : absolute;
+	top : 25px;
+	left : 10px;
+}
+/**
+* fixed是特殊的absolute，即fixed总是以body为定位对象的，按照浏览器的窗口进行定位。
+*/
+#sub1_3 {
+	position : fixed;
+	top : 60px;
+	left : 20px;
+}
+#sub2_3 {
+	position : fixed;
+	top : 90px;
+}
+/**
+* position的默认值，一般不设置position属性时，会按照正常的文档流进行排列。
+*/
+</style>
+</head>
+<body>
+	<div id="parent1">
+		<div id="sub1_1">sub1_1</div>
+		<div id="sub2_1">sub40</div>
+	</div>
+	<div id="parent2">
+		<div id="sub1_2">sub1_2</div>
+		<div id="sub2_2">sub2_2</div>
+	</div>
+	<div id="parent3">
+		<div id="sub1_3">sub1_3</div>
+		<div id="sub2_3">sub90</div>
+	</div>
+</body>
+</html>
