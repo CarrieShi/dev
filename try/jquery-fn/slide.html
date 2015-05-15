@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jQuery 插件</title>
+<style type="text/css">
+#photoShow{
+    border: solid 1px #C5E88E;
+    overflow: hidden; /*图片超出DIV的部分不显示*/
+    width: 600px;
+    height: 384px;
+    background: #C5E88E;
+    position: absolute;
+}
+.photo{
+    position: absolute;
+    top: 0px;
+    width: 512px;
+    height: 384px;
+}
+.photo img{
+    width: 512px;
+    height: 384px;
+}
+.photo span{
+    padding: 5px 0px 0px 5px;
+    width: 512px;
+    height: 30px;
+    position: absolute;
+    left: 0px;
+    bottom: -32px; /*介绍内容开始的时候不显示*/
+    background: black;
+    filter: alpha(opacity=50); /*IE透明*/
+    opacity: 0.5; /*FF透明*/
+    color: #FFFFFF;
+}
+</style>
+</head>
+<body>
+	<div id="photoShow">
+	    <div class="photo">
+	        <img src="../images/Hydrangeas.jpg" />
+	        <span>这是什么花？</span>
+	    </div>
+	    <div class="photo">
+	        <img src="../images/Jellyfish.jpg" />
+	        <span>拖着长裙的水母</span>
+	    </div>
+	    <div class="photo">
+	        <img src="../images/Koala.jpg" />
+	        <span>傻愣愣的考拉</span>
+	    </div>
+	    <div class="photo">
+	        <img src="../images/Lighthouse.jpg" />
+	        <span>伫立在海岸线上的灯塔</span>
+	    </div>
+	    <div class="photo">
+	        <img src="../images/Penguins.jpg" />
+	        <span>企鹅一家子</span>
+	    </div>
+	    </div>
+	</div>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var imgDivs = $("#photoShow>div");
+	var imgNums = imgDivs.length; //图片数量
+	var divWidth = parseInt($("#photoShow").css("width")); //显示宽度
+	var imgWidth = parseInt($(".photo>img").css("width")); //图片宽度
+	var minWidth = (divWidth - imgWidth)/(imgNums-1); //显示其中一张图片时其他图片的显示宽度
+	var spanHeight = parseInt($("#photoShow>.photo:first>span").css("height")); //图片介绍信息的高度	
+	imgDivs.each(function(i){
+		$(imgDivs[i]).css({"z-index": i, "left": i*(divWidth/imgNums)});
+		$(imgDivs[i]).hover(function(){
+			//$(this).find("img").css("opacity","1");
+			$(this).find("span").stop().animate({bottom: 0}, "slow");
+			imgDivs.each(function(j){
+				if(j<=i){
+					$(imgDivs[j]).stop().animate({left: j*minWidth}, "slow");
+				}else{
+					$(imgDivs[j]).stop().animate({left: (j-1)*minWidth+imgWidth}, "slow");
+				}
+			});
+		},function(){
+			imgDivs.each(function(k){
+				//$(this).find("img").css("opacity","0.7");
+				$(this).find("span").stop().animate({bottom: -spanHeight}, "slow");
+				$(imgDivs[k]).stop().animate({left: k*(divWidth/imgNums)}, "slow");
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

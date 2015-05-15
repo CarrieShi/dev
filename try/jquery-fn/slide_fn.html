@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jQuery 插件</title>
+<style type="text/css">
+#photoShow{
+    border: solid 1px #C5E88E;
+    overflow: hidden; /*图片超出DIV的部分不显示*/
+    background: #C5E88E;
+    position: absolute;
+}
+.photo{
+    position: absolute;
+    top: 0px;
+}
+.photo span{
+    padding: 5px 0px 0px 5px;
+    position: absolute;
+    left: 0px;
+    bottom: -32px; /*介绍内容开始的时候不显示*/
+    background: black;
+    filter: alpha(opacity=50); /*IE透明*/
+    opacity: 0.5; /*FF透明*/
+    color: #FFFFFF;
+}
+</style>
+</head>
+<body>
+	<div id="photoShow">
+	    <div class="photo">
+	        <img src="../images/Hydrangeas.jpg" />
+	        <span>这是什么花？</span>
+	    </div>
+	    <div class="photo">
+	        <img src="../images/Jellyfish.jpg" />
+	        <span>拖着长裙的水母</span>
+	    </div>
+	    <div class="photo">
+	        <img src="../images/Koala.jpg" />
+	        <span>傻愣愣的考拉</span>
+	    </div>
+	    <div class="photo">
+	        <img src="../images/Lighthouse.jpg" />
+	        <span>伫立在海岸线上的灯塔</span>
+	    </div>
+	    <div class="photo">
+	        <img src="../images/Penguins.jpg" />
+	        <span>企鹅一家子</span>
+	    </div>
+	    </div>
+	</div>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+;(function($,window,document,undefined) {//自调用匿名函数
+	//定义Slide的构造函数
+	var Slide = function(opt) {
+		var defaults = {
+			'container' : {
+				'obj' 	: '#photoShow',
+				'width' : '1500',
+				'height': '768',
+			},
+			'item' : {
+				'obj' 	: '.photo',
+				'width' : '1024',
+				'height': '768',
+			},
+			'img' : {
+				'obj' 	: '.photo img',
+				'width' : '1024',
+				'height': '768',
+			},
+			'span' : {
+				'obj' 	: '.photo span',
+				'width' : '1024',
+				'height': '30',
+			}
+		};
+		this.options = $.extend({}, defaults, opt);				
+	}
+
+	Slide.prototype = {
+		showOpt : function(){
+			console.log(this.options)
+		},
+		setWH : function(){
+			$.each(this.options, function(key, val) {
+				$(val.obj).css({
+					'width' : val.width,
+					'height' : val.height
+				});
+			});
+		},
+		sliding : function() {
+			var imgDivs = $(this.options.container.obj + '>div');
+			var imgNums = imgDivs.length; //图片数量			
+			var divWidth = parseInt(this.options.container.width);//显示宽度
+			var imgWidth = parseInt(this.options.item.width);//图片宽度
+			var minWidth = (divWidth - imgWidth)/(imgNums-1); //显示其中一张图片时其他图片的显示宽度
+			var spanHeight = parseInt(this.options.span.height);			
+			imgDivs.each(function(i){
+				$(imgDivs[i]).css({"z-index": i, "left": i*(divWidth/imgNums)});
+				$(imgDivs[i]).hover(function(){
+					//$(this).find("img").css("opacity","1");
+					$(this).find("span").stop().animate({bottom: 0}, "slow");
+					imgDivs.each(function(j){
+						if(j<=i){
+							$(imgDivs[j]).stop().animate({left: j*minWidth}, "slow");
+						}else{
+							$(imgDivs[j]).stop().animate({left: (j-1)*minWidth+imgWidth}, "slow");
+						}
+					});
+				},function(){
+					imgDivs.each(function(k){
+						//$(this).find("img").css("opacity","0.7");
+						$(this).find("span").stop().animate({bottom: -spanHeight}, "slow");
+						$(imgDivs[k]).stop().animate({left: k*(divWidth/imgNums)}, "slow");	
+					});
+				});
+			});			
+		}
+	}
+
+	$.fn.Slide = function(options) {
+		var slide = new Slide(options);
+		// slide.show();
+		slide.setWH();
+		slide.sliding();
+	}
+})(jQuery,window,document);//自调用匿名函数
+
+$(function(){
+	$.fn.Slide({
+			'container' : {
+				'obj' 	: '#photoShow',
+				'width' : '1100',
+				'height': '768',
+			}
+		});
+});
+</script>
+</body>
+</html>
