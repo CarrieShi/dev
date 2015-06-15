@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jQuery 插件</title>
+</head>
+<body>
+	<ul>
+		<li>
+			<a href="http://www.baidu.com">百度</a>
+		</li>
+		<li>
+			<a href="http://www.sina.com.cn">新浪</a>
+		</li>
+		<li>
+			<a href="http://www.qq.com">腾讯</a>
+		</li>
+	</ul>
+	<p>这是p标签不是a标签，我不会受影响</p>	
+	
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript">
+	/**
+	* 关于命名空间
+	*
+	* 1、用自调用匿名函数包裹代码
+	* 1.1、定义了一个Beautifier全局变量，它会被附到全局的window对象上
+	* 为了防止这种事情发生，你或许会说，把所有代码放到jQuery的插件定义代码里面去啊，也就是放到$.fn.myPlugin里面。
+	* 这样做倒也是种选择。但会让我们实际跟插件定义有关的代码变得臃肿
+	* 1.2、而在$.fn.myPlugin里面我们其实应该更专注于插件的调用，以及如何与jQuery互动。
+	* 所以保持原来的代码不变，我们将所有代码用自调用匿名函数包裹。
+	* 2、添加;是个好习惯 充当自调用匿名函数的第一对括号与上面别人定义的函数相连，因为中间没有分号嘛，总之我们的代码无法正常解析了，所以报错。
+	* 3、系统带的函数被修改 另一个插件编写过程中的好习惯，将系统变量以参数的形式传递到我们的代码中，这样就可以安全地使用而不用担心得到的是一个被修改后的值。
+	* 同时这也是使用自调用匿名函数的带来的另一个好处。
+	* 4、变量定义 当变量是jQuery类型时，建议以$开头
+	* 5、引号 一般HTML代码里面使用双引号，而在JavaScript中多用单引号
+	*/
+	;(function($,window,document,undefined) {//自调用匿名函数
+		//定义Beautifier的构造函数
+		var Beautifier = function(ele, opt) {
+		    this.$element = ele,
+		    this.defaults = {
+		        'color': 'red',
+		        'fontSize': '12px',
+		        'textDecoration':'none'
+		    },
+		    this.options = $.extend({}, this.defaults, opt)
+		}
+		//定义Beautifier的方法
+		Beautifier.prototype = {
+		    beautify: function() {
+		        return this.$element.css({
+		            'color': this.options.color,
+		            'fontSize': this.options.fontSize,
+		            'textDecoration': this.options.textDecoration
+		        });
+		    }
+		}
+		//在插件中使用Beautifier对象
+		$.fn.myPlugin = function(options) {
+		    //创建Beautifier的实体
+		    var beautifier = new Beautifier(this, options);
+		    //调用其方法
+		    return beautifier.beautify();
+		}
+	})(jQuery,window,document);//自调用匿名函数
+
+	//调用插件
+	$(function() {
+	    $('a').myPlugin({
+	        //'color': '#2C9929',
+	        'fontSize': '20px',
+	        'textDecoration': 'underline'
+	    });
+	})
+	</script>
+</body>
+</html>

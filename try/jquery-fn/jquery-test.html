@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jQuery 插件</title>
+</head>
+<body>
+	<ul>
+		<li>
+			<a href="http://www.baidu.com">百度</a>
+		</li>
+		<li>
+			<a href="http://www.sina.com.cn">新浪</a>
+		</li>
+		<li>
+			<a href="http://www.qq.com">腾讯</a>
+		</li>
+	</ul>
+	<p>这是p标签不是a标签，我不会受影响</p>	
+	
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<script type="text/javascript">
+	/**
+	* 类级别
+	*/
+	$.msg = function () {
+		console.log('hello');
+	};         
+    //调用方法	
+	$.msg();
+	
+    
+    /**
+    * 通过$.extend()来扩展jQuery
+    *
+    * 说明：在jQuery命名空间或者理解成jQuery身上添加了一个静态方法
+	* 调用方法：调用通过$.extend()添加的函数时直接通过$符号调用$.myfunction(),而不需要选中DOM元素$('#example').myfunction()
+	* 缺点：这种方式无法利用jQuery强大的选择器带来的便利，要处理DOM元素以及将插件更好地运用于所选择的元素身上，还是需要使用第二种开发方式。
+	*/
+	$.extend({
+		sayHello: function(name) {
+			console.log('Hello,' + (name ? name : 'Dude') + '!');
+		}
+	});
+
+	$.sayHello(); //调用
+	$.sayHello('Wayou'); //带参调用
+
+
+	$.extend({
+	    log: function(message) {
+	        var now = new Date(),
+				y = now.getFullYear(),
+	            m = now.getMonth() + 1, //！JavaScript中月分是从0开始的
+	            d = now.getDate(),
+	            h = now.getHours(),
+	            min = now.getMinutes(),
+	            s = now.getSeconds(),
+	            time = y + '/' + m + '/' + d + ' ' + h + ':' + min + ':' + s;
+	        console.log(time + ' My App: ' + message);
+	    }
+	})
+	$.log('initializing...'); //调用
+
+
+	/**
+	* 通过$.fn 向jQuery添加新的方法
+	*
+	* 说明：在函数内部，this指代的是我们在调用该插件时，用jQuery选择器选中的元素，一般是一个jQuery类型的集合。
+	* 调用方法：需要选中DOM元素$('#example').myfunction()
+	* 支持链式调用：jQuery一个时常优雅的特性是支持链式调用，选择好DOM元素后可以不断地调用其他方法。要让插件不打破这种链式调用，只需return一下即可。
+	* 默认值和传参：在插件里定义一个保存插件参数默认值的对象，同时将接收来的参数对象合并到默认对象上，最后就实现了用户指定值的参数使用指定的值，未指定的参数使用插件默认值。
+	* 保护好默认参数：将一个新的空对象做为$.extend的第一个参数，defaults和用户传递的参数对象紧随其后，这样做的好处是所有值被合并到这个空对象上，保护了插件里面的默认值。
+	* 面向对象的插件开发：见beautifier.html
+	*/
+	$.fn.myPlugin = function(options) {
+		 var defaults = {
+	        'color': 'red',
+	        'fontSize': '12px'
+	    };
+	    var settings = $.extend({}, defaults, options);
+	    //在这里面,this指的是用jQuery选中的元素
+	    //example :$('a'),则this=$('a')
+	    this.css({
+	        'color': settings.color,
+	        'fontSize': settings.fontSize
+	    });
+	    //在插件代码里处理每个具体的元素，而不是对一个集合进行处理
+	    return this.each(function() {
+	        $(this).append(' ' + $(this).attr('href'));
+	    });
+	}
+
+	$(function(){
+		$('a').myPlugin({
+		    'color': '#2C9929',
+		    'fontSize': '24px'
+		});
+	})
+
+	;(function() {
+		$.fn.showLinkLocation = function() {
+			this.filter( "a" ).each(function() {
+				var link = $( this );
+				link.append( " (" + link.attr( "href" ) + ")" );
+			});
+			return this;
+		};
+	}( jQuery ));
+	// Usage example:
+	$( "a" ).showLinkLocation();
+
+
+    </script>
+	</script>
+</body>
+</html>
