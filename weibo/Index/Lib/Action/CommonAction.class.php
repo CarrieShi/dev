@@ -151,6 +151,51 @@ Class CommonAction extends Action {
 	}
 
 	/**
+	 * 异步轮询推送消息
+	 */
+	public function getMsg() {
+		if(!$this->isAjax()) {
+			halt('页面不存在');
+		}
+		$uid = session('uid');
+		$msg = S('usermsg' . $uid);
+
+		if($msg) {
+			if($msg['comment']['status']) {
+				$msg['comment']['status'] = 0;
+				S('usermsg' . $uid, $msg, 0);
+				echo json_encode(array(
+					'status' => 1,
+					'total' => $msg['comment']['total'],
+					'type' => 1
+					));
+				exit();
+			}
+			if($msg['letter']['status']) {
+				$msg['letter']['status'] = 0;
+				S('usermsg' . $uid, $msg, 0);
+				echo json_encode(array(
+					'status' => 1,
+					'total' => $msg['letter']['total'],
+					'type' => 2
+					));
+				exit();
+			}
+			if($msg['atme']['status']) {
+				$msg['atme']['status'] = 0;
+				S('usermsg' . $uid, $msg, 0);
+				echo json_encode(array(
+					'status' => 1,
+					'total' => $msg['atme']['total'],
+					'type' => 3
+					));
+				exit();
+			}
+		}
+		echo json_encode(array('status' => 0));
+	}
+
+	/**
 	 * 图片上传处理
 	 * @param  [String] $path   [保存文件夹名称]
 	 * @param  [String] $width  [缩略图宽度多个用，号分隔]

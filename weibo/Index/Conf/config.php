@@ -11,6 +11,7 @@ return array(
 
     'DEFAULT_THEME'			=> 'default',//默认模板主题
 
+    // 去掉url后的.html
     'URL_HTML_SUFFIX'		=> '',
     'URL_MODEL'             => 1,
     //'TOKEN_ON'              => false;//当前版本不会自动生成表单令牌，故不需要设置

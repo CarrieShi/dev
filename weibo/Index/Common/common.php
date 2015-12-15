@@ -104,8 +104,9 @@ function replace_weibo ($content) {
  * 往内存写入推送消息
  * @param [int] $uid [用户ID号]
  * @param [int] $type [1:评论;2:私信;3:@用户]
+ * @param [boolean] $flush [是否清零]
  */
-function set_msg($uin, $type) {
+function set_msg($uid, $type, $flush=false) {
 	$name = '';
 	switch ($type) {
 		case 1:
@@ -114,9 +115,17 @@ function set_msg($uin, $type) {
 		case 2:
 			$name = 'letter';
 			break;
-		case 1:
+		case 3:
 			$name = 'atme';
 			break;
+	}
+
+	if($flush) {
+		$data = S('usermsg' . $uid);
+		$data[$name]['total'] = 0;
+		$data[$name]['status'] = 0;
+		S('usermsg' . $uid, $data, 0);
+		return;
 	}
 
 	//内存数据已存在时让相应数据+1

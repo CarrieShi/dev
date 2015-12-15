@@ -93,6 +93,9 @@ class IndexAction extends CommonAction {
 						'wid' => $wid,
 						'uid' => $uid
 						);
+
+					//写入消息推送
+					set_msg($uid, 3);
 					$atme->data($data)->add();
 				}
 			}
@@ -218,8 +221,9 @@ class IndexAction extends CommonAction {
 		$data = array(
 			'content' => $this->_post('content'),
 			'time' => time(),
-			'uid' => session('uid'),
-			'wid' => $this->_post('wid', 'intval')
+			'uid' => session('uid'),// 评论的用户ID
+			'wid' => $this->_post('wid', 'intval'),
+			'touid' => $this->_post('uid', 'intval')// 收到评论的用户ID
 			);
 		if(M('comment')->data($data)->add()) {
 			//读取评论用户信息
@@ -274,7 +278,11 @@ class IndexAction extends CommonAction {
 			$str .= '<div class="reply">';
 			$str .= '<a href="">回复</a>';
 			$str .= '</div></dd></dl>';
-			echo $str;	
+			//写入消息推送
+			set_msg($data['touid'], 1);
+			echo $str;
+		} else {
+			echo 'false';
 		}
 		
 	}

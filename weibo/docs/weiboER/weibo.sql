@@ -153,6 +153,7 @@ CREATE TABLE IF NOT EXISTS `weibo`.`hd_comment` (
   `time` INT(10) NOT NULL COMMENT '评论时间',
   `uid` INT NOT NULL COMMENT '评论用户的ID',
   `wid` INT NOT NULL COMMENT '所属微博ID',
+  `touid` INT(11) NOT NULL COMMENT '收到评论的用户ID',/*冗余增加*/
   PRIMARY KEY (`id`),
   INDEX `uid` (`uid` ASC),
   INDEX `wid` (`wid` ASC))
@@ -195,3 +196,20 @@ COMMENT = '@提到我的表';
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+/*后台管理*/
+use weibo;
+create table hd_admin(
+id int unsigned not null primary key auto_increment,
+username char(20) not null default '',
+password char(20) not null default '',
+logintime int(10) not null default 0,
+loginip char(20) not null default '',
+`lock` tinyint(1) unsigned not null default 0,
+admin tinyint(1) unsigned not null default 1
+) engine MyISAM default character set utf8;
+
+insert into hd_admin set username = 'admin' , password = md5('admin'),
+logintime = unix_timestamp(now()), loginip='127.0.0.1',
+admin = 0

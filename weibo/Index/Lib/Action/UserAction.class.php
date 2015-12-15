@@ -184,9 +184,11 @@ Class UserAction extends CommonAction {
 	 * 私信列表
 	 */
 	public function letter() {
-		import('ORG.Util.Page');
+		$uid = session('uid');		
+		set_msg($uid, 2, true);
 
-		$uid = session('uid');
+		import('ORG.Util.Page');
+		
 		$count = M('letter')->where(array('uid' => $uid))->count();
 		$page = new Page($count, 20);
 		$limit = $page->firstRow . ',' . $page->listRows;
@@ -223,6 +225,8 @@ Class UserAction extends CommonAction {
 			);
 
 		if(M('letter')->data($data)->add()) {
+			//写入消息推送
+			set_msg($uid, 2);
 			$this->success('私信已发送', U('letter'));
 		} else {
 			$this->error('发送失败，请重试...');
@@ -249,9 +253,11 @@ Class UserAction extends CommonAction {
 	 * 评论列表
 	 */
 	public function comment() {
+		set_msg(session('uid'), 1, true);
+
 		import('ORG.Util.Page');
 
-		$where = array('uid' => session('uid'));
+		$where = array('touid' => session('uid'));
 		$count = M('comment')->where($where)->count();
 		$page = new Page($count, 20);
 		$limit = $page->firstRow . ',' . $page->listRows;
@@ -312,6 +318,7 @@ Class UserAction extends CommonAction {
 	 * @提到我的
 	 */
 	public function atme () {
+		set_msg(session('uid'), 3, true);
 		$where = array('uid' => session('uid'));
 		$wid = M('atme')->where($where)->field('wid')->select();
 		if($wid) {
