@@ -56,6 +56,7 @@ class LoginAction extends Action {
 		session('logintime', date('Y-m-d H:i:s', $user['logintime']));
 		session('now', date('Y-m-d H:i:s', time()));		
 		session('loginip', $user['loginip']);
+		session('admin', $user['admin']);
 
 		$this->success('正在登陆...', __APP__);
 		// header('Content-Type:text/html;Charset=UTF-8');

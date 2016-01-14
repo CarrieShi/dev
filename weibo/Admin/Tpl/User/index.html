@@ -28,7 +28,7 @@
 				<td width='80' align='center'>
 					<img src="<if condition='$v["face"]'>__ROOT__/Uploads/Face/{$v.face}<else/>__ROOT__/Public/Images/noface.gif</if>" width='50' height='50'/>
 				</td>
-				<td align='center'>
+				<td>
 					<ul>
 						<li>关注：{$v.follow}</li>
 						<li>粉丝：{$v.fans}</li>
@@ -36,7 +36,7 @@
 					</ul>
 				</td>
 				<td width='100' align='center'>{$v.registime|date='Y-m-d', ###}</td>
-				<td width='60' align='center'><if condition='$v["lock"]'>锁定</if></td>
+				<td width='60' align='center'><if condition='$v["lock"]'>锁定<else/>正常</if></td>
 				<td width='100' align='center'>
 					<if condition='$v["lock"]'>
 						<a href="{:U('lockUser', array('id' => $v['id'], 'lock' => 0))}" class='add lock'>解除锁定</a>

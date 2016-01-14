@@ -37,10 +37,10 @@
 				<td align='center'>{$v.logintime|date='y-m-d H:i', ###}</td>
 				<td align='center'>{$v.loginip}</td>
 				<td width='60' align='center'>
-					<if condition='$v["lock"]'>锁定</if>
+					<if condition='$v["lock"]'>锁定<else/>正常</if>
 				</td>
 				<if condition='!$_SESSION["admin"]'>
-					<td width='240'>
+					<td width='240' align='center'>
 						<if condition='$v["admin"]'>
 							<if condition='$v["lock"]'>
 								<a href="{:U('lockAdmin', array('id' => $v['id'], 'lock' => 0))}" class='add lock'>解除锁定</a>
@@ -48,6 +48,8 @@
 								<a href="{:U('lockAdmin', array('id' => $v['id'], 'lock' => 1))}" class='add lock'>锁定用户</a>
 							</if>
 							<a href='{:U("delAdmin", array("id" => $v["id"]))}' class='add lock'>删除管理员</a>
+						<else/>
+							不可操作
 						</if>
 					</td>
 				</if>
