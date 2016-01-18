@@ -44,7 +44,7 @@ Class UserAction extends CommonAction {
 			$where = $_GET['type'] ? array('id' => $this->_get('sech', 'intval')) : array('username' => array('LIKE', '%' . $this->_get('sech') . '%'));
 			$user = D('UserView')->where($where)->select();
 			// echo D('UserView')->getLastSql();
-			$this->user = $user ? $user : fasle;
+			$this->user = $user ? $user : false;
 		}
 		$this->display();
 	}

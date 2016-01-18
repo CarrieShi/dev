@@ -7,7 +7,7 @@ class IndexAction extends CommonAction {
 	/**
 	 * 首页视图
 	 */
-	public function index () {		
+	public function index () {
 		//实例化微博视图模型
 		$db = D('WeiboView');
 		import('ORG.Util.Page');// 导入分页类

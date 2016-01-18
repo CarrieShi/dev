@@ -45,6 +45,9 @@ return array(
     // 'DATA_PATH_LEVEL'  => 2, //目录层次
     'DATA_CACHE_TYPE' => 'Memcache',
     'MEMCACHE_HOST' => '127.0.0.1',
-    'MEMCACHE_PORT' => 11211
+    'MEMCACHE_PORT' => 11211,
+
+    // 加载扩展配置
+    'LOAD_EXT_CONFIG' => 'system'
 );
 ?>

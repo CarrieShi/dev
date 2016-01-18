@@ -24,6 +24,10 @@ class IndexAction extends CommonAction {
 		$this->turn = $db->where(array('isturn' => array('GT', 0)))->count();
 		$this->comment = M('comment')->count();
 		//echo $db->getLastSql();die;
+		$config = include './Index/Conf/system.php';
+		$this->copy = $config['COPY'];
+		$this->author = $config['AUTHOR'];
+
 		$this->display();
 	}
 
