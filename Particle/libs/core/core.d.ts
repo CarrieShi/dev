@@ -1,29 +1,120 @@
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+declare module egret {
+    /**
+     * @private
+     */
+    var egret_string_code: {};
+}
+
+declare var __extends: any;
+declare module egret {
+    /**
+     * @language en_US
+     * Call setter properties of the parent class, instead of the other writing languages, such as super.alpha = 1;
+     * @param thisObj The current object. Always this
+     * @param type Setter property names need to call
+     * @param values Value passed to the parent class
+     *
+     * @exmaple egret.superSetter(this, "alpha", 1);
+     */
+    /**
+     * @language zh_CN
+     * 调用父类的setter属性，代替其他语言的写法，如 super.alpha = 1;
+     * @param thisObj 当前对象。永远都this
+     * @param type 需要调用的setter属性名称
+     * @param values 传给父类的值
+     *
+     * @exmaple egret.superSetter(this, "alpha", 1);
+     */
+    function superSetter(thisObj: any, type: string, ...values: any[]): any;
+    /**
+     * @language en_US
+     * Get getter property value of the parent class. Instead of writing in other languages, such as super.alpha;
+     * @param thisObj 当前对象。永远都this
+     * @param type 需要调用的setter属性名称
+     * @returns {any} The value returned by the parent
+     *
+     * @exmaple egret.superGetter(this, "alpha");
+     */
+    /**
+     * @language zh_CN
+     * 获取父类的getter属性值。代替其他语言的写法，如 super.alpha;
+     * @param thisObj 当前对象。永远都this
+     * @param type 需要调用的setter属性名称
+     * @returns {any} 父类返回的值
+     *
+     * @exmaple egret.superGetter(this, "alpha");
+     */
+    function superGetter(thisObj: any, type: string): any;
+}
+
+declare module egret {
+    /**
+     * @private
+     */
+    class Logger {
+        static ALL: string;
+        static DEBUG: string;
+        static INFO: string;
+        static WARN: string;
+        static ERROR: string;
+        static OFF: string;
+        private static logFuncs;
+        /**
+         * @private
+         * @param logType
+         */
+        static openLogByType(logType: string): void;
+        /**
+         * 表示出现了致命错误，开发者必须修复错误
+         * @method egret.Logger.fatal
+         * @param actionCode {string} 错误信息
+         * @param value {Object} 错误描述信息
+         */
+        static fatal(actionCode: string, value?: Object): void;
+        /**
+         * 记录正常的Log信息
+         * @method egret.Logger.info
+         * @param actionCode {string} 错误信息
+         * @param value {Object} 错误描述信息
+         */
+        static info(actionCode: string, value?: Object): void;
+        /**
+         * 记录可能会出现问题的Log信息
+         * @method egret.Logger.warning
+         * @param actionCode {string} 错误信息
+         * @param value {Object} 错误描述信息
+         */
+        static warning(actionCode: string, value?: Object): void;
+        /**
+         * @private
+         * @param type
+         * @param actionCode
+         * @param value
+         */
+        private static traceToConsole(type, actionCode, value);
+        /**
+         * @private
+         * @param type
+         * @param actionCode
+         * @param value
+         * @returns {string}
+         */
+        private static getTraceCode(type, actionCode, value);
+    }
+    /**
+     * @private
+     */
+    function getString(id: number, ...args: any[]): string;
+    /**
+     * @private
+     */
+    function $error(code: number, ...args: any[]): void;
+    /**
+     * @private
+     */
+    function $warn(code: number, ...args: any[]): void;
+}
+
 declare module egret {
     /**
      * @classdesc
@@ -34,38 +125,14 @@ declare module egret {
      */
     interface IHashObject {
         /**
+         * @readOnly
          * 返回此对象唯一的哈希值,用于唯一确定一个对象。hashCode为大于等于1的整数。
          * @member {number} egret.IHashObject#hashCode
          */
         hashCode: number;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 /**
  * @namespace egret
  */
@@ -77,6 +144,7 @@ declare module egret {
      */
     class HashObject implements IHashObject {
         /**
+         * 创建一个 egret.HashObject 对象
          * @method egret.HashObject#constructor
          */
         constructor();
@@ -92,46 +160,23 @@ declare module egret {
         hashCode: number;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.Recycler
      * @classdesc
      * 对象缓存复用工具类，可用于构建对象池，一段时间后会自动回收对象。
      * @extends egret.HashObject
+     * @includeExample egret/utils/Recycler.ts
      */
     class Recycler extends HashObject {
         /**
+         * 创建一个 egret.Recycler 对象
          * @method egret.Recycler#constructor
-         * @param autoDisposeTime {number}
+         * @param autoDisposeTime {number} 多少帧后自动销毁对象，默认值300
          */
         constructor(autoDisposeTime?: number);
-        static _callBackList: any[];
+        static _callBackList: Array<any>;
         /**
          * 多少帧后自动销毁对象。
          */
@@ -148,13 +193,13 @@ declare module egret {
         /**
          * 缓存一个对象以复用
          * @method egret.Recycler#push
-         * @param object {any}
+         * @param object {any} 需要缓存的对象
          */
         push(object: any): void;
         /**
          * 获取一个缓存的对象
          * @method egret.Recycler#pop
-         * @returns {any}
+         * @returns {any} 获得的缓存对象
          */
         pop(): any;
         /**
@@ -164,172 +209,109 @@ declare module egret {
         dispose(): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     var __START_TIME: number;
     /**
      * 用于计算相对时间。此方法返回自启动 Egret 引擎以来经过的毫秒数。
      * @method egret.getTimer
      * @returns {number} 启动 Egret 引擎以来经过的毫秒数。
+     * @includeExample egret/utils/getTimer.ts
      */
     function getTimer(): number;
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
-    var __callLaterFunctionList: any[];
-    var __callLaterThisList: any[];
-    var __callLaterArgsList: any[];
+    var __callLaterFunctionList: Array<any>;
+    var __callLaterThisList: Array<any>;
+    var __callLaterArgsList: Array<any>;
     /**
      * 延迟函数到屏幕重绘前执行。
      * @method egret.callLater
      * @param method {Function} 要延迟执行的函数
      * @param thisObject {any} 回调函数的this引用
      * @param ...args {any} 函数参数列表
+     * @includeExample egret/utils/callLater.ts
      */
     function callLater(method: Function, thisObject: any, ...args: any[]): void;
-    var __callAsyncFunctionList: any[];
-    var __callAsyncThisList: any[];
-    var __callAsyncArgsList: any[];
+    var __callAsyncFunctionList: Array<any>;
+    var __callAsyncThisList: Array<any>;
+    var __callAsyncArgsList: Array<any>;
     /**
      * 异步调用函数
      * @param method {Function} 要异步调用的函数
      * @param thisObject {any} 函数的this引用
      * @param ...args {any} 函数参数列表
+     * @includeExample egret/utils/callLater.ts
      */
     function __callAsync(method: Function, thisObject: any, ...args: any[]): void;
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-declare module egret_dom {
-    var header: string;
-    /**
-     * 获取当前浏览器的类型
-     * @returns {string}
-     */
-    function getHeader(): string;
-    /**
-     * 获取当前浏览器类型
-     * @type {string}
-     */
-    function getTrans(type: string): string;
-}
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
+    /**
+     * @private
+     */
+    class RenderCommand {
+        static __freeList: Array<RenderCommand>;
+        callback: any;
+        thisObject: any;
+        call(renderContext: RendererContext): void;
+        dispose(): void;
+        static push(callback: Function, thisObject: any): void;
+    }
+}
+
+declare module egret {
+    /**
+     * @private
+     * 绘图上下文
+     */
+    interface RenderContext {
+        lineWidth: number;
+        strokeStyle: any;
+        fillStyle: any;
+        arc(x: number, y: number, radius: number, startAngle: number, endAngle: number, anticlockwise?: boolean): void;
+        quadraticCurveTo(cpx: number, cpy: number, x: number, y: number): void;
+        lineTo(x: number, y: number): void;
+        fill(fillRule?: string): void;
+        closePath(): void;
+        rect(x: number, y: number, w: number, h: number): void;
+        moveTo(x: number, y: number): void;
+        fillRect(x: number, y: number, w: number, h: number): void;
+        bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): void;
+        stroke(): void;
+        strokeRect(x: number, y: number, w: number, h: number): void;
+        beginPath(): void;
+        arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): void;
+        translate(x: number, y: number): void;
+        scale(x: number, y: number): void;
+        rotate(angle: number): void;
+        restore(): void;
+        save(): void;
+    }
+}
+
+declare module egret {
+    /**
+     * @classdesc
+     * Event 类作为创建 Event 对象的基类，当发生事件时，Event 对象将作为参数传递给事件侦听器。
+     * Event 类的属性包含有关事件的基本信息，例如事件的类型或者是否可以取消事件的默认行为。
+     * 对于许多事件（如由 Event 类常量表示的事件），此基本信息就足够了。但其他事件可能需要更详细的信息。
+     * 例如，与触摸关联的事件需要包括有关触摸事件的位置以及在触摸事件期间是否按下了任何键的其他信息。
+     * 您可以通过扩展 Event 类（TouchEvent 类执行的操作）将此类其他信息传递给事件侦听器。
+     * Egret API 为需要其他信息的常见事件定义多个 Event 子类。与每个 Event 子类关联的事件将在每个类的文档中加以介绍。
+     * Event 类的方法可以在事件侦听器函数中使用以影响事件对象的行为。
+     * 某些事件有关联的默认行为，通过调用 preventDefault() 方法，您的事件侦听器可以取消此行为。
+     * 可以通过调用 stopPropagation() 或 stopImmediatePropagation() 方法，将当前事件侦听器作为处理事件的最后一个事件侦听器。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=114&terms1_id=25&terms2_id=29 Event类
+     * @includeExample egret/events/Event.ts
+     */
     class Event extends HashObject {
         /**
-         * @class egret.Event
-         * @classdesc
-         * Event 类作为创建 Event 对象的基类，当发生事件时，Event 对象将作为参数传递给事件侦听器。
-         * Event 类的属性包含有关事件的基本信息，例如事件的类型或者是否可以取消事件的默认行为。
-         * 对于许多事件（如由 Event 类常量表示的事件），此基本信息就足够了。但其他事件可能需要更详细的信息。
-         * 例如，与触摸关联的事件需要包括有关触摸事件的位置以及在触摸事件期间是否按下了任何键的其他信息。
-         * 您可以通过扩展 Event 类（TouchEvent 类执行的操作）将此类其他信息传递给事件侦听器。
-         * Egret API 为需要其他信息的常见事件定义多个 Event 子类。与每个 Event 子类关联的事件将在每个类的文档中加以介绍。
-         * Event 类的方法可以在事件侦听器函数中使用以影响事件对象的行为。
-         * 某些事件有关联的默认行为，通过调用 preventDefault() 方法，您的事件侦听器可以取消此行为。
-         * 可以通过调用 stopPropagation() 或 stopImmediatePropagation() 方法，将当前事件侦听器作为处理事件的最后一个事件侦听器。
-         * @param {string} type 事件的类型，可以作为 Event.type 访问。
-         * @param bubbles{boolean} 确定 Event 对象是否参与事件流的冒泡阶段。默认值为 false。
-         * @param cancelable{boolean} 确定是否可以取消 Event 对象。默认值为 false。
+         * 创建一个作为参数传递给事件侦听器的 egret.Event 对象。
+         * @param type {string} 事件的类型，可以作为 Event.type 访问。
+         * @param bubbles {boolean} 确定 Event 对象是否参与事件流的冒泡阶段。默认值为 false。
+         * @param cancelable {boolean} 确定是否可以取消 Event 对象。默认值为 false。
          */
         constructor(type: string, bubbles?: boolean, cancelable?: boolean);
         /**
@@ -361,6 +343,11 @@ declare module egret {
          * @constant {string} egret.Event.COMPLETE
          */
         static COMPLETE: string;
+        /**
+         * 循环完成
+         * @constant {string} egret.Event.LOOP_COMPLETE
+         */
+        static LOOP_COMPLETE: string;
         /**
          * 主循环：进入新的一帧
          * @constant {string} egret.Event.ENTER_FRAME
@@ -416,6 +403,10 @@ declare module egret {
          * @constant {string} egret.Event.CONNECT
          */
         static CONNECT: string;
+        /**
+         * Event 事件的数据
+         * @member {any} egret.Event.data
+         */
         data: any;
         _type: string;
         /**
@@ -474,7 +465,7 @@ declare module egret {
         preventDefault(): void;
         _isPropagationStopped: boolean;
         /**
-         * 防止对事件流中当前节点的后续节点中的所有事件侦听器进行处理。此方法不会影响当前节点 (currentTarget) 中的任何事件侦听器。
+         * 防止对事件流中当前节点的后续节点中的所有事件侦听器进行处理。此方法不会影响当前节点 currentTarget 中的任何事件侦听器。
          * 相比之下，stopImmediatePropagation() 方法可以防止对当前节点中和后续节点中的事件侦听器进行处理。
          * 对此方法的其它调用没有任何效果。可以在事件流的任何阶段中调用此方法。
          * 注意：此方法不会取消与此事件相关联的行为；有关此功能的信息，请参阅 preventDefault()。
@@ -491,41 +482,21 @@ declare module egret {
         stopImmediatePropagation(): void;
         private isNew;
         _reset(): void;
+        __recycle(): void;
         static _dispatchByTarget(EventClass: any, target: IEventDispatcher, type: string, props?: Object, bubbles?: boolean, cancelable?: boolean): boolean;
         static _getPropertyData(EventClass: any): any;
         /**
-         * 使用指定的EventDispatcher对象来抛出Event事件对象。抛出的对象将会缓存在对象池上，供下次循环复用。
+         * 使用指定的 EventDispatcher 对象来抛出 Event 事件对象。抛出的对象将会缓存在对象池上，供下次循环复用。
+         * @param target {egret.IEventDispatcher} 派发事件目标
+         * @param type {string} 事件类型
+         * @param bubbles {boolean} 确定 Event 对象是否参与事件流的冒泡阶段。默认值为 false。
+         * @param data {any} 事件data
          * @method egret.Event.dispatchEvent
          */
         static dispatchEvent(target: IEventDispatcher, type: string, bubbles?: boolean, data?: any): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.HTTPStatusEvent
@@ -537,130 +508,144 @@ declare module egret {
     class HTTPStatusEvent extends Event {
         /**
          * HTTPStatusEvent.HTTP_STATUS 常量定义 httpStatus 事件对象的 type 属性值。
-         * @constant {string} egret.IOErrorEvent.IO_ERROR
+         * @constant {string} egret.HTTPStatusEvent.HTTP_STATUS
          */
         static HTTP_STATUS: string;
         /**
+         * 创建一个 egret.HTTPStatusEvent 对象
          * @method egret.HTTPStatusEvent#constructor
-         * @param type {string}
-         * @param bubbles {boolean}
-         * @param cancelable {boolean}
+         * @param type {string} 事件的类型，可以作为 Event.type 访问。
+         * @param bubbles {boolean} 确定 Event 对象是否参与事件流的冒泡阶段。默认值为 false。
+         * @param cancelable {boolean} 确定是否可以取消 Event 对象。默认值为 false。
          */
         constructor(type: string, bubbles?: boolean, cancelable?: boolean);
+        private _status;
         /**
-         * 由服务器返回的 HTTP 状态代码。【只读】
+         * 由服务器返回的 HTTP 状态代码。
          * @type {number}
          * @private
          */
-        private _status;
         status: number;
         private static httpStatusEvent;
         /**
          * 使用指定的EventDispatcher对象来抛出Event事件对象。抛出的对象将会缓存在对象池上，供下次循环复用。
          * @method egret.IOErrorEvent.dispatchIOErrorEvent
-         * @param target {egret.IEventDispatcher}
+         * @param target {egret.IEventDispatcher} 派发事件目标
+         * @param status {number} 由服务器返回的 HTTP 状态代码
          */
         static dispatchHTTPStatusEvent(target: IEventDispatcher, status: number): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
+declare module egret {
+    /**
+     * @class egret.SoundEvent
+     * @classdesc
+     * 声音相关事件。
+     * 有事件：SoundEvent.SOUND_COMPLETE
+     * @includeExample egret/events/SoundEvent.ts
+     */
+    class SoundEvent extends egret.Event {
+        /**
+         * 在声音完成播放后调度。
+         * @constant {string} egret.SoundEvent.SOUND_COMPLETE
+         */
+        static SOUND_COMPLETE: string;
+        /**
+         * 创建一个 egret.SoundEvent 对象
+         * @param type {string} 事件类型
+         * @param bubbles {boolean}
+         * @param cancelable {boolean}
+         */
+        constructor(type: string, bubbles?: boolean, cancelable?: boolean);
+    }
+}
+
+declare module egret {
+    /**
+     * @class egret.FocusEvent
+     * @classdesc
+     * 用户将焦点从显示列表中的一个对象更改到另一个对象时，对象将调度 FocusEvent 对象。目前只支持输入文本。
+     * 有四种类型的焦点事件：FocusEvent.FOCUS_IN FocusEvent.FOCUS_OUT
+     */
+    class FocusEvent extends egret.Event {
+        /**
+         * 获得焦点
+         * @constant {string} egret.FocusEvent.FOCUS_IN
+         */
+        static FOCUS_IN: string;
+        /**
+         * 失去焦点
+         * @constant {string} egret.FocusEvent.FOCUS_OUT
+         */
+        static FOCUS_OUT: string;
+        /**
+         * 创建一个 egret.FocusEvent 对象
+         * @param type {string} 事件类型
+         * @param bubbles {boolean}
+         * @param cancelable {boolean}
+         * @param bytesLoaded {number}
+         * @param bytesTotal {number}
+         */
+        constructor(type: string, bubbles?: boolean, cancelable?: boolean);
+    }
+}
+
 declare module egret {
     /**
      * @class egret.IOErrorEvent
      * @classdesc IO流事件，当错误导致输入或输出操作失败时调度 IOErrorEvent 对象。
      * @extends egret.Event
+     * @includeExample egret/events/IOErrorEvent.ts
      */
     class IOErrorEvent extends Event {
         /**
+         * 定义 ioError 事件对象的 type 属性值。
          * @constant {string} egret.IOErrorEvent.IO_ERROR
          */
         static IO_ERROR: string;
         /**
+         * 创建一个 egret.IOErrorEvent 对象
          * @method egret.IOErrorEvent#constructor
-         * @param type {string}
-         * @param bubbles {boolean}
-         * @param cancelable {boolean}
+         * @param type {string} 事件的类型，可以作为 Event.type 访问。
+         * @param bubbles {boolean} 确定 Event 对象是否参与事件流的冒泡阶段。默认值为 false。
+         * @param cancelable {boolean} 确定是否可以取消 Event 对象。默认值为 false。
          */
         constructor(type: string, bubbles?: boolean, cancelable?: boolean);
         /**
          * 使用指定的EventDispatcher对象来抛出Event事件对象。抛出的对象将会缓存在对象池上，供下次循环复用。
          * @method egret.IOErrorEvent.dispatchIOErrorEvent
-         * @param target {egret.IEventDispatcher}
+         * @param target {egret.IEventDispatcher} 派发事件目标
          */
         static dispatchIOErrorEvent(target: IEventDispatcher): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
+    /**
+     * @class egret.TouchEvent
+     * @classdesc
+     * 使用 TouchEvent 类，您可以处理设备上那些检测用户与设备之间的接触的事件。
+     * 当用户与带有触摸屏的移动电话或平板电脑等设备交互时，用户通常使用手指或指针设备接触屏幕。可使用 TouchEvent 类开发响应基本触摸事件（如单个手指点击）的应用程序。
+     * 使用此类中定义的事件类型创建事件侦听器。
+     * 注意：当对象嵌套在显示列表中时，触摸事件的目标将是显示列表中可见的最深的可能嵌套对象。此对象称为目标节点。要使目标节点的祖代（祖代是一个包含显示列表中所有目标节点的对象，从舞台到目标节点的父节点均包括在内）接收触摸事件的通知，请对祖代节点使用 EventDispatcher.addEventListener() 并将 type 参数设置为要检测的特定触摸事件。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=117&terms1_id=25&terms2_id=29 触摸事件
+     * @includeExample egret/events/TouchEvent.ts
+     */
     class TouchEvent extends Event {
         /**
-         * 创建一个作为参数传递给事件侦听器的 Event 对象。
-         *
-         * @class egret.TouchEvent
-         * @classdesc
-         * TouchEvent事件类
-         * @extends egret.Event
+         * 创建一个 egret.TouchEvent 对象，其中包含有关Touch事件的信息。
          * @constructor egret.TouchEvent
          * @param type {string} 事件的类型，可以作为 Event.type 访问。
          * @param bubbles {boolean} 确定 Event 对象是否参与事件流的冒泡阶段。默认值为 false。
          * @param cancelable {boolean} 确定是否可以取消 Event 对象。默认值为 false。
-         * @param touchPointID {number}
-         * @param stageX {number}
-         * @param stageY {number}
-         * @param ctrlKey {boolean}
-         * @param altKey {boolean}
-         * @param shiftKey {boolean}
-         * @param touchDown {boolean}
+         * @param touchPointID {number} 分配给触摸点的唯一标识号
+         * @param stageX {number} 事件发生点在全局舞台坐标中的水平坐标
+         * @param stageY {number} 事件发生点在全局舞台坐标中的垂直坐标
+         * @param ctrlKey {boolean} 事件发生时ctrl键是否被按下
+         * @param altKey {boolean} 事件发生时shift键是否被按下
+         * @param shiftKey {boolean} 事件发生时shift键是否被按下
+         * @param touchDown {boolean} 表示触摸是否已按下
          */
         constructor(type: string, bubbles?: boolean, cancelable?: boolean, touchPointID?: number, stageX?: number, stageY?: number, ctrlKey?: boolean, altKey?: boolean, shiftKey?: boolean, touchDown?: boolean);
         /**
@@ -689,18 +674,22 @@ declare module egret {
          */
         static TOUCH_RELEASE_OUTSIDE: string;
         /**
+         * 此功能已被废弃
          * @deprecated
          */
         static TOUCH_ROLL_OUT: string;
         /**
+         * 此功能已被废弃
          * @deprecated
          */
         static TOUCH_ROLL_OVER: string;
         /**
+         * 此功能已被废弃
          * @deprecated
          */
         static TOUCH_OUT: string;
         /**
+         * 此功能已被废弃
          * @deprecated
          */
         static TOUCH_OVER: string;
@@ -757,45 +746,20 @@ declare module egret {
         /**
          * 使用指定的EventDispatcher对象来抛出Event事件对象。抛出的对象将会缓存在对象池上，供下次循环复用。
          * @method egret.TouchEvent.dispatchTouchEvent
-         * @param target {egret.IEventDispatcher}
-         * @param type {string}
-         * @param touchPointID {number}
-         * @param stageX {number}
-         * @param stageY {number}
-         * @param ctrlKey {boolean}
-         * @param altKey {boolean}
-         * @param shiftKey {boolean}
-         * @param touchDown {boolean}
+         * @param target {egret.IEventDispatcher} 派发事件目标
+         * @param type {string} 事件类型
+         * @param touchPointID {number} 分配给触摸点的唯一标识号
+         * @param stageX {number} 事件发生点在全局舞台坐标中的水平坐标
+         * @param stageY {number} 事件发生点在全局舞台坐标中的垂直坐标
+         * @param ctrlKey {boolean} 事件发生时ctrl键是否被按下
+         * @param altKey {boolean} 事件发生时shift键是否被按下
+         * @param shiftKey {boolean} 事件发生时shift键是否被按下
+         * @param touchDown {boolean} 表示触摸是否已按下
          */
         static dispatchTouchEvent(target: IEventDispatcher, type: string, touchPointID?: number, stageX?: number, stageY?: number, ctrlKey?: boolean, altKey?: boolean, shiftKey?: boolean, touchDown?: boolean): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 /** @namespace egret */
 declare module egret {
     /**
@@ -803,10 +767,12 @@ declare module egret {
      * @classdesc
      * 每当 Timer 对象达到由 Timer.delay 属性指定的间隔时，Timer 对象即会调度 TimerEvent 对象。
      * @extends egret.Event
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=154&terms1_id=25&terms2_id=35 Timer计时器
+     * @includeExample egret/events/TimerEvent.ts
      */
     class TimerEvent extends Event {
         /**
-         *
+         * 创建一个 egret.TimerEvent 对象
          * @method egret.TimerEvent#constructor
          * @param type {string} 事件的类型。事件侦听器可以通过继承的 type 属性访问此信息。
          * @param bubbles {boolean} 确定 Event 对象是否冒泡。事件侦听器可以通过继承的 bubbles 属性访问此信息。
@@ -826,53 +792,77 @@ declare module egret {
         /**
          * 使用指定的EventDispatcher对象来抛出Event事件对象。抛出的对象将会缓存在对象池上，供下次循环复用。
          * @method egret.TimerEvent.dispatchTimerEvent
-         * @param target {egret.IEventDispatcher}
-         * @param type {string}
+         * @param target {egret.IEventDispatcher} 派发事件目标
+         * @param type {string} 事件类型
          */
         static dispatchTimerEvent(target: IEventDispatcher, type: string): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
-    class ProgressEvent extends Event {
+    /**
+     * 用户在富文本中单击超链接时，对象将调度 TextEvent 对象。文本事件类型：TextEvent.LINK。
+     * @includeExample egret/events/TextEvent.ts
+     */
+    class TextEvent extends Event {
         /**
+         * 创建一个 TextEvent 对象，其中包含有关文本事件的信息。
+         * @param type 事件的类型，可以作为 TextEvent.type 访问。
+         * @param bubbles 确定 Event 对象是否参与事件流的冒泡阶段。默认值为 false。
+         * @param cancelable 确定是否可以取消 Event 对象。默认值为 false。
+         * @param text 用户输入的一个或多个文本字符。事件侦听器可以通过 text 属性访问此信息。
+         */
+        constructor(type: string, bubbles?: boolean, cancelable?: boolean, text?: string);
+        /**
+         * 定义 link 事件对象的 type 属性值。
+         */
+        static LINK: string;
+        /**
+         * 在 textInput 事件中，由用户输入的字符或字符序列。
+         */
+        text: string;
+        /**
+         * 使用指定的EventDispatcher对象来抛出TextEvent事件对象。抛出的对象将会缓存在对象池上，供下次循环复用。
+         * @param target 派发事件目标
+         * @param type  事件类型
+         * @param text  TextEvent对象的text赋值
+         */
+        static dispatchTextEvent(target: IEventDispatcher, type: string, text: string): void;
+    }
+}
+
+declare module egret {
+    /**
+     * @class egret.ProgressEvent
+     * @classdesc
+     * 当加载操作已开始或套接字已接收到数据时，将调度 ProgressEvent 对象。
+     * 有两种类型的进程事件：ProgressEvent.PROGRESS 和 ProgressEvent.SOCKET_DATA。
+     */
+    class ProgressEvent extends egret.Event {
+        /**
+         * 定义 progress 事件对象的 type 属性值。
          * @constant {string} egret.ProgressEvent.PROGRESS
          */
         static PROGRESS: string;
         /**
+         * 定义 socketData 事件对象的 type 属性值。
          * @constant {string} egret.ProgressEvent.SOCKET_DATA
          */
         static SOCKET_DATA: string;
+        /**
+         * 在侦听器处理事件时加载的项数或字节数。
+         * @member {number} egret.ProgressEvent#bytesLoaded
+         */
         bytesLoaded: number;
+        /**
+         * 如果加载过程成功，将加载的总项数或总字节数。
+         * @member {number} egret.ProgressEvent#bytesTotal
+         */
         bytesTotal: number;
         /**
+         * 创建一个 egret.ProgressEvent 对象
          * @method egret.ProgressEvent#constructor
-         * @param type {string}
+         * @param type {string} 事件类型
          * @param bubbles {boolean}
          * @param cancelable {boolean}
          * @param bytesLoaded {number}
@@ -882,42 +872,22 @@ declare module egret {
         /**
          * 使用指定的EventDispatcher对象来抛出Event事件对象。抛出的对象将会缓存在对象池上，供下次循环复用。
          * @method egret.ProgressEvent.dispatchIOErrorEvent
-         * @param target {egret.IEventDispatcher}
+         * @param target {egret.IEventDispatcher} 派发事件目标
+         * @param type {string} 事件类型
+         * @param bytesLoaded {number} 加载的项数或字节数
+         * @param bytesTotal {number} 加载的总项数或总字节数
          */
         static dispatchProgressEvent(target: IEventDispatcher, type: string, bytesLoaded?: number, bytesTotal?: number): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.EventPhase
      * @classdesc
      * EventPhase 类可为 Event 类的 eventPhase 属性提供值。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=113&terms1_id=25&terms2_id=29 事件的执行流程
+     * @includeExample egret/events/EventPhase.ts
      */
     class EventPhase {
         /**
@@ -937,38 +907,16 @@ declare module egret {
         static BUBBLING_PHASE: number;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      *
      * @class egret.IEventDispatcher
      * @interface
-     * @classdesc IEventDispatcher是egret的事件派发器接口，负责进行事件的发送和侦听。
+     * @classdesc IEventDispatcher 接口定义用于添加或删除事件侦听器的方法，检查是否已注册特定类型的事件侦听器，并调度事件。
+     * 事件目标是 Egret 事件模型的重要组成部分。事件目标是事件如何通过显示列表层次结构这一问题的焦点。当发生鼠标单击或按键等事件时，会将事件对象调度到从显示列表根开始的事件流中。事件对象进行到事件目标的往返行程，在概念上，此往返行程被划分为三个阶段：捕获阶段包括从根到事件目标节点之前的最后一个节点的行程，目标阶段仅包括事件目标节点，冒泡阶段包括到显示列表的根的回程上遇到的任何后续节点。
+     * 通常，使用户定义的类能够调度事件的最简单方法是扩展 EventDispatcher。如果无法扩展（即，如果该类已经扩展了另一个类），则可以实现 IEventDispatcher 接口，创建 EventDispatcher 成员，并编写一些简单的挂钩，将调用连接到聚合的 EventDispatcher 中。
+     * @includeExample egret/events/IEventDispatcher.ts
      */
     interface IEventDispatcher extends IHashObject {
         /**
@@ -1018,53 +966,27 @@ declare module egret {
         willTrigger(type: string): boolean;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      *
      * @class egret.EventDispatcher
      * @classdesc
-     * EventDispatcher是egret的事件派发器类，负责进行事件的发送和侦听。
+     * EventDispatcher 是 Egret 的事件派发器类，负责进行事件的发送和侦听。
      *
      * 事件目标是事件如何通过显示列表层次结构这一问题的焦点。当发生鼠标单击、触摸或按键等事件时，
      * 引擎会将事件对象调度到从显示列表根开始的事件流中。然后该事件对象在显示列表中前进，直到到达事件目标，
      * 然后从这一点开始其在显示列表中的回程。在概念上，到事件目标的此往返行程被划分为三个阶段：
      * 捕获阶段包括从根到事件目标节点之前的最后一个节点的行程，目标阶段仅包括事件目标节点，冒泡阶段包括回程上遇到的任何后续节点到显示列表的根。
-     *
-     * @extends egret.HashObject
-     * @implements egret.IEventDispatcher
-     *
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=115&terms1_id=25&terms2_id=29 事件侦听器
+     * @includeExample egret/events/EventDispatcher.ts
      */
     class EventDispatcher extends HashObject implements IEventDispatcher {
         /**
-         * EventDispatcher 类是可调度事件的所有类的基类。EventDispatcher 类实现 IEventDispatcher 接口
-         * ，并且是 DisplayObject 类的基类。EventDispatcher 类允许显示列表上的任何对象都是一个事件目标，
-         * 同样允许使用 IEventDispatcher 接口的方法。
+         * 创建一个 egret.EventDispatcher 对象
+         * EventDispatcher 类是可调度事件的所有类的基类。
+         * EventDispatcher 类实现 IEventDispatcher 接口 ，并且是 DisplayObject 类的基类。
+         * EventDispatcher 类允许显示列表上的任何对象都是一个事件目标，同样允许使用 IEventDispatcher 接口的方法。
          */
         constructor(target?: IEventDispatcher);
         /**
@@ -1098,7 +1020,7 @@ declare module egret {
         /**
          * 在一个事件列表中按优先级插入事件对象
          */
-        _insertEventBin(list: any[], listener: Function, thisObject: any, priority: number, display?: any): boolean;
+        _insertEventBin(list: Array<any>, listener: Function, thisObject: any, priority: number, display?: any): boolean;
         /**
          * 移除事件侦听器
          * @method egret.EventDispatcher#removeEventListener
@@ -1111,7 +1033,7 @@ declare module egret {
         /**
          * 在一个事件列表中按优先级插入事件对象
          */
-        _removeEventBin(list: any[], listener: Function, thisObject: any, display?: any): boolean;
+        _removeEventBin(list: Array<any>, listener: Function, thisObject: any, display?: any, fromIdx?: number): boolean;
         /**
          * 检测是否存在监听器
          * @method egret.EventDispatcher#hasEventListener
@@ -1148,38 +1070,14 @@ declare module egret {
         dispatchEventWith(type: string, bubbles?: boolean, data?: Object): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.MainContext
      * @classdesc
      * MainContext是游戏的核心跨平台接口，组合了多个功能Context，并是游戏启动的主入口
      * @extends egret.EventDispatcher
+     * @private
      */
     class MainContext extends EventDispatcher {
         constructor();
@@ -1214,15 +1112,23 @@ declare module egret {
         static runtimeType: string;
         static RUNTIME_HTML5: string;
         static RUNTIME_NATIVE: string;
+        private _profileInstance;
         /**
          * 游戏启动，开启主循环，参考Flash的滑动跑道模型
          * @method egret.MainContext#run
          */
         run(): void;
+        static __DRAW_COMMAND_LIST: Array<RenderCommand>;
+        static __use_new_draw: boolean;
+        /**
+         * renderLoop阶段，引擎内部使用，暂未实现完全
+         */
+        static _renderLoopPhase: string;
         /**
          * 滑动跑道模型，渲染部分
          */
         private renderLoop(frameTime);
+        private _draw(context);
         private reuseEvent;
         /**
          * 广播EnterFrame事件。
@@ -1243,44 +1149,20 @@ declare module egret {
         /**
          * @member egret.MainContext.instance
          */
-        static instance: MainContext;
+        static instance: egret.MainContext;
         private static cachedEvent;
     }
 }
 declare var testDeviceType: () => boolean;
 declare var testRuntimeType: () => boolean;
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.Profiler
      * @classdesc
      * Profiler是egret的性能检测分析类
      * 请使用 egret.Profiler.getInstance().run();打开性能分析显示。
+     * @includeExample egret/utils/Profiler.ts
      */
     class Profiler {
         private static instance;
@@ -1294,15 +1176,24 @@ declare module egret {
         private _renderPerformanceCost;
         private _updateTransformPerformanceCost;
         private _preDrawCount;
+        private _calculatePreDrawCount;
         private _txt;
         private _tick;
         private _maxDeltaTime;
         private _totalDeltaTime;
+        _isRunning: boolean;
+        /**
+         * 停止Profiler
+         * @method egret.Profiler#stop
+         */
+        stop(): void;
         /**
          * 启动Profiler
          * @method egret.Profiler#run
          */
         run(): void;
+        _drawProfiler(context: RendererContext): void;
+        _setTxtFontSize(fontSize: number): void;
         /**
          * @private
          */
@@ -1327,40 +1218,17 @@ declare module egret {
         onDrawImage(): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
-     * @class egret.Ticker
-     * @classdesc
-     * Ticker是egret引擎的心跳控制器，是游戏唯一的时间处理入口。开发者务必不要使用setTimeout / setInterval 等方法，而是统一使用Ticker
-     * @extends egret.EventDispatcher
+     * Ticker是egret引擎的心跳控制器，是游戏唯一的时间处理入口。
+     * @includeExample egret/context/Ticker.ts
      */
     class Ticker extends EventDispatcher {
+        /**
+         * 创建一个Ticker对象，不可以创建
+         */
+        constructor();
         private _timeScale;
         private _paused;
         /**
@@ -1370,6 +1238,8 @@ declare module egret {
          * @stable A
          */
         run(): void;
+        private _callIndex;
+        private _callList;
         private update(advancedTime);
         private callBackList;
         /**
@@ -1377,7 +1247,7 @@ declare module egret {
          * @method egret.Ticker#register
          * @param listener {Function} 帧回调函数,参数返回上一帧和这帧的间隔时间。示例：onEnterFrame(frameTime:number):void
          * @param thisObject {any} 帧回调函数的this对象
-         * @param priority {any} 事件优先级，开发者请勿传递 Number.NEGATIVE_INFINITY 和 Number.POSITIVE_INFINITY
+         * @param priority {number} 事件优先级，开发者请勿传递 Number.NEGATIVE_INFINITY 和 Number.POSITIVE_INFINITY
          * @stable A-
          */
         register(listener: Function, thisObject: any, priority?: number): void;
@@ -1400,60 +1270,42 @@ declare module egret {
          */
         setTimeout(listener: Function, thisObject: any, delay: number, ...parameters: any[]): void;
         /**
-         * @method egret.Ticker#setTimeScale
+         * @deprecated
          * @param timeScale {number}
+         * @private
          */
         setTimeScale(timeScale: number): void;
         /**
+         * @deprecated
          * @method egret.Ticker#getTimeScale
+         * @private
          */
         getTimeScale(): number;
         /**
+         * 暂停
          * @method egret.Ticker#pause
          */
         pause(): void;
         /**
+         * 继续
          * @method egret.Ticker#resume
          */
         resume(): void;
         private static instance;
         /**
+         * 获取Ticker当前单例
          * @method egret.Ticker.getInstance
          * @returns {Ticker}
          */
-        static getInstance(): Ticker;
+        static getInstance(): egret.Ticker;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.HorizontalAlign
      * @classdesc 水平对齐方式
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=144&terms1_id=25&terms2_id=33 文本布局
      */
     class HorizontalAlign {
         /**
@@ -1486,36 +1338,12 @@ declare module egret {
         static CONTENT_JUSTIFY: string;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.VerticalAlign
      * @classdesc 垂直对齐方式
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=144&terms1_id=25&terms2_id=33 文本布局
      */
     class VerticalAlign {
         /**
@@ -1548,68 +1376,66 @@ declare module egret {
         static CONTENT_JUSTIFY: string;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.Timer
      * @classdesc
+     * Timer 类是计时器的接口，它使您能按指定的时间序列运行代码。
+     * 使用 start() 方法来启动计时器。为 timer 事件添加事件侦听器，以便将代码设置为按计时器间隔运行。
+     * 可以创建 Timer 对象以运行一次或按指定间隔重复运行，从而按计划执行代码。
+     * 根据 Egret 的帧速率或运行时环境（可用内存和其他因素），运行时调度事件的间隔可能稍有不同。
      * @extends egret.EventDispatcher
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=posts&id=114 Timer计时器
+     *
+     * @event egret.TimerEvent.TIMER 每当 Timer 对象达到根据 Timer.delay 属性指定的间隔时调度。
+     * @event egret.TimerEvent.TIMER_COMPLETE 每当它完成 Timer.repeatCount 设置的请求数后调度。
+     *
+     * @includeExample egret/utils/Timer.ts
      */
     class Timer extends EventDispatcher {
+        /**
+         * 创建一个 egret.Timer 对象
+         * @param delay {number} 计时器事件间的延迟（以毫秒为单位）。
+         * @param repeatCount {number} 设置的计时器运行总次数。
+         */
         constructor(delay: number, repeatCount?: number);
         /**
+         * 计时器事件间的延迟（以毫秒为单位）。如果在计时器正在运行时设置延迟间隔，则计时器将按相同的 repeatCount 迭代重新启动。
+         * 注意：建议 delay 不要低于 20 毫秒。计时器频率不得超过 60 帧/秒，这意味着低于 16.6 毫秒的延迟可导致出现运行时问题。
          * @member {number} egret.Timer#delay
          */
         delay: number;
         /**
+         * 设置的计时器运行总次数。如果重复计数设置为 0，则计时器将持续不断运行，或直至调用了 stop() 方法或节目停止。
+         * 如果重复计数不为 0，则将运行计时器，运行次数为指定的次数。如果设置的 repeatCount 总数等于或小于 currentCount，则计时器将停止并且不会再次触发。
          * @member {number} egret.Timer#repeatCount
          */
         repeatCount: number;
         private _currentCount;
         /**
+         * 计时器从 0 开始后触发的总次数。如果已重置了计时器，则只会计入重置后的触发次数。
          * @method egret.Timer#currentCount
-         * @returns {number}
          */
-        currentCount(): number;
+        currentCount: number;
         private _running;
         /**
+         * 计时器的当前状态；如果计时器正在运行，则为 true，否则为 false。
          * @member {boolean} egret.Timer#running
          */
         running: boolean;
         /**
+         * 如果计时器正在运行，则停止计时器，并将 currentCount 属性设回为 0，这类似于秒表的重置按钮。然后，在调用 start() 后，将运行计时器实例，运行次数为指定的重复次数（由 repeatCount 值设置）。
          * @method egret.Timer#reset
          */
         reset(): void;
         /**
+         * 如果计时器尚未运行，则启动计时器。
          * @method egret.Timer#start
          */
         start(): void;
         /**
+         * 停止计时器。如果在调用 stop() 后调用 start()，则将继续运行计时器实例，运行次数为剩余的 重复次数（由 repeatCount 属性设置）。
          * @method egret.Timer#stop
          */
         stop(): void;
@@ -1617,32 +1443,7 @@ declare module egret {
         private onEnterFrame(frameTime);
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * 返回一个对象的完全限定名<br/>
@@ -1650,7 +1451,10 @@ declare module egret {
      * @param value {any} 需要完全限定类名称的对象，可以将任何 TypeScript / JavaScript值传递给此方法，包括所有可用的TypeScript / JavaScript类型、对象实例、原始类型（如number）和类对象
      * @returns {string}
      * @example
+     * <pre>
      *  egret.getQualifiedClassName(egret.DisplayObject) //返回 "egret.DisplayObject"
+     * </pre>
+     * @includeExample egret/utils/getQualifiedClassName.ts
      */
     function getQualifiedClassName(value: any): string;
     /**
@@ -1659,36 +1463,13 @@ declare module egret {
     * @param value {any} 需要取得父类的对象，可以将任何 TypeScript / JavaScript值传递给此方法，包括所有可用的TypeScript / JavaScript类型、对象实例、原始类型（如number）和类对象
     * @returns {Function}
     * @example
+    * <pre>
     *  egret.getQualifiedSuperclassName(egret.DisplayObjectContainer) //返回 "egret.DisplayObject"
+    * </pre>
     */
     function getQualifiedSuperclassName(value: any): string;
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * 返回 name 参数指定的类的类对象引用。
@@ -1696,37 +1477,15 @@ declare module egret {
      * @param name {string} 类的名称。
      * @returns {any}
      * @example
+     * <pre>
      * egret.getDefinitionByName("egret.DisplayObject") //返回 DisplayObject类定义
+     * </pre>
+     * @includeExample egret/utils/getDefinitionByName.ts
      */
     function getDefinitionByName(name: string): any;
 }
 declare var __global: any;
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * 在指定的延迟（以毫秒为单位）后运行指定的函数。
@@ -1736,128 +1495,77 @@ declare module egret {
      * @param delay {number} 延迟时间，以毫秒为单位
      * @param ...args {any} 参数列表
      * @returns {number} 返回索引，可以用于 clearTimeout
+     * @includeExample egret/utils/setTimeout.ts
      */
     function setTimeout(listener: Function, thisObject: any, delay: number, ...args: any[]): number;
     /**
      * 清除指定延迟后运行的函数。
      * @method egret.clearTimeout
-     * @param key {number}
+     * @param key {number} egret.setTimeout所返回的索引
+     * @includeExample egret/utils/setTimeout.ts
      */
     function clearTimeout(key: number): void;
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
+declare module egret {
+    /**
+     * 在指定的延迟（以毫秒为单位）后运行指定的函数。
+     * @method egret.setInterval
+     * @param listener {Function} 侦听函数
+     * @param thisObject {any} this对象
+     * @param delay {number} 延迟时间，以毫秒为单位
+     * @param ...args {any} 参数列表
+     * @returns {number} 返回索引，可以用于 clearInterval
+     * @includeExample egret/utils/setInterval.ts
+     */
+    function setInterval(listener: Function, thisObject: any, delay: number, ...args: any[]): number;
+    /**
+     * 清除指定延迟后运行的函数。
+     * @method egret.clearInterval
+     * @param key {number} egret.setInterval所返回的索引
+     * @includeExample egret/utils/setInterval.ts
+     */
+    function clearInterval(key: number): void;
+}
+
 declare module egret {
     /**
      * 检查指定的应用程序域之内是否存在一个公共定义。该定义可以是一个类、一个命名空间或一个函数的定义。
-    * @method egret.hasDefinition
+     * @method egret.hasDefinition
      * @param name {string} 定义的名称。
-    * @returns {boolean}
+     * @returns {boolean} 公共定义是否存在
      * @example
-     * egret.hasDefinition("egret.DisplayObject") //返回 true
+     * <pre>
+     *  egret.hasDefinition("egret.DisplayObject") //返回 true
+     * </pre>
+     * @includeExample egret/utils/hasDefinition.ts
      */
     function hasDefinition(name: string): boolean;
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * 转换数字为颜色字符串
      * @method egret.toColorString
-     * @param value {number}
-     * @returns {string}
+     * @param value {number} 需要转换的颜色值
+     * @returns {string} 颜色字符串，例如"#ffffff"。
+     * @includeExample egret/utils/toColorString.ts
      */
     function toColorString(value: number): string;
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.Matrix
      * @classdesc
-     * 2D矩阵类，包括常见矩阵算法
+     * Matrix 类表示一个转换矩阵，它确定如何将点从一个坐标空间映射到另一个坐标空间。
+     * 您可以对一个显示对象执行不同的图形转换，方法是设置 Matrix 对象的属性，将该 Matrix 对象应用于 Transform 对象的 matrix 属性，然后应用该 Transform 对象作为显示对象的 transform 属性。这些转换函数包括平移（x 和 y 重新定位）、旋转、缩放和倾斜。
      * @extends egret.HashObject
+     * @includeExample egret/geom/Matrix.ts
      */
     class Matrix extends HashObject {
-        a: number;
-        b: number;
-        c: number;
-        d: number;
-        tx: number;
-        ty: number;
         /**
+         * 创建一个 egret.Matrix 对象
          * @method egret.Matrix#constructor
          * @param a {number} 缩放或旋转图像时影响像素沿 x 轴定位的值。
          * @param b {number} 旋转或倾斜图像时影响像素沿 y 轴定位的值。
@@ -1867,59 +1575,96 @@ declare module egret {
          * @param ty {number} 沿 y 轴平移每个点的距离。
          */
         constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number);
+        /**
+         * 缩放或旋转图像时影响像素沿 x 轴定位的值
+         * @member egret.Matrix#a
+         */
+        a: number;
+        /**
+         * 旋转或倾斜图像时影响像素沿 y 轴定位的值
+         * @member egret.Matrix#b
+         */
+        b: number;
+        /**
+         * 旋转或倾斜图像时影响像素沿 x 轴定位的值
+         * @member egret.Matrix#c
+         */
+        c: number;
+        /**
+         * 缩放或旋转图像时影响像素沿 y 轴定位的值
+         * @member egret.Matrix#d
+         */
+        d: number;
+        /**
+         * 沿 x 轴平移每个点的距离
+         * @member egret.Matrix#tx
+         */
+        tx: number;
+        /**
+         * 沿 y 轴平移每个点的距离
+         * @member egret.Matrix#ty
+         */
+        ty: number;
+        /**
+         * 引擎内部用于函数传递返回值的全局 Matrix 对象，开发者请勿随意修改此对象
+         * @member {egret.Matrix} egret.Matrix.identity
+         */
         static identity: Matrix;
+        /**
+         * @private
+         */
         static DEG_TO_RAD: number;
         /**
          * 前置矩阵
          * @method egret.Matrix#prepend
-         * @param a {number}
-         * @param b {number}
-         * @param c {number}
-         * @param d {number}
-         * @param tx {number}
-         * @param ty {number}
+         * @param a {number} 缩放或旋转图像时影响像素沿 x 轴定位的值
+         * @param b {number} 缩放或旋转图像时影响像素沿 y 轴定位的值
+         * @param c {number} 缩放或旋转图像时影响像素沿 x 轴定位的值
+         * @param d {number} 缩放或旋转图像时影响像素沿 y 轴定位的值
+         * @param tx {number} 沿 x 轴平移每个点的距离
+         * @param ty {number} 沿 y 轴平移每个点的距离
          * @returns {egret.Matrix}
          */
         prepend(a: number, b: number, c: number, d: number, tx: number, ty: number): Matrix;
         /**
          * 后置矩阵
          * @method egret.Matrix#append
-         * @param a {number}
-         * @param b {number}
-         * @param c {number}
-         * @param d {number}
-         * @param tx {number}
-         * @param ty {number}
+         * @param a {number} 缩放或旋转图像时影响像素沿 x 轴定位的值
+         * @param b {number} 缩放或旋转图像时影响像素沿 y 轴定位的值
+         * @param c {number} 缩放或旋转图像时影响像素沿 x 轴定位的值
+         * @param d {number} 缩放或旋转图像时影响像素沿 y 轴定位的值
+         * @param tx {number} 沿 x 轴平移每个点的距离
+         * @param ty {number} 沿 y 轴平移每个点的距离
          * @returns {egret.Matrix}
          */
-        append(a: any, b: any, c: any, d: any, tx: any, ty: any): Matrix;
+        append(a: number, b: number, c: number, d: number, tx: number, ty: number): Matrix;
         /**
          * 前置矩阵
          * @method egret.Matrix#prependTransform
-         * @param x {number}
-         * @param y {number}
-         * @param scaleX {number}
-         * @param scaleY {number}
-         * @param rotation {number}
-         * @param skewX {number}
-         * @param skewY {number}
-         * @param regX {number}
-         * @param regY {number}
+         * @param x {number} x值
+         * @param y {number} y值
+         * @param scaleX {number} 水平缩放
+         * @param scaleY {number} 垂直缩放
+         * @param rotation {number} 旋转
+         * @param skewX {number} x方向斜切
+         * @param skewY {number} y方向斜切
+         * @param regX {number} x值偏移
+         * @param regY {number} y值偏移
          * @returns {egret.Matrix}
          */
         prependTransform(x: number, y: number, scaleX: number, scaleY: number, rotation: number, skewX: number, skewY: number, regX: number, regY: number): Matrix;
         /**
          * 后置矩阵
          * @method egret.Matrix#appendTransform
-         * @param x {number}
-         * @param y {number}
-         * @param scaleX {number}
-         * @param scaleY {number}
-         * @param rotation {number}
-         * @param skewX {number}
-         * @param skewY {number}
-         * @param regX {number}
-         * @param regY {number}
+         * @param x {number} x值
+         * @param y {number} y值
+         * @param scaleX {number} 水平缩放
+         * @param scaleY {number} 垂直缩放
+         * @param rotation {number} 旋转
+         * @param skewX {number} x方向斜切
+         * @param skewY {number} y方向斜切
+         * @param regX {number} x值偏移
+         * @param regY {number} y值偏移
          * @returns {egret.Matrix}
          */
         appendTransform(x: number, y: number, scaleX: number, scaleY: number, rotation: number, skewX: number, skewY: number, regX: number, regY: number): Matrix;
@@ -1930,23 +1675,23 @@ declare module egret {
          * @param angle {number} 角度
          * @returns {egret.Matrix}
          */
-        rotate(angle: any): Matrix;
+        rotate(angle: number): Matrix;
         /**
          * 矩阵斜切，以角度值为单位
          * @method egret.Matrix#skew
-         * @param skewX {number}
-         * @param skewY {number}
+         * @param skewX {number} x方向斜切
+         * @param skewY {number} y方向斜切
          * @returns {egret.Matrix}
          */
-        skew(skewX: any, skewY: any): Matrix;
+        skew(skewX: number, skewY: number): Matrix;
         /**
          * 矩阵缩放
          * @method egret.Matrix#scale
-         * @param x {number}
-         * @param y {number}
+         * @param x {number} 水平缩放
+         * @param y {number} 垂直缩放
          * @returns {egret.Matrix}
          */
-        scale(x: any, y: any): Matrix;
+        scale(x: number, y: number): Matrix;
         /**
          * 沿 x 和 y 轴平移矩阵，由 x 和 y 参数指定。
          * @method egret.Matrix#translate
@@ -1954,7 +1699,7 @@ declare module egret {
          * @param y {number} 沿 y 轴向下移动的量（以像素为单位）。
          * @returns {egret.Matrix}
          */
-        translate(x: any, y: any): Matrix;
+        translate(x: number, y: number): Matrix;
         /**
          * 为每个矩阵属性设置一个值，该值将导致 null 转换。
          * 通过应用恒等矩阵转换的对象将与原始对象完全相同。
@@ -1966,7 +1711,9 @@ declare module egret {
         /**
          * 矩阵重置为目标矩阵
          * @method egret.Matrix#identityMatrix
+         * @param matrix {egret.Matrix} 重置的目标矩阵
          * @returns {egret.Matrix}
+         * @deprecated
          */
         identityMatrix(matrix: Matrix): Matrix;
         /**
@@ -1984,46 +1731,101 @@ declare module egret {
          * @param y {number}
          * @returns {numberPoint}
          * @stable C 该方法以后可能删除
+         * @deprecated
          */
         static transformCoords(matrix: Matrix, x: number, y: number): Point;
         private array;
+        /**
+         * @private
+         */
         toArray(transpose: any): any;
+        /**
+         * 将 Matrix 的成员设置为指定值
+         * @method egret.Matrix#setTo
+         * @param aa {number} 要将 Matrix 设置为的值
+         * @param ba {number} 要将 Matrix 设置为的值
+         * @param ca {number} 要将 Matrix 设置为的值
+         * @param da {number} 要将 Matrix 设置为的值
+         * @param txa {number} 要将 Matrix 设置为的值
+         * @param tya {number} 要将 Matrix 设置为的值
+         */
+        setTo(aa: number, ba: number, ca: number, da: number, txa: number, tya: number): void;
+        /**
+         * 将源 Matrix 对象中的所有矩阵数据复制到调用方 Matrix 对象中。
+         * @method egret.Matrix#copyFrom
+         * @param sourceMatrix {egret.Matrix} 要从中复制数据的 Matrix 对象
+         */
+        copyFrom(sourceMatrix: Matrix): void;
+        /**
+         * 返回一个新的 Matrix 对象，它是此矩阵的克隆，带有与所含对象完全相同的副本。
+         * @method egret.Matrix#clone
+         * @returns {Matrix} 一个 Matrix 对象
+         */
+        clone(): Matrix;
+        /**
+         * 将某个矩阵与当前矩阵连接，从而将这两个矩阵的几何效果有效地结合在一起。
+         * @method egret.Matrix#concat
+         * @param m {egret.Matrix} 要连接到源矩阵的矩阵
+         */
+        concat(m: Matrix): void;
+        /**
+         * 如果给定预转换坐标空间中的点，则此方法返回发生转换后该点的坐标。
+         * 与使用 transformPoint() 方法应用的标准转换不同，deltaTransformPoint() 方法的转换不考虑转换参数 tx 和 ty。
+         * @method egret.Matrix#deltaTransformPoint
+         * @param point {egret.Point} 想要获得其矩阵转换结果的点
+         * @returns {egret.Point} 由应用矩阵转换所产生的点
+         */
+        deltaTransformPoint(point: egret.Point): egret.Point;
+        /**
+         * 返回将 Matrix 对象表示的几何转换应用于指定点所产生的结果。
+         * @method egret.Matrix#transformPoint
+         * @param point {egret.Point} 想要获得其矩阵转换结果的点
+         * @returns {egret.Point} 由应用矩阵转换所产生的点
+         */
+        transformPoint(point: egret.Point): egret.Point;
+        /**
+         * 返回列出该 Matrix 对象属性的文本值。
+         * @method egret.Matrix#toString
+         * @returns {egret.Point} 一个字符串，它包含 Matrix 对象的属性值：a、b、c、d、tx 和 ty。
+         */
+        toString(): string;
+        /**
+         * 包括用于缩放、旋转和转换的参数。当应用于矩阵时，该方法会基于这些参数设置矩阵的值。
+         * @method egret.Matrix#createBox
+         * @param scaleX {number} 水平缩放所用的系数
+         * @param scaleY {number} 垂直缩放所用的系数
+         * @param rotation {number} 旋转量（以弧度为单位）
+         * @param tx {number} 沿 x 轴向右平移（移动）的像素数
+         * @param ty {number} 沿 y 轴向下平移（移动）的像素数
+         */
+        createBox(scaleX: number, scaleY: number, rotation?: number, tx?: number, ty?: number): void;
+        /**
+         * 创建 Graphics 类的 beginGradientFill() 和 lineGradientStyle() 方法所需的矩阵的特定样式。
+         * 宽度和高度被缩放为 scaleX/scaleY 对，而 tx/ty 值偏移了宽度和高度的一半。
+         * @method egret.Matrix#createGradientBox
+         * @param width {number} 渐变框的宽度
+         * @param height {number} 渐变框的高度
+         * @param rotation {number} 旋转量（以弧度为单位）
+         * @param tx {number} 沿 x 轴向右平移的距离（以像素为单位）。此值将偏移 width 参数的一半
+         * @param ty {number} 沿 y 轴向下平移的距离（以像素为单位）。此值将偏移 height 参数的一半
+         */
+        createGradientBox(width: number, height: number, rotation?: number, tx?: number, ty?: number): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.Point
      * @classdesc
      * Point 对象表示二维坐标系统中的某个位置，其中 x 表示水平轴，y 表示垂直轴。
      * @extends egret.HashObject
+     * @includeExample egret/geom/Point.ts
      */
     class Point extends HashObject {
+        /**
+         * 引擎内部用于函数传递返回值的全局 Point 对象，开发者请勿随意修改此对象
+         * @member {egret.Point} egret.Point.identity
+         */
         static identity: Point;
         /**
          * 创建一个 egret.Point 对象
@@ -2062,35 +1864,78 @@ declare module egret {
          * @param p2 {egret.Point} 第二个点
          * @returns {number} 第一个点和第二个点之间的距离。
          */
-        static distance(p1: Point, p2: Point): number;
+        static distance(p1: egret.Point, p2: egret.Point): number;
+        /**
+         * 将 Point 的成员设置为指定值
+         * @method egret.Point#setTo
+         * @param xa {number} 要将 Point 设置为的值
+         * @param ya {number} 要将 Point 设置为的值
+         */
+        setTo(xa: number, ya: number): void;
+        /**
+         * 将源 Point 对象中的所有点数据复制到调用方 Point 对象中。
+         * @method egret.Point#copyFrom
+         * @param sourcePoint {egret.Point} 要从中复制数据的 Point 对象
+         */
+        copyFrom(sourcePoint: Point): void;
+        /**
+         * 从 (0,0) 到此点的线段长度。
+         * @method egret.Point#length
+         */
+        length: number;
+        /**
+         * 将另一个点的坐标添加到此点的坐标以创建一个新点。
+         * @method egret.Point#add
+         * @param v {egret.Point} 要添加的点。
+         * @returns {egret.Point} 新点。
+         */
+        add(v: Point): Point;
+        /**
+         * 确定两个指定点之间的点。
+         * 参数 f 确定新的内插点相对于参数 pt1 和 pt2 指定的两个端点所处的位置。参数 f 的值越接近 1.0，则内插点就越接近第一个点（参数 pt1）。参数 f 的值越接近 0，则内插点就越接近第二个点（参数 pt2）。
+         * @method egret.Point.interpolate
+         * @param pt1 {egret.Point} 第一个点。
+         * @param pt2 {egret.Point} 第二个点。
+         * @param f {number} 两个点之间的内插级别。表示新点将位于 pt1 和 pt2 连成的直线上的什么位置。如果 f=1，则返回 pt1；如果 f=0，则返回 pt2。
+         * @returns {egret.Point} 新的内插点。
+         */
+        static interpolate(pt1: Point, pt2: Point, f: number): Point;
+        /**
+         * 将 (0,0) 和当前点之间的线段缩放为设定的长度。
+         * @method egret.Point#normalize
+         * @param thickness {number} 缩放值。例如，如果当前点为 (0,5) 并且您将它规范化为 1，则返回的点位于 (0,1) 处。
+         */
+        normalize(thickness: number): void;
+        /**
+         * 按指定量偏移 Point 对象。dx 的值将添加到 x 的原始值中以创建新的 x 值。dy 的值将添加到 y 的原始值中以创建新的 y 值。
+         * @method egret.Point#offset
+         * @param dx {number} 水平坐标 x 的偏移量。
+         * @param dy {number} 水平坐标 y 的偏移量。
+         */
+        offset(dx: number, dy: number): void;
+        /**
+         * 将一对极坐标转换为笛卡尔点坐标。
+         * @method egret.Point.polar
+         * @param len {number} 极坐标对的长度。
+         * @param angle {number} 极坐标对的角度（以弧度表示）。
+         */
+        static polar(len: number, angle: number): Point;
+        /**
+         * 从此点的坐标中减去另一个点的坐标以创建一个新点。
+         * @method egret.Point#subtract
+         * @param v {egret.Point} 要减去的点。
+         * @returns {egret.Point} 新点。
+         */
+        subtract(v: Point): Point;
+        /**
+         * 返回包含 x 和 y 坐标的值的字符串。该字符串的格式为 "(x=x, y=y)"，因此为点 23,17 调用 toString() 方法将返回 "(x=23, y=17)"。
+         * @method egret.Point#toString
+         * @returns {string} 坐标的字符串表示形式。
+         */
+        toString(): string;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.Rectangle
@@ -2099,17 +1944,27 @@ declare module egret {
      * Rectangle 类的 x、y、width 和 height 属性相互独立；更改一个属性的值不会影响其他属性。
      * 但是，right 和 bottom 属性与这四个属性是整体相关的。例如，如果更改 right 属性的值，则 width 属性的值将发生变化；如果更改 bottom 属性，则 height 属性的值将发生变化。
      * @extends egret.HashObject
+     * @includeExample egret/geom/Rectangle.ts
      */
     class Rectangle extends HashObject {
+        /**
+         * 创建一个 egret.Rectangle 对象。
+         * 其左上角由 x 和 y 参数指定，并具有指定的 width 和 height 参数。如果调用此函数时不使用任何参数，将创建一个 x、y、width 和 height 属性均设置为 0 的矩形。
+         * @method egret.Rectangle#constructor
+         * @param x {number} 矩形左上角的 x 坐标。
+         * @param y {number} 矩形左上角的 y 坐标。
+         * @param width {number} 矩形的宽度（以像素为单位）。
+         * @param height {number} 矩形的高度（以像素为单位）。
+         */
         constructor(x?: number, y?: number, width?: number, height?: number);
         /**
          * 矩形左上角的 x 坐标。
-         * @constant {number} egret.Rectangle#x
+         * @member {number} egret.Rectangle#x
          */
         x: number;
         /**
          * 矩形左上角的 y 坐标。
-         * @constant {number} egret.Rectangle#y
+         * @member {number} egret.Rectangle#y
          */
         y: number;
         /**
@@ -2123,15 +1978,35 @@ declare module egret {
          */
         height: number;
         /**
+         * 矩形左上角的 x 坐标。
+         * @member {number} egret.Rectangle#left
+         */
+        left: number;
+        /**
          * x 和 width 属性的和。
          * @member {number} egret.Rectangle#right
          */
         right: number;
         /**
+         * 矩形左上角的 y 坐标。
+         * @member {number} egret.Rectangle#top
+         */
+        top: number;
+        /**
          * y 和 height 属性的和。
          * @member {number} egret.Rectangle#bottom
          */
         bottom: number;
+        /**
+         * 由该点的 x 和 y 坐标确定的 Rectangle 对象左上角的位置。
+         * @member {number} egret.Rectangle#topLeft
+         */
+        topLeft: Point;
+        /**
+         * 由 right 和 bottom 属性的值确定的 Rectangle 对象的右下角的位置。
+         * @member {number} egret.Rectangle#bottomRight
+         */
+        bottomRight: Point;
         /**
          * 举行类初始化赋值，开发者尽量调用此方法复用Rectangle对象，而不是每次需要的时候都重新创建
          * @method egret.Rectangle#initialize
@@ -2140,6 +2015,7 @@ declare module egret {
          * @param width {number} 矩形的宽度
          * @param height {number} 矩形的高度
          * @returns {egret.Rectangle}
+         * @deprecated
          */
         initialize(x: number, y: number, width: number, height: number): Rectangle;
         /**
@@ -2158,13 +2034,18 @@ declare module egret {
          */
         intersects(toIntersect: Rectangle): boolean;
         /**
+         * 将 Rectangle 对象的所有属性设置为 0。
+         * @method egret.Rectangle#setEmpty
+         */
+        setEmpty(): void;
+        /**
          * 克隆矩形对象
          * @method egret.Rectangle#clone
          * @returns {egret.Rectangle} 返回克隆后的矩形
          */
         clone(): Rectangle;
         /**
-         * 引擎内部用于函数传递返回值的全局矩形对象，开发者请勿随意修改此对象
+         * 引擎内部用于函数传递返回值的全局 Rectangle 对象，开发者请勿随意修改此对象
          * @member {egret.Rectangle} egret.Rectangle.identity
          */
         static identity: Rectangle;
@@ -2176,110 +2057,258 @@ declare module egret {
          * @returns {boolean} 如果包含，返回true，否则返回false
          */
         containsPoint(point: Point): boolean;
+        /**
+         * 将 Rectangle 的成员设置为指定值
+         * @method egret.Rectangle#setTo
+         * @param xa {number} 要将 Rectangle 设置为的值
+         * @param ya {number} 要将 Rectangle 设置为的值
+         * @param widtha {number} 要将 Rectangle 设置为的值
+         * @param heighta {number} 要将 Rectangle 设置为的值
+         */
+        setTo(xa: number, ya: number, widtha: number, heighta: number): void;
+        /**
+         * 将源 Rectangle 对象中的所有矩形数据复制到调用方 Rectangle 对象中
+         * @method egret.Rectangle#copyFrom
+         * @param sourceRect {egret.Rectangle} 要从中复制数据的 Rectangle 对象
+         */
+        copyFrom(sourceRect: Rectangle): void;
+        /**
+         * 按指定量增加 Rectangle 对象的大小（以像素为单位）
+         * 保持 Rectangle 对象的中心点不变，使用 dx 值横向增加它的大小，使用 dy 值纵向增加它的大小。
+         * @method egret.Rectangle#inflate
+         * @param dx {number} Rectangle 对象横向增加的值。
+         * @param dy {number} Rectangle 对象纵向增加的值。
+         */
+        inflate(dx: number, dy: number): void;
+        /**
+         * 确定此 Rectangle 对象是否为空
+         * @method egret.Rectangle#isEmpty
+         * @returns {boolean} 如果 Rectangle 对象的宽度或高度小于等于 0，则返回 true 值，否则返回 false
+         */
+        isEmpty(): boolean;
+        /**
+         * 确定此 Rectangle 对象内是否包含由 rect 参数指定的 Rectangle 对象。
+         * 如果一个 Rectangle 对象完全在另一个 Rectangle 的边界内，我们说第二个 Rectangle 包含第一个 Rectangle。
+         * @method egret.Rectangle#containsRect
+         * @param rect {egret.Rectangle} 所检查的 Rectangle 对象
+         * @returns {boolean} 如果此 Rectangle 对象包含您指定的 Rectangle 对象，则返回 true 值，否则返回 false。
+         */
+        containsRect(rect: egret.Rectangle): boolean;
+        /**
+         * 确定在 toCompare 参数中指定的对象是否等于此 Rectangle 对象。
+         * 此方法将某个对象的 x、y、width 和 height 属性与此 Rectangle 对象所对应的相同属性进行比较。
+         * @method egret.Rectangle#equals
+         * @param toCompare {egret.Rectangle} 要与此 Rectangle 对象进行比较的矩形
+         * @returns {boolean} 如果对象具有与此 Rectangle 对象完全相同的 x、y、width 和 height 属性值，则返回 true 值，否则返回 false。
+         */
+        equals(toCompare: Rectangle): boolean;
+        /**
+         * 增加 Rectangle 对象的大小。此方法与 Rectangle.inflate() 方法类似，只不过它采用 Point 对象作为参数。
+         * @method egret.Rectangle#inflatePoint
+         * @param point {egret.Point} 此 Point 对象的 x 属性用于增加 Rectangle 对象的水平尺寸。y 属性用于增加 Rectangle 对象的垂直尺寸。
+         */
+        inflatePoint(point: Point): void;
+        /**
+         * 如果在 toIntersect 参数中指定的 Rectangle 对象与此 Rectangle 对象相交，则返回交集区域作为 Rectangle 对象。
+         * 如果矩形不相交，则此方法返回一个空的 Rectangle 对象，其属性设置为 0。
+         * @method egret.Rectangle#intersection
+         * @param toIntersect {egret.Rectangle} 要与此 Rectangle 对象比较的 Rectangle 对象。
+         * @returns {egret.Rectangle} 等于交集区域的 Rectangle 对象。如果该矩形不相交，则此方法返回一个空的 Rectangle 对象；即，其 x、y、width 和 height 属性均设置为 0 的矩形。
+         */
+        intersection(toIntersect: Rectangle): Rectangle;
+        /**
+         * 按指定量调整 Rectangle 对象的位置（由其左上角确定）。
+         * @method egret.Rectangle#offset
+         * @param dx {number} 将 Rectangle 对象的 x 值移动此数量。
+         * @param dy {number} 将 Rectangle 对象的 t 值移动此数量。
+         */
+        offset(dx: number, dy: number): void;
+        /**
+         * 将 Point 对象用作参数来调整 Rectangle 对象的位置。此方法与 Rectangle.offset() 方法类似，只不过它采用 Point 对象作为参数。
+         * @method egret.Rectangle#offsetPoint
+         * @param point {egret.Point} 要用于偏移此 Rectangle 对象的 Point 对象。
+         */
+        offsetPoint(point: Point): void;
+        /**
+         * 生成并返回一个字符串，该字符串列出 Rectangle 对象的水平位置和垂直位置以及高度和宽度。
+         * @method egret.Rectangle#toString
+         * @returns {string} 一个字符串，它列出了 Rectangle 对象的下列各个属性的值：x、y、width 和 height。
+         */
+        toString(): string;
+        /**
+         * 通过填充两个矩形之间的水平和垂直空间，将这两个矩形组合在一起以创建一个新的 Rectangle 对象。
+         * @method egret.Rectangle#union
+         * @param toUnion {egret.Rectangle} 要添加到此 Rectangle 对象的 Rectangle 对象。
+         * @returns {egret.Rectangle} 充当两个矩形的联合的新 Rectangle 对象。
+         */
+        union(toUnion: Rectangle): Rectangle;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
-     * @class egret.Logger
+     * @class egret.ColorTransform
      * @classdesc
-     * Logger是引擎的日志处理模块入口
-     * @stable B 目前Logger的接口设计没有问题，但是考虑到跨平台，需要将其改为一个Context，并且允许开发者自由扩展以实现自身游戏的日志分析收集需求
-     * todo:GitHub文档，如何利用日志帮助游戏持续改进
+     * 可使用 ColorTransform 类调整显示对象的颜色值。可以将颜色调整或颜色转换应用于所有四种通道：红色、绿色、蓝色和 Alpha 透明度。
+     * 当 ColorTransform 对象应用于显示对象时，将按如下方法为每个颜色通道计算新值：
+     * 新红色值 = (旧红色值 * redMultiplier) + redOffset
+     * 新绿色值 = (旧绿色值 * greenMultiplier) + greenOffset
+     * 新蓝色值 = (旧蓝色值 * blueMultiplier) + blueOffset
+     * 新 Alpha 值 = (旧 Alpha 值 * alphaMultiplier) + alphaOffset
+     * @extends egret.HashObject
+     * @private
      */
-    class Logger {
+    class ColorTransform extends HashObject {
         /**
-         * 表示出现了致命错误，开发者必须修复错误
-         * @method egret.Logger.fatal
-         * @param actionCode {string} 错误信息
-         * @param value {Object} 错误描述信息
+         * 创建一个 egret.ColorTransform 对象
+         * @method egret.ColorTransform#constructor
+         * @param redMultiplier {number} 红色乘数的值，在 0 到 1 范围内。
+         * @param greenMultiplier {number} 绿色乘数的值，在 0 到 1 范围内。
+         * @param blueMultiplier {number} 蓝色乘数的值，在 0 到 1 范围内。
+         * @param alphaMultiplier {number} Alpha 透明度乘数的值，在 0 到 1 范围内。
+         * @param redOffset {number} 红色通道值的偏移量，在 -255 到 255 范围内。
+         * @param greenOffset {number} 绿色通道值的偏移量，在 -255 到 255 范围内。
+         * @param blueOffset {number} 蓝色通道值的偏移量，在 -255 到 255 范围内。
+         * @param alphaOffset {number} Alpha 透明度通道值的偏移量，在 -255 到 255 范围内。
          */
-        static fatal(actionCode: string, value?: Object): void;
-        /**
-         * 记录正常的Log信息
-         * @method egret.Logger.info
-         * @param actionCode {string} 错误信息
-         * @param value {Object} 错误描述信息
-         */
-        static info(actionCode: string, value?: Object): void;
-        /**
-         * 记录可能会出现问题的Log信息
-         * @method egret.Logger.warning
-         * @param actionCode {string} 错误信息
-         * @param value {Object} 错误描述信息
-         */
-        static warning(actionCode: string, value?: Object): void;
+        constructor(redMultiplier?: number, greenMultiplier?: number, blueMultiplier?: number, alphaMultiplier?: number, redOffset?: number, greenOffset?: number, blueOffset?: number, alphaOffset?: number);
         /**
          * @private
-         * @param type
-         * @param actionCode
-         * @param value
          */
-        private static traceToConsole(type, actionCode, value);
+        _alphaMultiplier: number;
+        /**
+         * 与 Alpha 透明度通道值相乘的十进制值。
+         * @member {number} egret.ColorTransform#alphaMultiplier
+         * @default 1
+         */
+        alphaMultiplier: number;
         /**
          * @private
-         * @param type
-         * @param actionCode
-         * @param value
-         * @returns {string}
          */
-        private static getTraceCode(type, actionCode, value);
+        _alphaOffset: number;
+        /**
+         * -255 到 255 之间的数字，加到 Alpha 透明度通道值和 alphaMultiplier 值的乘积上。
+         * @member {number} egret.ColorTransform#alphaOffset
+         * @default 0
+         */
+        alphaOffset: number;
+        /**
+         * @private
+         */
+        _blueMultiplier: number;
+        /**
+         * 与蓝色通道值相乘的十进制值。
+         * @member {number} egret.ColorTransform#blueMultiplier
+         * @default 1
+         */
+        blueMultiplier: number;
+        /**
+         * @private
+         */
+        _blueOffset: number;
+        /**
+         * -255 到 255 之间的数字，加到蓝色通道值和 blueMultiplier 值的乘积上。
+         * @member {number} egret.ColorTransform#blueOffset
+         * @default 0
+         */
+        blueOffset: number;
+        /**
+         * @private
+         */
+        _greenMultiplier: number;
+        /**
+         * 与绿色通道值相乘的十进制值。
+         * @member {number} egret.ColorTransform#greenMultiplier
+         * @default 1
+         */
+        greenMultiplier: number;
+        /**
+         * @private
+         */
+        _greenOffset: number;
+        /**
+         * -255 到 255 之间的数字，加到绿色通道值和 greenMultiplier 值的乘积上。
+         * @member {number} egret.ColorTransform#greenOffset
+         * @default 0
+         */
+        greenOffset: number;
+        /**
+         * @private
+         */
+        _redMultiplier: number;
+        /**
+         * 与红色通道值相乘的十进制值。
+         * @member {number} egret.ColorTransform#redMultiplier
+         * @default 1
+         */
+        redMultiplier: number;
+        /**
+         * @private
+         */
+        _redOffset: number;
+        /**
+         * -255 到 255 之间的数字，加到红色通道值和 redMultiplier 值的乘积上。
+         * @member {number} egret.ColorTransform#redOffset
+         * @default 0
+         */
+        redOffset: number;
+        /**
+         * ColorTransform 对象的 RGB 颜色值。
+         * @member {number} egret.ColorTransform#color
+         */
+        color: number;
+        identityColorTransform(colorTransform: ColorTransform): void;
+        /**
+         * 将 second 参数指定的 ColorTransform 对象与当前 ColorTransform 对象连接，并将当前对象设置为结果，即两个颜色转换的相加组合
+         * @method egret.ColorTransform#concat
+         * @param second {egret.ColorTransform} 要与当前 ColorTransform 对象合并的 ColorTransform 对象
+         */
+        concat(second: egret.ColorTransform): void;
+        /**
+         * 设置字符串格式并将其返回，该字符串描述 ColorTransform 对象的所有属性
+         * @method egret.ColorTransform#toString
+         */
+        toString(): string;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
+declare module egret {
+    /**
+     * @class egret.Transform
+     * @classdesc
+     * 利用 Transform 类，可以访问可应用于显示对象的颜色调整属性和二维转换对象。
+     * @extends egret.HashObject
+     * @private
+     */
+    class Transform extends HashObject {
+        private _display;
+        constructor(display: DisplayObject);
+        private _matrix;
+        private _matrix2;
+        /**
+         * 一个 Matrix 对象，其中包含更改显示对象的缩放、旋转和平移的值。
+         * @member {number} egret.Transform#matrix
+         */
+        matrix: Matrix;
+        private _setMatrix(value);
+        /**
+         * @private
+         */
+        _colorTransform: ColorTransform;
+        private _colorTransform2;
+        /**
+         * 一个 ColorTransform 对象，其中包含整体调整显示对象颜色的值。
+         * @member {egret.ColorTransform} egret.Transform#colorTransform
+         */
+        colorTransform: ColorTransform;
+        private _setColorTransform(value);
+    }
+}
+
 declare module egret {
     /**
      * @deprecated
+     * @private
      */
     class SAXParser extends HashObject {
         static _instance: SAXParser;
@@ -2297,32 +2326,7 @@ declare module egret {
         parserXML(textxml: string): any;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.StageDelegate
@@ -2344,6 +2348,7 @@ declare module egret {
         static canvas_name: string;
         /**
          */
+        static egret_root_div: string;
         static canvas_div_name: string;
         private _designWidth;
         private _designHeight;
@@ -2382,7 +2387,7 @@ declare module egret {
         getOffSetY(): number;
     }
     /**
-     * @classdesc
+     * @private
      */
     class ResolutionPolicy {
         private _containerStrategy;
@@ -2402,6 +2407,7 @@ declare module egret {
         _apply(view: any, designedResolutionWidth: any, designedResolutionHeight: any): void;
     }
     /**
+     * @private
      */
     class ContainerStrategy {
         /**
@@ -2429,11 +2435,13 @@ declare module egret {
     /**
      * @classdesc
      * @extends egret.ContainerStrategy
+     * @private
      */
     class EqualToFrame extends ContainerStrategy {
         _apply(view: any): void;
     }
     /**
+     * @private
      */
     class ContentStrategy {
         /**
@@ -2447,7 +2455,7 @@ declare module egret {
          * @param designedResolutionWidth {number}
          * @param designedResolutionHeight {number}
          */
-        _apply(delegate: StageDelegate, designedResolutionWidth: number, designedResolutionHeight: number): void;
+        _apply(delegate: egret.StageDelegate, designedResolutionWidth: number, designedResolutionHeight: number): void;
         setEgretSize(w: number, h: number, styleW: number, styleH: number, left?: number, top?: number): void;
         /**
          * 显示区域分辨率宽
@@ -2464,6 +2472,7 @@ declare module egret {
      * @class egret.FixedHeight
      * @classdesc
      * @extends egret.ContentStrategy
+     * @private
      */
     class FixedHeight extends ContentStrategy {
         private minWidth;
@@ -2484,6 +2493,7 @@ declare module egret {
      * @class egret.FixedWidth
      * @classdesc
      * @extends egret.ContentStrategy
+     * @private
      */
     class FixedWidth extends ContentStrategy {
         private minHeight;
@@ -2498,6 +2508,7 @@ declare module egret {
      * @class egret.FixedSize
      * @classdesc
      * @extends egret.ContentStrategy
+     * @private
      */
     class FixedSize extends ContentStrategy {
         private width;
@@ -2515,6 +2526,7 @@ declare module egret {
      * @class egret.NoScale
      * @classdesc
      * @extends egret.ContentStrategy
+     * @private
      */
     class NoScale extends ContentStrategy {
         constructor();
@@ -2526,6 +2538,9 @@ declare module egret {
          */
         _apply(delegate: StageDelegate, designedResolutionWidth: number, designedResolutionHeight: number): void;
     }
+    /**
+     * @private
+     */
     class ShowAll extends ContentStrategy {
         constructor();
         /**
@@ -2536,6 +2551,9 @@ declare module egret {
          */
         _apply(delegate: StageDelegate, designedResolutionWidth: number, designedResolutionHeight: number): void;
     }
+    /**
+     * @private
+     */
     class FullScreen extends ContentStrategy {
         constructor();
         /**
@@ -2547,32 +2565,7 @@ declare module egret {
         _apply(delegate: StageDelegate, designedResolutionWidth: number, designedResolutionHeight: number): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @classdesc
@@ -2587,18 +2580,19 @@ declare module egret {
          * @returns {RenderFilter}
          */
         static getInstance(): RenderFilter;
-        _drawAreaList: Rectangle[];
+        _drawAreaList: Array<Rectangle>;
         private _defaultDrawAreaList;
         private _originalData;
         /**
          * @method egret.egret#addDrawArea
          * @param area {egret.Rectangle}
          */
-        addDrawArea(area: Rectangle): void;
+        addDrawArea(area: egret.Rectangle): void;
         /**
          * @method egret.egret#clearDrawArea
          */
         clearDrawArea(): void;
+        private static identityRectangle;
         /**
          * 先检查有没有不需要绘制的区域，再把需要绘制的区域绘制出来
          * @method egret.egret#drawImage
@@ -2619,60 +2613,35 @@ declare module egret {
          * @method egret.egret#getDrawAreaList
          * @returns {Rectangle}
          */
-        getDrawAreaList(): Rectangle[];
+        getDrawAreaList(): Array<Rectangle>;
         /**
          * 改变尺寸时使用
          */
         private onResize();
     }
     /**
-     * @class egret.RenderData
-     * @interface
-     * @classdesc
+     * @private
+     * 用于显示对象的接口定义，开发者不需要用到该类
      */
     interface RenderData {
         /**
          * @member egret.RenderData#_worldTransform
          */
-        _worldTransform: Matrix;
+        _worldTransform: egret.Matrix;
         /**
          * @member egret.RenderData#_worldBounds
          */
-        _worldBounds: Rectangle;
-        _texture_to_render: Texture;
-        _getSize(resultRect: Rectangle): Rectangle;
+        _worldBounds: egret.Rectangle;
+        _texture_to_render: egret.Texture;
+        _getSize(resultRect: Rectangle): egret.Rectangle;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @classdesc 注入器
      * @class egret.Injector
+     * @includeExample egret/utils/Injector.ts
      */
     class Injector {
         /**
@@ -2705,7 +2674,7 @@ declare module egret {
          * @method egret.Injector.hasMapRule
          * @param whenAskedFor {any} 传递类定义或类的完全限定名作为需要映射的键。
          * @param named {string} 可选参数，在同一个类作为键需要映射多条规则时，可以传入此参数区分不同的映射。
-         * @returns {boolean}
+         * @returns {boolean} 指定的映射规则是否存在
          */
         static hasMapRule(whenAskedFor: any, named?: string): boolean;
         /**
@@ -2713,33 +2682,166 @@ declare module egret {
          * @method egret.Injector.getInstance
          * @param clazz {any} 类定义或类的完全限定名
          * @param named {string} 可选参数，若在调用mapClass()映射时设置了这个值，则要传入同样的字符串才能获取对应的单例
-         * @returns {any}
+         * @returns {any} 获取指定类映射的单例
          */
         static getInstance(clazz: any, named?: string): any;
     }
 }
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
+
+declare module egret {
+    /**
+     * @private
+     */
+    const enum BitmapFilterQuality {
+        /**
+         * 定义低品质滤镜设置
+         * @private
+         */
+        LOW = 1,
+        /**
+         * 定义中等品质滤镜设置
+         * @private
+         */
+        MEDIUM = 2,
+        /**
+         * 定义高品质滤镜设置
+         * @private
+         */
+        HIGH = 3,
+    }
+}
+
+declare module egret {
+    /**
+     * @private
+     */
+    class Filter extends HashObject {
+        type: string;
+    }
+}
+
+declare module egret {
+    /**
+     * @class egret.BlurFilter
+     * @classdesc
+     * 可使用 BlurFilter 类将模糊视觉效果应用于显示对象。模糊效果可以柔化图像的细节。
+     * @extends egret.Filter
+     * @private
+     */
+    class BlurFilter extends Filter {
+        blurX: number;
+        blurY: number;
+        /**
+         * 创建一个 egret.BlurFilter 对象
+         * @method egret.BlurFilter#constructor
+         * @param blurX {number} 水平模糊量。有效值为 0 到 255（浮点）。
+         * @param blurY {number} 垂直模糊量。有效值为 0 到 255（浮点）。
+         */
+        constructor(blurX: number, blurY: number);
+    }
+}
+
+declare module egret {
+    /**
+     * @class egret.ColorMatrixFilter
+     * @classdesc
+     * 使用 ColorMatrixFilter 类可以将 4 x 5 矩阵转换应用于输入图像上的每个像素的 RGBA 颜色和 Alpha 值，以生成具有一组新的 RGBA 颜色和 Alpha 值的结果。
+     * @extends egret.Filter
+     * @private
+     */
+    class ColorMatrixFilter extends Filter {
+        /**
+         * @private
+         */
+        _matrix: Array<number>;
+        private _matrix2;
+        /**
+         * 创建一个 egret.ColorMatrixFilter 对象
+         * @method egret.ColorMatrixFilter#constructor
+         * @param matrix {Array<number>} 由 20 个项目（排列成 4 x 5 矩阵）组成的数组。
+         */
+        constructor(matrix?: Array<number>);
+        /**
+         * 由 20 个项目组成的数组，适用于 4 x 5 颜色转换。
+         * @member egret.ColorMatrixFilter#matrix
+         */
+        matrix: Array<number>;
+        private _setMatrix(value);
+    }
+}
+
+declare module egret {
+    /**
+     * @class egret.GlowFilter
+     * @classdesc
+     * 使用 GlowFilter 类可以对显示对象应用发光效果。在投影滤镜的 distance 和 angle 属性设置为 0 时，发光滤镜与投影滤镜极为相似。
+     * @extends egret.Filter
+     * @private
+     */
+    class GlowFilter extends Filter {
+        color: number;
+        alpha: number;
+        blurX: number;
+        blurY: number;
+        strength: number;
+        quality: number;
+        inner: boolean;
+        knockout: boolean;
+        _red: number;
+        _green: number;
+        _blue: number;
+        /**
+         * 创建一个 egret.GlowFilter 对象
+         * @method egret.GlowFilter#constructor
+         * @param color {number} 光晕颜色，采用十六进制格式 0xRRGGBB。默认值为 0xFF0000。
+         * @param alpha {number} 颜色的 Alpha 透明度值。有效值为 0 到 1。例如，0.25 设置透明度值为 25%。
+         * @param blurX {number} 水平模糊量。有效值为 0 到 255（浮点）。
+         * @param blurY {number} 垂直模糊量。有效值为 0 到 255（浮点）。
+         * @param strength {number} 印记或跨页的强度。该值越高，压印的颜色越深，而且发光与背景之间的对比度也越强。有效值为 0 到 255。暂未实现。
+         * @param quality {number} 应用滤镜的次数。
+         * @param inner {boolean} 指定发光是否为内侧发光。值 true 指定发光是内侧发光。值 false 指定发光是外侧发光（对象外缘周围的发光）。暂未实现。
+         * @param knockout {number} 指定对象是否具有挖空效果。值为 true 将使对象的填充变为透明，并显示文档的背景颜色。暂未实现。
+         */
+        constructor(color?: number, alpha?: number, blurX?: number, blurY?: number, strength?: number, quality?: number, inner?: boolean, knockout?: boolean);
+    }
+}
+
+declare module egret {
+    /**
+     * @class egret.DropShadowFilter
+     * @classdesc
+     * 可使用 DropShadowFilter 类向显示对象添加投影。
+     * @extends egret.GlowFilter
+     * @private
+     */
+    class DropShadowFilter extends GlowFilter {
+        distance: number;
+        angle: number;
+        /**
+         * 创建一个 egret.DropShadowFilter 对象
+         * @method egret.DropShadowFilter#constructor
+         * @param distance {number} 阴影的偏移距离，以像素为单位。
+         * @param angle {number} 阴影的角度，0 到 360 度（浮点）。
+         * @param color {number} 光晕颜色，采用十六进制格式 0xRRGGBB。默认值为 0xFF0000。
+         * @param alpha {number} 颜色的 Alpha 透明度值。有效值为 0 到 1。例如，0.25 设置透明度值为 25%。
+         * @param blurX {number} 水平模糊量。有效值为 0 到 255（浮点）。
+         * @param blurY {number} 垂直模糊量。有效值为 0 到 255（浮点）。
+         * @param strength {number} 印记或跨页的强度。该值越高，压印的颜色越深，而且发光与背景之间的对比度也越强。有效值为 0 到 255。暂未实现。
+         * @param quality {number} 应用滤镜的次数。
+         * @param inner {boolean} 指定发光是否为内侧发光。值 true 指定发光是内侧发光。值 false 指定发光是外侧发光（对象外缘周围的发光）。暂未实现。
+         * @param knockout {number} 指定对象是否具有挖空效果。值为 true 将使对象的填充变为透明，并显示文档的背景颜色。暂未实现。
+         */
+        constructor(distance?: number, angle?: number, color?: number, alpha?: number, blurX?: number, blurY?: number, strength?: number, quality?: number, inner?: boolean, knockout?: boolean, hideObject?: boolean);
+    }
+}
+
 declare module egret {
     /**
      * @class egret.BlendMode
      * @classdesc
      * 提供混合模式可视效果的常量值的类。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=48 BlendMode实例代码
+     * @includeExample egret/display/BlendMode.ts
      */
     class BlendMode {
         /**
@@ -2753,39 +2855,87 @@ declare module egret {
          * @constant {string} egret.BlendMode.ADD
          */
         static ADD: string;
+        /**
+         * 根据显示对象的 Alpha 值擦除背景。Alpha 值不为0的区域将被擦除。
+         * @constant {string} egret.BlendMode.ERASE
+         */
+        static ERASE: string;
+        /**
+         * 根据显示对象的 Alpha 值擦除背景。Alpha 值为0的区域将被擦除。
+         * 注意：由于 CanvasAPI 的限制，只会保留 Alpha 值不为1的区域。
+         * @constant {string} egret.BlendMode.ERASE_REVERSE
+         * @deprecated
+         */
+        static ERASE_REVERSE: string;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written pemission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
+declare module egret {
+    /**
+     * @private
+     */
+    class DisplayObjectProperties {
+        _name: string;
+        _explicitWidth: number;
+        _explicitHeight: number;
+        _x: number;
+        _y: number;
+        _scaleX: number;
+        _scaleY: number;
+        _anchorOffsetX: number;
+        _anchorOffsetY: number;
+        _anchorX: number;
+        _anchorY: number;
+        _rotation: number;
+        _alpha: number;
+        _skewX: number;
+        _skewY: number;
+        _blendMode: string;
+        /**
+         * 每个显示对象初始化时默认的 touchEnabled 属性值
+         * @default false
+         */
+        static defaultTouchEnabled: boolean;
+        _touchEnabled: boolean;
+        _visible: boolean;
+        _worldAlpha: number;
+        _scrollRect: Rectangle;
+        _cacheAsBitmap: boolean;
+        _parent: DisplayObjectContainer;
+        _stage: Stage;
+        _needDraw: boolean;
+        /**
+         * beta功能，请勿调用此方法
+         */
+        _filters: Array<Filter>;
+        _hasWidthSet: boolean;
+        _hasHeightSet: boolean;
+        _normalDirty: boolean;
+        _sizeDirty: boolean;
+        _isContainer: boolean;
+        constructor();
+    }
+}
+
+declare module egret {
+    /**
+     * @private
+     */
+    class DisplayObjectPrivateProperties {
+        _cacheBounds: egret.Rectangle;
+        _hitTestPointTexture: RenderTexture;
+        _rectW: number;
+        _rectH: number;
+        _cacheDirty: boolean;
+        constructor();
+    }
+}
+
 declare module egret {
     /**
      * @class egret.DisplayObject
      * @extends egret.EventDispatcher
-     * @classdesc 类是可放在显示列表中的所有对象的基类。该显示列表管理运行时显示的所有对象。使用 DisplayObjectContainer 类排列显示列表中的显示对象。
+     * @classdesc DisplayObject 类是可放在显示列表中的所有对象的基类。该显示列表管理运行时显示的所有对象。使用 DisplayObjectContainer 类排列显示列表中的显示对象。
      * DisplayObjectContainer 对象可以有子显示对象，而其他显示对象是“叶”节点，只有父级和同级，没有子级。
      * DisplayObject 类支持基本功能（如对象的 x 和 y 位置），也支持更高级的对象属性（如它的转换矩阵），所有显示对象都继承自 DisplayObject 类。
      * DisplayObject 类包含若干广播事件。通常，任何特定事件的目标均为一个特定的 DisplayObject 实例。
@@ -2796,15 +2946,38 @@ declare module egret {
      * 不允许重写以下方法
      * _draw();
      * getBounds();
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=102&terms1_id=25&terms2_id=27 显示对象的基本概念
+     * @includeExample egret/display/DisplayObject.ts
      *
+     * @event egret.Event.ADDED 将显示对象添加到显示列表中时调度。
+     * @event egret.Event.ADDED_TO_STAGE 在将显示对象直接添加到舞台显示列表或将包含显示对象的子树添加至舞台显示列表中时调度。
+     * @event egret.Event.REMOVED 将要从显示列表中删除显示对象时调度。
+     * @event egret.Event.REMOVED_FROM_STAGE 在从显示列表中直接删除显示对象或删除包含显示对象的子树时调度。
+     * @event egret.Event.ENTER_FRAME [广播事件] 播放头进入新帧时调度。
+     * @event egret.Event.RENDER [广播事件] 将要更新和呈现显示列表时调度。
+     * @event egret.Event.TOUCH_BEGIN [触摸事件] 触摸开始时调度。
+     * @event egret.Event.TOUCH_MOVE [触摸事件] 触摸移动时调度。
+     * @event egret.Event.TOUCH_END [触摸事件] 触摸结束时调度。
+     * @event egret.Event.TOUCH_TAP [触摸事件] 单击时调度。
      */
     class DisplayObject extends EventDispatcher implements RenderData {
-        __hack_local_matrix: any;
+        _DO_Props_: DisplayObjectProperties;
+        private _DO_Privs_;
+        /**
+         * 创建一个 egret.DisplayObject 对象
+         */
         constructor();
-        _normalDirty: boolean;
+        _texture_to_render: Texture;
+        _worldTransform: egret.Matrix;
+        _worldBounds: egret.Rectangle;
+        __hack_local_matrix: any;
+        _sizeChangeCallBack: Function;
+        _sizeChangeCallTarget: any;
         _setDirty(): void;
+        /**
+         * @private
+         */
         getDirty(): boolean;
-        private _sizeDirty;
         _setParentSizeDirty(): void;
         _setSizeDirty(): void;
         _clearDirty(): void;
@@ -2815,10 +2988,8 @@ declare module egret {
          * @member {string} egret.DisplayObject#name
          */
         name: string;
-        _texture_to_render: Texture;
-        _parent: DisplayObjectContainer;
         /**
-         * 表示包含此显示对象的 DisplayObjectContainer 对象。【只读】
+         * 表示包含此显示对象的 DisplayObjectContainer 对象。
          * 使用 parent 属性可以指定高于显示列表层次结构中当前显示对象的显示对象的相对路径。
          * @member {egret.DisplayObjectContainer} egret.DisplayObject#parent
          */
@@ -2829,7 +3000,6 @@ declare module egret {
          * 如果该对象位于具有变形的 DisplayObjectContainer 内，则它也位于包含 DisplayObjectContainer 的本地坐标系中。因此，对于逆时针旋转 90 度的 DisplayObjectContainer，该 DisplayObjectContainer 的子级将继承逆时针旋转 90 度的坐标系。
          * @member {number} egret.DisplayObject#x
          */
-        _x: number;
         x: number;
         _setX(value: number): void;
         /**
@@ -2837,7 +3007,6 @@ declare module egret {
          * 如果该对象位于具有变形的 DisplayObjectContainer 内，则它也位于包含 DisplayObjectContainer 的本地坐标系中。因此，对于逆时针旋转 90 度的 DisplayObjectContainer，该 DisplayObjectContainer 的子级将继承逆时针旋转 90 度的坐标系。
          * @member {number} egret.DisplayObject#y
          */
-        _y: number;
         y: number;
         _setY(value: number): void;
         /**
@@ -2847,7 +3016,6 @@ declare module egret {
          * @member {number} egret.DisplayObject#scaleX
          * @default 1
          */
-        _scaleX: number;
         scaleX: number;
         /**
          * 表示从对象注册点开始应用的对象的垂直缩放比例（百分比）。
@@ -2856,36 +3024,33 @@ declare module egret {
          * @member {number} egret.DisplayObject#scaleY
          * @default 1
          */
-        _scaleY: number;
         scaleY: number;
         /**
          * 表示从对象绝对锚点X。
          * @member {number} egret.DisplayObject#anchorOffsetX
          * @default 0
          */
-        _anchorOffsetX: number;
         anchorOffsetX: number;
         /**
          * 表示从对象绝对锚点Y。
          * @member {number} egret.DisplayObject#anchorOffsetY
          * @default 0
          */
-        _anchorOffsetY: number;
         anchorOffsetY: number;
         /**
          * 表示从对象相对锚点X。
          * @member {number} egret.DisplayObject#anchorX
          * @default 0
+         * @deprecated
          */
-        _anchorX: number;
         anchorX: number;
         _setAnchorX(value: number): void;
         /**
          * 表示从对象相对锚点Y。
          * @member {number} egret.DisplayObject#anchorY
          * @default 0
+         * @deprecated
          */
-        _anchorY: number;
         anchorY: number;
         _setAnchorY(value: number): void;
         /**
@@ -2894,7 +3059,6 @@ declare module egret {
          * 默认值为 true 可见
          * @member {boolean} egret.DisplayObject#visible
          */
-        _visible: boolean;
         visible: boolean;
         _setVisible(value: boolean): void;
         /**
@@ -2903,36 +3067,32 @@ declare module egret {
          * @member {number} egret.DisplayObject#rotation
          * @default 0 默认值为 0 不旋转。
          */
-        _rotation: number;
         rotation: number;
         /**
          * 表示指定对象的 Alpha 透明度值。
          * 有效值为 0（完全透明）到 1（完全不透明）。alpha 设置为 0 的显示对象是活动的，即使它们不可见。
          * @member {number} egret.DisplayObject#alpha
-         *  @default 1 默认值为 1。
+         * @default 1
          */
-        _alpha: number;
         alpha: number;
+        _setAlpha(value: number): void;
         /**
          * 表示DisplayObject的x方向斜切
          * @member {number} egret.DisplayObject#skewX
          * @default 0
          */
-        _skewX: number;
         skewX: number;
         /**
          * 表示DisplayObject的y方向斜切
          * @member {number} egret.DisplayObject#skewY
          * @default 0
          */
-        _skewY: number;
         skewY: number;
         /**
          * 指定此对象是否接收鼠标/触摸事件
          * @member {boolean} egret.DisplayObject#touchEnabled
          * @default false 默认为 false 即不可以接收。
          */
-        _touchEnabled: boolean;
         touchEnabled: boolean;
         _setTouchEnabled(value: boolean): void;
         /**
@@ -2945,30 +3105,29 @@ declare module egret {
          * 显示对象的滚动矩形范围。显示对象被裁切为矩形定义的大小，当您更改 scrollRect 对象的 x 和 y 属性时，它会在矩形内滚动。
          *  @member {egret.Rectangle} egret.DisplayObject#scrollRect
          */
-        _scrollRect: Rectangle;
         scrollRect: Rectangle;
         _setScrollRect(value: Rectangle): void;
         /**
          * 测量宽度
          * @returns {number}
+         * @member {egret.Rectangle} egret.DisplayObject#measuredWidth
          */
         measuredWidth: number;
         /**
          * 测量高度
          * @returns {number}
+         * @member {egret.Rectangle} egret.DisplayObject#measuredWidth
          */
         measuredHeight: number;
         /**
          * 显式设置宽度
          * @returns {number}
          */
-        _explicitWidth: number;
         explicitWidth: number;
         /**
          * 显式设置高度
          * @returns {number}
          */
-        _explicitHeight: number;
         explicitHeight: number;
         /**
          * 表示显示对象的宽度，以像素为单位。
@@ -2976,28 +3135,20 @@ declare module egret {
          * @member {number} egret.DisplayObject#width
          * @returns {number}
          */
-        /**
-         * 显式设置宽度
-         * @param value
-         */
         width: number;
+        _getWidth(): number;
         /**
          * 表示显示对象的高度，以像素为单位。
          * 高度是根据显示对象内容的范围来计算的。优先顺序为 显式设置高度 > 测量高度。
          * @member {number} egret.DisplayObject#height
          * @returns {number}
          */
-        /**
-         * 显式设置高度
-         * @param value
-         */
         height: number;
-        _hasWidthSet: Boolean;
+        _getHeight(): number;
         /**
          * @inheritDoc
          */
         _setWidth(value: number): void;
-        _hasHeightSet: Boolean;
         /**
          * @inheritDoc
          */
@@ -3008,15 +3159,32 @@ declare module egret {
          * 将 mask 设置为 null 可删除蒙版。
          */
         mask: Rectangle;
-        _worldTransform: Matrix;
-        _worldBounds: Rectangle;
+        /**
+         * @private
+         */
         worldAlpha: number;
         /**
          * @private
          * @param renderContext
          */
         _draw(renderContext: RendererContext): void;
+        private static color;
+        private static colorMatrixFilter;
+        _setGlobalFilters(renderContext: RendererContext): void;
+        _removeGlobalFilters(renderContext: RendererContext): void;
+        _hasFilters(): boolean;
+        _pushMask(renderContext: RendererContext): void;
+        _popMask(renderContext: RendererContext): void;
+        /**
+         * @private
+         */
         private drawCacheTexture(renderContext);
+        /**
+         * 强制每帧执行_draw函数
+         * @public
+         * @member {string} egret.DisplayObject#blendMode
+         */
+        needDraw: boolean;
         /**
          * @private
          * @param renderContext
@@ -3032,7 +3200,6 @@ declare module egret {
          * @param renderContext
          */
         _render(renderContext: RendererContext): void;
-        private _cacheBounds;
         /**
          * 获取显示对象的测量边界
          * @method egret.DisplayObject#getBounds
@@ -3040,16 +3207,17 @@ declare module egret {
          * @param calculateAnchor {boolean} 可选参数，是否会计算锚点。
          * @returns {Rectangle}
          */
-        getBounds(resultRect?: Rectangle, calculateAnchor?: boolean): Rectangle;
+        getBounds(resultRect?: Rectangle, calculateAnchor?: boolean): egret.Rectangle;
         private destroyCacheBounds();
         /**
          * @private
          * @returns {Matrix}
          */
         private static identityMatrixForGetConcatenated;
-        _getConcatenatedMatrix(): Matrix;
+        _getConcatenatedMatrix(): egret.Matrix;
         /**
          * 将 point 对象从显示对象的（本地）坐标转换为舞台（全局）坐标。
+         * 此方法允许您将任何给定的 x 和 y 坐标从相对于特定显示对象原点 (0,0) 的值（本地坐标）转换为相对于舞台原点的值（全局坐标）。
          * @method egret.DisplayObject#localToGlobal
          * @param x {number} 本地x坐标
          * @param y {number} 本地y坐标
@@ -3071,98 +3239,92 @@ declare module egret {
          * @method egret.DisplayObject#hitTest
          * @param x {number} 检测坐标的x轴
          * @param y {number} 检测坐标的y轴
-         * @param ignoreTouchEnabled {boolean} 是否忽略TouchEnabled
+         * @param ignoreTouchEnabled {boolean} 是否忽略 touchEnabled 属性
          * @returns {*}
          */
         hitTest(x: number, y: number, ignoreTouchEnabled?: boolean): DisplayObject;
-        private _hitTestPointTexture;
         /**
          * 计算显示对象，以确定它是否与 x 和 y 参数指定的点重叠或相交。x 和 y 参数指定舞台的坐标空间中的点，而不是包含显示对象的显示对象容器中的点（除非显示对象容器是舞台）。
-         * 注意，不要在大量物体中使用精确碰撞像素检测，这回带来巨大的性能开销
+         * 注意，不要在大量物体中使用精确碰撞像素检测，这会带来巨大的性能开销
          * @method egret.DisplayObject#hitTestPoint
          * @param x {number}  要测试的此对象的 x 坐标。
          * @param y {number}  要测试的此对象的 y 坐标。
          * @param shapeFlag {boolean} 是检查对象 (true) 的实际像素，还是检查边框 (false) 的实际像素。
          * @returns {boolean} 如果显示对象与指定的点重叠或相交，则为 true；否则为 false。
+         * @platform Web
          */
         hitTestPoint(x: number, y: number, shapeFlag?: boolean): boolean;
         _getMatrix(parentMatrix?: Matrix): Matrix;
         _getSize(resultRect: Rectangle): Rectangle;
-        private _rectW;
-        private _rectH;
         /**
          * 测量显示对象坐标与大小
          */
-        _measureSize(resultRect: Rectangle): Rectangle;
+        _measureSize(resultRect: Rectangle): egret.Rectangle;
         /**
          * 测量显示对象坐标，这个方法需要子类重写
          * @returns {egret.Rectangle}
          * @private
          */
-        _measureBounds(): Rectangle;
-        _getOffsetPoint(): Point;
+        _measureBounds(): egret.Rectangle;
+        _getOffsetPoint(): egret.Point;
         _onAddToStage(): void;
         _onRemoveFromStage(): void;
-        _stage: Stage;
         /**
-         * 显示对象的舞台。【只读】
+         * 显示对象的舞台。
          * 例如，您可以创建多个显示对象并加载到显示列表中，每个显示对象的 stage 属性是指相同的 Stage 对象。
          * 如果显示对象未添加到显示列表，则其 stage 属性会设置为 null。
          * @member {number} egret.DisplayObject#stage
          * @returns {egret.Stage}
          */
         stage: Stage;
-        static _enterFrameCallBackList: any[];
-        static _renderCallBackList: any[];
-        addEventListener(type: string, listener: Function, thisObject: any, useCapture?: boolean, priority?: number): void;
-        removeEventListener(type: string, listener: Function, thisObject: any, useCapture?: boolean): void;
-        dispatchEvent(event: Event): boolean;
-        _dispatchPropagationEvent(event: Event, list: DisplayObject[], targetIndex?: number): void;
-        willTrigger(type: string): boolean;
-        private _cacheAsBitmap;
-        cacheAsBitmap: boolean;
-        private renderTexture;
-        private _makeBitmapCache();
-        private _cacheDirty;
-        private _setCacheDirty(dirty?);
-        static getTransformBounds(bounds: Rectangle, mtx: Matrix): Rectangle;
+        static _enterFrameCallBackList: Array<any>;
+        static _renderCallBackList: Array<any>;
         /**
-         * beta功能，请勿调用此方法
+         * @inheritDoc
          */
-        private _colorTransform;
-        colorTransform: ColorTransform;
-    }
-    class ColorTransform {
-        matrix: number[];
-        updateColor(r: number, g: number, b: number, a: number, addR: number, addG: number, addB: number, addA: number): void;
+        addEventListener(type: string, listener: Function, thisObject: any, useCapture?: boolean, priority?: number): void;
+        /**
+         * @inheritDoc
+         */
+        removeEventListener(type: string, listener: Function, thisObject: any, useCapture?: boolean): void;
+        /**
+         * @inheritDoc
+         */
+        dispatchEvent(event: Event): boolean;
+        _dispatchPropagationEvent(event: Event, list: Array<DisplayObject>, targetIndex?: number): void;
+        /**
+         * @inheritDoc
+         */
+        willTrigger(type: string): boolean;
+        /**
+         * 如果设置为 true，则 egret 运行时将缓存显示对象的内部位图表示形式。此缓存可以提高包含复杂矢量内容的显示对象的性能。
+         * 具有已缓存位图的显示对象的所有矢量数据都将被绘制到位图而不是主显示。像素按一对一与父对象进行映射。如果位图的边界发生更改，则将重新创建位图而不会拉伸它。
+         * 除非将 cacheAsBitmap 属性设置为 true，否则不会创建内部位图。
+         * @member {number} egret.DisplayObject#cacheAsBitmap
+         */
+        cacheAsBitmap: boolean;
+        /**
+         * @private
+         */
+        renderTexture: RenderTexture;
+        _makeBitmapCache(): boolean;
+        _setCacheDirty(dirty?: boolean): void;
+        /**
+         * @private
+         */
+        static getTransformBounds(bounds: egret.Rectangle, mtx: egret.Matrix): egret.Rectangle;
+        /**
+         * @private
+         */
+        filters: Array<Filter>;
+        private _transform;
+        /**
+         * @private
+         */
+        transform: Transform;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @extends egret.DisplayObject
@@ -3170,10 +3332,15 @@ declare module egret {
      * @classdesc
      * DisplayObjectContainer 类是可用作显示列表中显示对象容器的所有对象的基类。
      * 该显示列表管理运行时中显示的所有对象。使用 DisplayObjectContainer 类排列显示列表中的显示对象。每个 DisplayObjectContainer 对象都有自己的子级列表，用于组织对象的 Z 轴顺序。Z 轴顺序是由前至后的顺序，可确定哪个对象绘制在前，哪个对象绘制在后等。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=108&terms1_id=25&terms2_id=28 显示容器的概念与实现
+     * @includeExample egret/display/DisplayObjectContainer.ts
      */
     class DisplayObjectContainer extends DisplayObject {
-        static __EVENT__ADD_TO_STAGE_LIST: DisplayObject[];
-        static __EVENT__REMOVE_FROM_STAGE_LIST: DisplayObject[];
+        static __EVENT__ADD_TO_STAGE_LIST: Array<DisplayObject>;
+        static __EVENT__REMOVE_FROM_STAGE_LIST: Array<DisplayObject>;
+        /**
+         * 创建一个 egret.DisplayObjectContainer 对象
+         */
         constructor();
         _touchChildren: boolean;
         /**
@@ -3182,9 +3349,9 @@ declare module egret {
          * @member {boolean} egret.DisplayObjectContainer#touchChildren
          */
         touchChildren: boolean;
-        _children: DisplayObject[];
+        _children: Array<DisplayObject>;
         /**
-         * 返回此对象的子项数目。【只读】
+         * 返回此对象的子项数目。
          * @member {number} egret.DisplayObjectContainer#numChildren
          */
         numChildren: number;
@@ -3262,7 +3429,7 @@ declare module egret {
          * @param child {egret.DisplayObject} 要标识的 DisplayObject 实例。
          * @returns {number} 要标识的子显示对象的索引位置。
          */
-        getChildIndex(child: DisplayObject): number;
+        getChildIndex(child: egret.DisplayObject): number;
         /**
          * 从 DisplayObjectContainer 实例的子级列表中删除所有 child DisplayObject 实例。
          * @method egret.DisplayObjectContainer#removeChildren
@@ -3275,7 +3442,7 @@ declare module egret {
          * @returns {null}
          * @private
          */
-        _measureBounds(): Rectangle;
+        _measureBounds(): egret.Rectangle;
         /**
          * 检测指定坐标是否在显示对象内
          * @method egret.DisplayObjectContainer#hitTest
@@ -3297,126 +3464,13 @@ declare module egret {
         getChildByName(name: string): DisplayObject;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
-     * @class egret.Stage
-     * @classdesc Stage 类代表主绘图区。
-     */
-    class Stage extends DisplayObjectContainer {
-        static _invalidateRenderFlag: boolean;
-        /**
-         * 调用 invalidate() 方法后，在显示列表下次呈现时，Egret 会向每个已注册侦听 render 事件的显示对象发送一个 render 事件。
-         * 每次您希望 Egret 发送 render 事件时，都必须调用 invalidate() 方法。
-         * @method egret.Stage#invalidate
-         */
-        invalidate(): void;
-        constructor(width?: number, height?: number);
-        /**
-         * 一个 StageScaleMode 类中指定要使用哪种缩放模式的值。以下是有效值：
-         * StageScaleMode.EXACT_FIT -- 整个应用程序在指定区域中可见，但不尝试保持原始高宽比。可能会发生扭曲，应用程序可能会拉伸或压缩显示。
-         * StageScaleMode.SHOW_ALL -- 整个应用程序在指定区域中可见，且不发生扭曲，同时保持应用程序的原始高宽比。应用程序的可能会显示边框。
-         * StageScaleMode.NO_BORDER -- 整个应用程序填满指定区域，不发生扭曲，但有可能进行一些裁切，同时保持应用程序的原始高宽比。
-         * StageScaleMode.NO_SCALE -- 整个应用程序的大小固定，因此，即使播放器窗口的大小更改，它也会保持不变。如果播放器窗口比内容小，则可能进行一些裁切。
-         * @member {number} egret.Stage#scaleMode
-         */
-        private _scaleMode;
-        scaleMode: string;
-        /**
-         * 当屏幕尺寸改变时调用
-         */
-        changeSize(): void;
-        /**
-         * 设置屏幕适配策略
-         */
-        private setResolutionPolicy();
-        private _stageWidth;
-        /**
-         * 舞台宽度（坐标系宽度，非设备宽度）
-         * @member {number} egret.Stage#stageWidth
-         */
-        stageWidth: number;
-        private _stageHeight;
-        /**
-         * 舞台高度（坐标系高度，非设备高度）
-         * @member {number} egret.Stage#stageHeight
-         */
-        stageHeight: number;
-        /**
-         * @member egret.Stage#hitTest
-         * @see egret.DisplayObject#hitTest
-         * @param x
-         * @param y
-         * @returns {egret.DisplayObject}
-         */
-        hitTest(x: any, y: any, ignoreTouchEnabled?: boolean): DisplayObject;
-        /**
-         * 返回舞台尺寸范围
-         * @member egret.Stage#getBounds
-         * @see egret.DisplayObject#getBounds
-         * @param resultRect {egret.Rectangle} 可选参数，传入用于保存结果的Rectangle对象，避免重复创建对象。
-         * @returns {egret.Rectangle}
-         */
-        getBounds(resultRect?: Rectangle): Rectangle;
-        _updateTransform(): void;
-        focus: DisplayObject;
-    }
-}
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-declare module egret {
-    /**
+     * @classdesc
      * StageScaleMode 类为 Stage.scaleMode 属性提供值。
      * @class egret.StageScaleMode
+     * @includeExample egret/display/StageScaleMode.ts
      */
     class StageScaleMode {
         /**
@@ -3441,44 +3495,167 @@ declare module egret {
         static EXACT_FIT: string;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
+declare module egret {
+    /**
+     * @class egret.Stage
+     * @classdesc
+     * * Stage 类代表主绘图区，表示显示 Egret 内容的整个区域。
+     * 可以以全局方式访问 Stage 对象(egret.MainContext.instance.stage)。也可以利用 DisplayObject 实例的 stage 属性进行访问。
+     * Stage 类具有多个祖代类 -- DisplayObjectContainer、DisplayObject 和 EventDispatcher，属性和方法便是从这些类继承而来的。从这些继承的许多属性和方法不适用于 Stage 对象。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=202&terms1_id=59&terms2_id=69 深入了解屏幕适配
+     * @includeExample egret/display/Stage.ts
+     */
+    class Stage extends DisplayObjectContainer {
+        static _invalidateRenderFlag: boolean;
+        /**
+         * 是否会派发 RESIZE 事件
+         */
+        _changeSizeDispatchFlag: boolean;
+        /**
+         * 调用 invalidate() 方法后，在显示列表下次呈现时，Egret 会向每个已注册侦听 render 事件的显示对象发送一个 render 事件。
+         * 每次您希望 Egret 发送 render 事件时，都必须调用 invalidate() 方法。
+         * @method egret.Stage#invalidate
+         */
+        invalidate(): void;
+        /**
+         * 创建一个 egret.Stage 对象
+         * @param width {number} 舞台宽度
+         * @param height {number} 舞台高度
+         */
+        constructor(width?: number, height?: number);
+        private _scaleMode;
+        /**
+         * 屏幕适配策略，可以通过 egret.Stage.registerScaleMode 方法扩展
+         * 一个 StageScaleMode 类中指定要使用哪种缩放模式的值。以下是有效值：
+         * StageScaleMode.EXACT_FIT -- 整个应用程序在指定区域中可见，但不尝试保持原始高宽比。可能会发生扭曲，应用程序可能会拉伸或压缩显示。
+         * StageScaleMode.SHOW_ALL -- 整个应用程序在指定区域中可见，且不发生扭曲，同时保持应用程序的原始高宽比。应用程序的可能会显示边框。
+         * StageScaleMode.NO_BORDER -- 整个应用程序填满指定区域，不发生扭曲，但有可能进行一些裁切，同时保持应用程序的原始高宽比。
+         * StageScaleMode.NO_SCALE -- 整个应用程序的大小固定，因此，即使播放器窗口的大小更改，它也会保持不变。如果播放器窗口比内容小，则可能进行一些裁切。
+         * @member {number} egret.Stage#scaleMode
+         */
+        scaleMode: string;
+        /**
+         * 当屏幕尺寸改变时调用
+         * @method egret.Stage#changeSize
+         */
+        changeSize(): void;
+        /**
+         * 设置屏幕适配策略
+         */
+        private setResolutionPolicy();
+        private _stageWidth;
+        /**
+         * 舞台宽度（坐标系宽度，非设备宽度）
+         * @member {number} egret.Stage#stageWidth
+         */
+        stageWidth: number;
+        private _stageHeight;
+        /**
+         * 舞台高度（坐标系高度，非设备高度）
+         * @member {number} egret.Stage#stageHeight
+         */
+        stageHeight: number;
+        private _frameRate;
+        /**
+         * 获取并设置舞台的帧速率。帧速率是指每秒显示的帧数。
+         * 注意：需设置为可以被60整除的数
+         * @member {number} egret.Stage#frameRate
+         */
+        frameRate: number;
+        /**
+         * @member egret.Stage#hitTest
+         * @see egret.DisplayObject#hitTest
+         * @param x
+         * @param y
+         * @returns {egret.DisplayObject}
+         * @private
+         */
+        hitTest(x: any, y: any, ignoreTouchEnabled?: boolean): DisplayObject;
+        /**
+         * 返回舞台尺寸范围
+         * @member egret.Stage#getBounds
+         * @see egret.DisplayObject#getBounds
+         * @param resultRect {egret.Rectangle} 可选参数，传入用于保存结果的Rectangle对象，避免重复创建对象。
+         * @returns {egret.Rectangle}
+         */
+        getBounds(resultRect?: Rectangle): Rectangle;
+        _updateTransform(): void;
+        /**
+         * @private
+         */
+        focus: DisplayObject;
+        /**
+         * @private
+         */
+        static SCALE_MODE_ENUM: any;
+        /**
+         * 设置屏幕适配模式
+         * @param key {string} 键值
+         * @param value {egret.ContentStrategy} 适配模式
+         * @param override {boolean} 是否覆盖
+         * @method egret.Stage#registerScaleMode
+         * @private
+         */
+        static registerScaleMode(key: string, value: ContentStrategy, override?: boolean): void;
+    }
+}
+
+declare module egret {
+    /**
+     * @private
+     */
+    class ScrollViewProperties {
+        _verticalScrollPolicy: string;
+        _horizontalScrollPolicy: string;
+        _scrollLeft: number;
+        _scrollTop: number;
+        _hCanScroll: boolean;
+        _vCanScroll: boolean;
+        _lastTouchPosition: egret.Point;
+        _touchStartPosition: egret.Point;
+        _scrollStarted: boolean;
+        _lastTouchTime: number;
+        _lastTouchEvent: TouchEvent;
+        _velocitys: Array<{
+            x: number;
+            y: number;
+        }>;
+        _isHTweenPlaying: boolean;
+        _isVTweenPlaying: boolean;
+        _hScrollTween: Tween;
+        _vScrollTween: Tween;
+        _bounces: boolean;
+    }
+}
+
 declare module egret {
     /**
      * @class egret.ScrollView
      * @classdesc
-     * ScrollView 是用于滑动的辅助类，将一个显示对象传入构造函数即可
+     * ScrollView 是用于滑动的辅助类，将一个显示对象传入构造函数即可。可以在指定的尺寸范围内显示超过该范围的显示对象。并可以在此范围内随意拖动。
      * @extends egret.DisplayObjectContainer
+     * @includeExample egret/display/ScrollView.ts
      */
     class ScrollView extends DisplayObjectContainer {
-        private _lastTouchPosition;
-        private _lastTouchTime;
-        private _lastTouchEvent;
-        private _velocitys;
+        _ScrV_Props_: ScrollViewProperties;
+        /**
+         * 开始滚动的阈值，当触摸点偏离初始触摸点的距离超过这个值时才会触发滚动
+         * @member {number} egret.ScrollView#scrollBeginThreshold
+         */
+        scrollBeginThreshold: number;
+        /**
+         * 滚动速度，这个值为需要的速度与默认速度的比值。
+         * 取值范围为 scrollSpeed > 0 赋值为 2 时，速度是默认速度的 2 倍
+         * @member {number} egret.ScrollView#scrollSpeed
+         */
+        scrollSpeed: number;
+        /**
+         * 是否启用回弹，当启用回弹后，ScrollView中内容在到达边界后允许继续拖动，在用户拖动操作结束后，再反弹回边界位置
+         * @default true
+         * @version Egret 2.4
+         */
+        bounces: boolean;
         /**
          * 创建一个 egret.ScrollView 对象
          * @method egret.ScrollView#constructor
@@ -3492,26 +3669,27 @@ declare module egret {
          * @param content {egret.DisplayObject} 需要滚动的对象
          */
         setContent(content: DisplayObject): void;
-        private _verticalScrollPolicy;
+        /**
+         * 移除滚动的对象
+         * @method egret.ScrollView#removeContent
+         */
+        removeContent(): void;
         /**
          * 垂直滚动条显示策略，on/off/auto。
          * @member egret.ScrollView#verticalScrollPolicy
          */
         verticalScrollPolicy: string;
-        private _horizontalScrollPolicy;
         /**
          * 水平滚动条显示策略，on/off/auto。
          * @member egret.ScrollView#horizontalScrollPolicy
          */
         horizontalScrollPolicy: string;
-        _scrollLeft: number;
         /**
          * 获取或设置水平滚动位置,
          * @member {number} egret.ScrollView#scrollLeft
          * @returns {number}
          */
         scrollLeft: number;
-        _scrollTop: number;
         /**
          * 获取或设置垂直滚动位置,
          * @member {number} egret.ScrollView#scrollTop
@@ -3526,7 +3704,6 @@ declare module egret {
          * @param isOffset {boolean} 可选参数，默认是false，是否是滚动增加量，如 top=1 代表往上滚动1像素
          */
         setScrollPosition(top: number, left: number, isOffset?: boolean): void;
-        private _isOnTheEdge(isVertical?);
         private _validatePosition(top?, left?);
         /**
          * @inheritDoc
@@ -3537,20 +3714,18 @@ declare module egret {
          */
         _setHeight(value: number): void;
         _updateContentPosition(): void;
-        private _hCanScroll;
-        private _vCanScroll;
-        private _checkScrollPolicy();
+        _checkScrollPolicy(): boolean;
         private __checkScrollPolicy(policy, contentLength, viewLength);
         _addEvents(): void;
         _removeEvents(): void;
         _onTouchBegin(e: TouchEvent): void;
-        delayTouchBeginEvent: any;
-        touchBeginTimer: any;
+        private delayTouchBeginEvent;
+        private touchBeginTimer;
         _onTouchBeginCapture(event: TouchEvent): void;
         private _onTouchEndCapture(event);
         private _onTouchBeginTimer();
         private dispatchPropagationEvent(event);
-        _dispatchPropagationEvent(event: Event, list: DisplayObject[], targetIndex?: number): void;
+        _dispatchPropagationEvent(event: Event, list: Array<DisplayObject>, targetIndex?: number): void;
         _onTouchMove(event: TouchEvent): void;
         _onTouchEnd(event: TouchEvent): void;
         _onEnterFrame(event: Event): void;
@@ -3559,16 +3734,32 @@ declare module egret {
         private _calcVelocitys(e);
         _getContentWidth(): number;
         _getContentHeight(): number;
+        /**
+         * @private
+         */
         getMaxScrollLeft(): number;
+        /**
+         * @private
+         */
         getMaxScrollTop(): number;
-        static weight: number[];
+        private static weight;
         private _moveAfterTouchEnd();
-        setScrollTop(scrollTop: number, duration?: number): Tween;
-        setScrollLeft(scrollLeft: number, duration?: number): Tween;
+        _onTweenFinished(tw: Tween): void;
+        _onScrollStarted(): void;
+        _onScrollFinished(): void;
+        /**
+         * @private
+         */
+        setScrollTop(scrollTop: number, duration?: number): egret.Tween;
+        /**
+         * @private
+         */
+        setScrollLeft(scrollLeft: number, duration?: number): egret.Tween;
         private getAnimationDatas(pixelsPerMS, curPos, maxPos);
         private cloneTouchEvent(event);
         private throwNotSupportedError();
         /**
+         * @private
          * @method egret.ScrollView#addChild
          * @deprecated
          * @param child {DisplayObject}
@@ -3576,6 +3767,7 @@ declare module egret {
          */
         addChild(child: DisplayObject): DisplayObject;
         /**
+         * @private
          * @method egret.ScrollView#addChildAt
          * @deprecated
          * @param child {DisplayObject}
@@ -3584,6 +3776,7 @@ declare module egret {
          */
         addChildAt(child: DisplayObject, index: number): DisplayObject;
         /**
+         * @private
          * @method egret.ScrollView#removeChild
          * @deprecated
          * @param child {DisplayObject}
@@ -3591,6 +3784,7 @@ declare module egret {
          */
         removeChild(child: DisplayObject): DisplayObject;
         /**
+         * @private
          * @method egret.ScrollView#removeChildAt
          * @deprecated
          * @param index {number}
@@ -3598,6 +3792,7 @@ declare module egret {
          */
         removeChildAt(index: number): DisplayObject;
         /**
+         * @private
          * @method egret.ScrollView#setChildIndex
          * @deprecated
          * @param child {DisplayObject}
@@ -3605,6 +3800,7 @@ declare module egret {
          */
         setChildIndex(child: DisplayObject, index: number): void;
         /**
+         * @private
          * @method egret.ScrollView#swapChildren
          * @deprecated
          * @param child1 {DisplayObject}
@@ -3612,102 +3808,28 @@ declare module egret {
          */
         swapChildren(child1: DisplayObject, child2: DisplayObject): void;
         /**
+         * @private
          * @method egret.ScrollView#swapChildrenAt
          * @deprecated
          * @param index1 {number}
          * @param index2 {number}
          */
         swapChildrenAt(index1: number, index2: number): void;
+        /**
+         * @inheritDoc
+         */
+        hitTest(x: number, y: number, ignoreTouchEnabled?: boolean): DisplayObject;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-declare module egret {
-    /**
-     * @classdesc
-     * egret.Scroller已废弃，请使用egret.ScrollView
-     * @extends egret.DisplayObject
-     */
-    class Scroller extends ScrollView {
-        content: DisplayObject;
-        /**
-         * egret.Scroller已废弃，请使用egret.ScrollView
-         * @method egret.Scroller#constructor
-         * @param content {egret.DisplayObject} 需要滚动的对象
-         * @param width {number} Scroller的宽度，默认值为content的宽度
-         * @param height {number} Scroller的高度，默认值为content的高度
-         */
-        constructor(content: DisplayObject, width?: number, height?: number);
-        /**
-         * 是否启用水平滚动
-         * @member {boolean} egret.Scroller#scrollXEnabled
-         * @returns {boolean}
-         */
-        scrollXEnabled: boolean;
-        /**
-         * 是否启用垂直滚动
-         * @member {boolean} egret.Scroller#scrollYEnabled
-         * @returns {boolean}
-         */
-        scrollYEnabled: boolean;
-    }
-}
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.BitmapFillMode
      * @classdesc
      * BitmapFillMode 类定义Bitmap的图像填充方式。
      * BitmapFillMode 类定义了调整大小模式的一个枚举，这些模式确定 Bitmap 如何填充由布局系统指定的尺寸。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=134&terms1_id=25&terms2_id=31 纹理的填充方式
+     * @includeExample egret/display/BitmapFillMode.ts
      */
     class BitmapFillMode {
         /**
@@ -3722,60 +3844,25 @@ declare module egret {
         static SCALE: string;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.Bitmap
      * @classdesc
-     * Bitmap 类表示用于表示位图图像的显示对象。
+     * Bitmap 类表示用于表示位图图像的显示对象。这些图像可以是使用 Bitmap() 构造函数创建的图像。
+     * 利用 Bitmap() 构造函数，可以创建包含对 Texture 对象的引用的 Bitmap 对象。创建了 Bitmap 对象后，使用父 DisplayObjectContainer 实例的 addChild() 或 addChildAt() 方法将位图放在显示列表中。
+     * 一个 Bitmap 对象可在若干 Bitmap 对象之中共享其 Texture 引用，与转换属性或旋转属性无关。由于能够创建引用相同 Texture 对象的多个 Bitmap 对象，因此，多个显示对象可以使用相同的复杂 Texture 对象，而不会因为每个显示对象实例使用一个 Texture 对象而产生内存开销。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=132&terms1_id=25&terms2_id=31&t3_id=132 创建位图
      * @extends egret.DisplayObject
+     * @includeExample egret/display/Bitmap.ts
      */
     class Bitmap extends DisplayObject {
-        /**
-         * 全部Bitmap是否开启DEBUG模式
-         * @member {boolean} egret.Bitmap.debug
-         * @private
-         */
-        static debug: boolean;
         private static renderFilter;
+        /**
+         * 创建一个 egret.Bitmap 对象以引用指定的 Texture 对象
+         * @param texture {Texture} 纹理
+         */
         constructor(texture?: Texture);
-        /**
-         * 单个Bitmap是否开启DEBUG模式
-         * @member {boolean} egret.Bitmap#debug
-         * @private
-         */
-        debug: boolean;
-        /**
-         * debug边框颜色，默认值为红色
-         * @member {number} egret.Bitmap#debugColor
-         * @private
-         */
-        debugColor: number;
         private _texture;
         /**
          * 渲染纹理
@@ -3785,14 +3872,14 @@ declare module egret {
         /**
          * 矩形区域，它定义位图对象的九个缩放区域。此属性仅当fillMode为BitmapFillMode.SCALE时有效。
          * scale9Grid的x、y、width、height分别代表九宫图中中间那块的左上点的x、y以及中间方块的宽高。
-         * @member {egret.Texture} egret.Bitmap#scale9Grid
+         * @member {egret.Rectangle} egret.Bitmap#scale9Grid
          */
         scale9Grid: Rectangle;
         /**
          * 确定位图填充尺寸的方式。
          * 设置为 BitmapFillMode.REPEAT时，位图将重复以填充区域；BitmapFillMode.SCALE时，位图将拉伸以填充区域。
          * 默认值：BitmapFillMode.SCALE。
-         * @member {egret.Texture} egret.Bitmap#fillMode
+         * @member {string} egret.Bitmap#fillMode
          */
         fillMode: string;
         _render(renderContext: RendererContext): void;
@@ -3810,43 +3897,23 @@ declare module egret {
          * @returns {egret.Rectangle}
          * @private
          */
-        _measureBounds(): Rectangle;
+        _measureBounds(): egret.Rectangle;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @classdesc
      * @class egret.BitmapText
      * 位图字体采用了Bitmap+SpriteSheet的方式来渲染文字。
-     * @extends egret.DisplayObjectContainer
+     * @extends egret.DisplayObject
+     * @includeExample egret/text/BitmapText.ts
      */
-    class BitmapText extends DisplayObjectContainer {
+    class BitmapText extends DisplayObject {
+        /**
+         * 创建一个 egret.BitmapText 对象
+         */
+        constructor();
         /**
          * 设置文本
          */
@@ -3855,60 +3922,96 @@ declare module egret {
         /**
          * 显示的文本内容
          * @member {string} egret.BitmapText#text
-         *
          */
         text: string;
+        $setText(value: string): void;
+        _font: BitmapFont;
+        private _fontChanged;
         /**
-         * BitmapTextSpriteSheet对象，缓存了所有文本的位图纹理
-         * @member {egret.BitmapTextSpriteSheet} egret.BitmapText#spriteSheet
+         * BitmapFont对象，缓存了所有文本的位图纹理
+         * @member {egret.BitmapFont} egret.BitmapText#font
          */
-        spriteSheet: BitmapTextSpriteSheet;
-        private _bitmapPool;
-        constructor();
-        _updateTransform(): void;
-        _renderText(forMeasureContentSize?: boolean): Rectangle;
-        _measureBounds(): Rectangle;
+        font: BitmapFont;
+        $setFont(value: BitmapFont): void;
+        _letterSpacing: number;
+        /**
+         * 字符之间的距离
+         * @default 0
+         * @version 1.7.2
+         * @param value
+         */
+        letterSpacing: number;
+        _setLetterSpacing(value: number): void;
+        _lineSpacing: number;
+        /**
+         * 行与行之间的距离
+         * @default 0
+         * @version 1.7.2
+         * @param value
+         */
+        lineSpacing: number;
+        _setLineSpacing(value: number): void;
+        _setSizeDirty(): void;
+        /**
+         * @private
+         */
+        static EMPTY_FACTOR: number;
+        _render(renderContext: RendererContext): void;
+        _measureBounds(): egret.Rectangle;
+        private _textWidth;
+        private _textHeight;
+        private _textOffsetX;
+        private _textOffsetY;
+        private textLinesChange;
+        private _textLines;
+        _lineHeights: Array<number>;
+        _getTextLines(): Array<string>;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
+declare module egret {
+    class GradientType {
+        /**
+         * 用于指定线性渐变填充的值
+         * @method egret.GradientType.LINEAR
+         */
+        static LINEAR: string;
+        /**
+         * 用于指定放射状渐变填充的值
+         * @method egret.GradientType.RADIAL
+         */
+        static RADIAL: string;
+    }
+}
+
 declare module egret {
     /**
      * @class egret.Graphics
      * @classdesc
      * Graphics 类包含一组可用来创建矢量形状的方法。支持绘制的显示对象包括 Sprite 和 Shape 对象。这些类中的每一个类都包括 graphics 属性，该属性是一个 Graphics 对象。
      * 以下是为便于使用而提供的一些辅助函数：drawRect()、drawRoundRect()、drawCircle() 和 drawEllipse()。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=136&terms1_id=25&terms2_id=32&t3_id=136  绘制矩形
+     * @includeExample egret/display/Graphics.ts
      */
     class Graphics {
-        private canvasContext;
+        /**
+         * 记录下当前fillStyle以便实现渐变色时候获取
+         * 注：当前没有考虑save和restore的情况
+         * @private
+         */
+        static _currentFillStyle: any;
+        _renderContext: RenderContext;
         private commandQueue;
-        private renderContext;
-        private strokeStyleColor;
-        private fillStyleColor;
+        private strokeStyle;
+        private fillStyle;
+        _dirty: boolean;
+        private lineX;
+        private lineY;
+        private _endLineCommand;
+        private _endFillCommand;
+        /**
+         * 创建一个 egret.Graphics 对象
+         */
         constructor();
         /**
          * 指定一种简单的单一颜色填充，在绘制时该填充将在随后对其他 Graphics 方法（如 lineTo() 或 drawCircle()）的调用中使用。
@@ -3918,7 +4021,22 @@ declare module egret {
          * @param alpha {number} 填充的 Alpha 值
          */
         beginFill(color: number, alpha?: number): void;
-        private _setStyle(colorStr);
+        _parseColor(color: number, alpha: number): string;
+        private _setStyle(fillStyle);
+        /**
+         * 指定一种简单的单一颜色填充，在绘制时该填充将在随后对其他 Graphics 方法（如 lineTo() 或 drawCircle()）的调用中使用。
+         * 调用 clear() 方法会清除填充。
+         * 注：该方法目前仅支持H5 Canvas
+         * @method egret.Graphics#beginFill
+         * @param type {string} 用于指定要使用哪种渐变类型的 GradientType 类的值：GradientType.LINEAR 或 GradientType.RADIAL。
+         * @param colors {Array} 渐变中使用的 RGB 十六进制颜色值的数组（例如，红色为 0xFF0000，蓝色为 0x0000FF，等等）。对于每种颜色，请在 alphas 和 ratios 参数中指定对应值。
+         * @param alphas {Array} colors 数组中对应颜色的 alpha 值数组。
+         * @param ratios {Array} 颜色分布比率的数组。
+         * @param matrix {egret.Matrix} 一个由 egret.Matrix 类定义的转换矩阵。egret.Matrix 类包括 createGradientBox() 方法，通过该方法可以方便地设置矩阵，以便与 beginGradientFill() 方法一起使用
+         * @platform Web
+         */
+        beginGradientFill(type: string, colors: Array<number>, alphas: Array<number>, ratios: Array<number>, matrix?: egret.Matrix): void;
+        private getGradient(type, colors, alphas, ratios, matrix);
         /**
          * 绘制一个矩形
          * @method egret.Graphics#drawRect
@@ -3926,7 +4044,6 @@ declare module egret {
          * @param y {number} 相对于父显示对象注册点的圆心的 y 位置（以像素为单位）。
          * @param width {number} 矩形的宽度（以像素为单位）。
          * @param height {number} 矩形的高度（以像素为单位）。
-         * @param r? {number} 圆的半径（以像素为单位）,不设置就为直角矩形。
          */
         drawRect(x: number, y: number, width: number, height: number): void;
         /**
@@ -3939,7 +4056,7 @@ declare module egret {
         drawCircle(x: number, y: number, r: number): void;
         /**
          * 绘制一个圆角矩形
-         * @method egret.Graphics#drawRect
+         * @method egret.Graphics#drawRoundRect
          * @param x {number} 圆心相对于父显示对象注册点的 x 位置（以像素为单位）。
          * @param y {number} 相对于父显示对象注册点的圆心的 y 位置（以像素为单位）。
          * @param width {number} 矩形的宽度（以像素为单位）。
@@ -3963,11 +4080,11 @@ declare module egret {
          * @param thickness {number} 一个整数，以点为单位表示线条的粗细，有效值为 0 到 255。如果未指定数字，或者未定义该参数，则不绘制线条。如果传递的值小于 0，则默认值为 0。值 0 表示极细的粗细；最大粗细为 255。如果传递的值大于 255，则默认值为 255。
          * @param color {number} 线条的十六进制颜色值（例如，红色为 0xFF0000，蓝色为 0x0000FF 等）。如果未指明值，则默认值为 0x000000（黑色）。可选。
          * @param alpha {number} 表示线条颜色的 Alpha 值的数字；有效值为 0 到 1。如果未指明值，则默认值为 1（纯色）。如果值小于 0，则默认值为 0。如果值大于 1，则默认值为 1。
-         * @param pixelHinting {boolean} 布尔型值，指定是否提示笔触采用完整像素。它同时影响曲线锚点的位置以及线条笔触大小本身。在 pixelHinting 设置为 true 的情况下，线条宽度会调整到完整像素宽度。在 pixelHinting 设置为 false 的情况下，对于曲线和直线可能会出现脱节。
-         * @param scaleMode {string} 用于指定要使用的比例模式
-         * @param caps {string} 用于指定线条末端处端点类型的 CapsStyle 类的值。
-         * @param joints {string} 指定用于拐角的连接外观的类型。
-         * @param miterLimit {number} 用于表示剪切斜接的极限值的数字。
+         * @param pixelHinting {boolean} 布尔型值，指定是否提示笔触采用完整像素。它同时影响曲线锚点的位置以及线条笔触大小本身。在 pixelHinting 设置为 true 的情况下，线条宽度会调整到完整像素宽度。在 pixelHinting 设置为 false 的情况下，对于曲线和直线可能会出现脱节。暂未实现。
+         * @param scaleMode {string} 用于指定要使用的比例模式。暂未实现。
+         * @param caps {string} 用于指定线条末端处端点类型的 CapsStyle 类的值。暂未实现。
+         * @param joints {string} 指定用于拐角的连接外观的类型。暂未实现。
+         * @param miterLimit {number} 用于表示剪切斜接的极限值的数字。暂未实现。
          */
         lineStyle(thickness?: number, color?: number, alpha?: number, pixelHinting?: boolean, scaleMode?: string, caps?: string, joints?: string, miterLimit?: number): void;
         /**
@@ -3989,6 +4106,17 @@ declare module egret {
          */
         curveTo(controlX: number, controlY: number, anchorX: number, anchorY: number): void;
         /**
+         * 从当前绘图位置到指定的锚点绘制一条三次贝塞尔曲线。三次贝塞尔曲线由两个锚点和两个控制点组成。该曲线内插这两个锚点，并向两个控制点弯曲。
+         * @method egret.Graphics#curveTo
+         * @param controlX1 {number} 指定首个控制点相对于父显示对象的注册点的水平位置。
+         * @param controlY1 {number} 指定首个控制点相对于父显示对象的注册点的垂直位置。
+         * @param controlX2 {number} 指定第二个控制点相对于父显示对象的注册点的水平位置。
+         * @param controlY2 {number} 指定第二个控制点相对于父显示对象的注册点的垂直位置。
+         * @param anchorX {number} 指定锚点相对于父显示对象的注册点的水平位置。
+         * @param anchorY {number} 指定锚点相对于父显示对象的注册点的垂直位置。
+         */
+        cubicCurveTo(controlX1: number, controlY1: number, controlX2: number, controlY2: number, anchorX: number, anchorY: number): void;
+        /**
          * 将当前绘图位置移动到 (x, y)。如果缺少任何一个参数，则此方法将失败，并且当前绘图位置不改变。
          * @method egret.Graphics#moveTo
          * @param x {number} 一个表示相对于父显示对象注册点的水平位置的数字（以像素为单位）。
@@ -4005,129 +4133,241 @@ declare module egret {
          * @method egret.Graphics#endFill
          */
         endFill(): void;
+        _beginDraw(renderContext: RendererContext): void;
+        _endDraw(renderContext: RendererContext): void;
         _draw(renderContext: RendererContext): void;
+        private _firstCheck;
         private _minX;
         private _minY;
         private _maxX;
         private _maxY;
-        private checkRect(x, y, w, h);
+        _checkRect(x: number, y: number, w: number, h: number): void;
         private _lastX;
         private _lastY;
-        private checkPoint(x, y);
+        _checkPoint(x: number, y: number): void;
+        _measureBounds(): egret.Rectangle;
+        private _createEndFillCommand();
+        private _fill();
+        private _createEndLineCommand();
+        private _pushCommand(cmd);
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.Shape
      * @classdesc 此类用于使用 Egret 绘图应用程序编程接口 (API) 创建简单形状。Shape 类包括 graphics 属性，该属性使您可以从 Graphics 类访问方法。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=136&terms1_id=25&terms2_id=32 Shape绘制矢量图
+     * @includeExample egret/display/Shape.ts
      */
-    class Shape extends DisplayObject {
-        constructor();
+    class Shape extends egret.DisplayObject {
         /**
-         * 获取 Shape 中的 Graphics 对象。【只读】
+         * 创建一个 egret.Shape 对象
+         */
+        constructor();
+        private _graphics;
+        /**
+         * 获取 Shape 中的 Graphics 对象。
          * @member {egret.Graphics} egret.Shape#graphics
          */
-        private _graphics;
         graphics: Graphics;
+        _draw(renderContext: RendererContext): void;
         _render(renderContext: RendererContext): void;
+        _measureBounds(): egret.Rectangle;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @extends egret.DisplayObjectContainer
      * @class egret.Sprite
      * @classdesc Sprite 类是基本显示列表构造块：一个可显示图形并且也可包含子项的显示列表节点。Sprite 对象与影片剪辑类似，但没有时间轴。Sprite 是不需要时间轴的对象的相应基类。例如，Sprite 将是通常不使用时间轴的用户界面 (UI) 组件的逻辑基类。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=102&terms1_id=25&terms2_id=27 显示对象的基本概念
+     * @includeExample egret/display/Sprite.ts
      */
     class Sprite extends DisplayObjectContainer {
-        constructor();
         /**
-         * 获取 Sprite 中的 Graphics 对象。【只读】
+         * 创建一个 egret.Sprite 对象
+         */
+        constructor();
+        private _graphics;
+        /**
+         * 获取 Sprite 中的 Graphics 对象。
          * 指定属于此 sprite 的 Graphics 对象，在此 sprite 中可执行矢量绘图命令。
          * @member {egret.Graphics} egret.Sprite#graphics
          */
-        private _graphics;
         graphics: Graphics;
+        _draw(renderContext: RendererContext): void;
         _render(renderContext: RendererContext): void;
+        _measureBounds(): egret.Rectangle;
+        /**
+         * @inheritDoc
+         */
+        hitTest(x: number, y: number, ignoreTouchEnabled?: boolean): DisplayObject;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
+declare module egret {
+    /**
+     * @private
+     */
+    class TextFieldUtils {
+        /**
+         * 获取第一个绘制的行数
+         * @param textfield 文本
+         * @returns {number} 行数，从0开始
+         * @private
+         */
+        static _getStartLine(textfield: egret.TextField): number;
+        /**
+         * 获取水平比例
+         * @param textfield 文本
+         * @returns {number} 水平比例
+         * @private
+         */
+        static _getHalign(textfield: egret.TextField): number;
+        static _getTextHeight(textfield: egret.TextField): number;
+        /**
+         * 获取垂直比例
+         * @param textfield 文本
+         * @returns {number} 垂直比例
+         * @private
+         */
+        static _getValign(textfield: egret.TextField): number;
+        /**
+         * 根据x、y获取文本项
+         * @param textfield 文本
+         * @param x x坐标值
+         * @param y y坐标值
+         * @returns 文本单项
+         * @private
+         */
+        static _getTextElement(textfield: egret.TextField, x: number, y: number): ITextElement;
+        /**
+         * 获取文本点击块
+         * @param textfield 文本
+         * @param x x坐标值
+         * @param y y坐标值
+         * @returns 文本点击块
+         * @private
+         */
+        static _getHit(textfield: egret.TextField, x: number, y: number): IHitTextElement;
+        /**
+         * 获取当前显示多少行
+         * @param textfield 文本
+         * @returns {number} 显示的行数
+         * @private
+         */
+        static _getScrollNum(textfield: egret.TextField): number;
+    }
+}
+
+declare module egret {
+    /**
+     * @private
+     */
+    class TextFieldProperties {
+        _type: string;
+        _text: string;
+        _displayAsPassword: boolean;
+        _fontFamily: string;
+        _size: number;
+        _italic: boolean;
+        _bold: boolean;
+        _textColorString: string;
+        _textColor: number;
+        _strokeColorString: string;
+        _strokeColor: number;
+        _stroke: number;
+        _border: boolean;
+        _borderColor: number;
+        _background: boolean;
+        _backgroundColor: number;
+        _textAlign: string;
+        _verticalAlign: string;
+        _textMaxWidth: number;
+        _textMaxHeight: number;
+        _maxChars: number;
+        _scrollV: number;
+        _lineSpacing: number;
+        _numLines: number;
+        _multiline: boolean;
+        _wordWrap: boolean;
+        _restrictAnd: string;
+        _restrictNot: string;
+        constructor();
+    }
+}
+
+declare module egret {
+    /**
+     * @private
+     */
+    interface IHitTextElement {
+        lineIndex: number;
+        textElementIndex: number;
+    }
+    /**
+     * @private
+     */
+    interface ITextStyle {
+        textColor?: number;
+        strokeColor?: number;
+        size?: number;
+        stroke?: number;
+        bold?: boolean;
+        italic?: boolean;
+        fontFamily?: string;
+        href?: string;
+    }
+    /**
+     * 用于建立多种样式混合文本的基本结构，主要用于设置 textFlow 属性
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=146&terms1_id=25&terms2_id=33&t3_id=146 多种样式文本混合
+     */
+    interface ITextElement {
+        /**
+         * 文本内容
+         */
+        text: string;
+        /**
+         * 文本样式
+         */
+        style?: ITextStyle;
+    }
+    /**
+     * @private
+     */
+    interface IWTextElement extends ITextElement {
+        width: number;
+    }
+    /**
+     * 文本最终解析的一行数据格式
+     * @private
+     */
+    interface ILineElement {
+        /**
+         * 文本占用宽度
+         */
+        width: number;
+        /**
+         * 文本占用高度
+         */
+        height: number;
+        /**
+         * 当前文本字符总数量（包括换行符）
+         */
+        charNum: number;
+        /**
+         * 是否含有换行符
+         */
+        hasNextLine: boolean;
+        /**
+         * 本行文本内容
+         */
+        elements: Array<IWTextElement>;
+    }
+}
+
 declare module egret {
     /**
      * @class egret.TextField
@@ -4135,31 +4375,35 @@ declare module egret {
      * TextField是egret的文本渲染类，采用浏览器/设备的API进行渲染，在不同的浏览器/设备中由于字体渲染方式不一，可能会有渲染差异
      * 如果开发者希望所有平台完全无差异，请使用BitmapText
      * @extends egret.DisplayObject
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=141&terms1_id=25&terms2_id=33 创建文本
+     * @event egret.TextEvent.LINK 点击链接后调度。
+     * @includeExample egret/text/TextField.ts
      */
     class TextField extends DisplayObject {
+        /**
+         * @private
+         */
         static default_fontFamily: string;
         private isInput();
         _inputEnabled: boolean;
         _setTouchEnabled(value: boolean): void;
+        private _inputUtils;
         /**
          * 文本字段的类型。
          * 以下 TextFieldType 常量中的任一个：TextFieldType.DYNAMIC（指定用户无法编辑的动态文本字段），或 TextFieldType.INPUT（指定用户可以编辑的输入文本字段）。
          * 默认值为 dynamic。
          * @member {string} egret.TextField#type
          */
-        _type: string;
-        private _inputUtils;
         type: string;
         _setType(value: string): void;
-        text: string;
-        _getText(): string;
-        _setSizeDirty(): void;
-        _setTextDirty(): void;
         /**
          * 作为文本字段中当前文本的字符串
          * @member {string} egret.TextField#text
          */
-        _text: string;
+        text: string;
+        _getText(): string;
+        _setSizeDirty(): void;
+        _setTextDirty(): void;
         _setBaseText(value: string): void;
         _setText(value: string): void;
         /**
@@ -4168,7 +4412,6 @@ declare module egret {
          * 默认值为 false。
          * @member {boolean} egret.TextInput#displayAsPassword
          */
-        _displayAsPassword: boolean;
         displayAsPassword: boolean;
         _setDisplayAsPassword(value: boolean): void;
         /**
@@ -4176,7 +4419,6 @@ declare module egret {
          * 默认值 Arial。
          * @member {any} egret.TextField#fontFamily
          */
-        _fontFamily: string;
         fontFamily: string;
         _setFontFamily(value: string): void;
         /**
@@ -4184,7 +4426,6 @@ declare module egret {
          * 默认值为 30。
          * @member {number} egret.TextField#size
          */
-        _size: number;
         size: number;
         _setSize(value: number): void;
         /**
@@ -4192,8 +4433,8 @@ declare module egret {
          * 如果值为 true，则文本为斜体；false，则为不使用斜体。
          * 默认值为 false。
          * @member {boolean} egret.TextField#italic
+         * @platform Web
          */
-        _italic: boolean;
         italic: boolean;
         _setItalic(value: boolean): void;
         /**
@@ -4201,28 +4442,24 @@ declare module egret {
          * 如果值为 true，则文本为粗体字；false，则为非粗体字。
          * 默认值为 false。
          * @member {boolean} egret.TextField#bold
+         * @platform Web
          */
-        _bold: boolean;
         bold: boolean;
         _setBold(value: boolean): void;
-        _textColorString: string;
         /**
          * 表示文本的颜色。
          * 包含三个 8 位 RGB 颜色成分的数字；例如，0xFF0000 为红色，0x00FF00 为绿色。
          * 默认值为 0xFFFFFF。
          * @member {number} egret.TextField#textColor
          */
-        _textColor: number;
         textColor: number;
         _setTextColor(value: number): void;
-        _strokeColorString: string;
         /**
          * 表示文本的描边颜色。
          * 包含三个 8 位 RGB 颜色成分的数字；例如，0xFF0000 为红色，0x00FF00 为绿色。
          * 默认值为 0x000000。
          * @member {number} egret.TextField#strokeColor
          */
-        _strokeColor: number;
         strokeColor: number;
         _setStrokeColor(value: number): void;
         /**
@@ -4231,7 +4468,6 @@ declare module egret {
          * 默认值为 0。
          * @member {number} egret.TextField#stroke
          */
-        _stroke: number;
         stroke: number;
         _setStroke(value: number): void;
         /**
@@ -4240,7 +4476,6 @@ declare module egret {
          * 默认值为 HorizontalAlign.LEFT。
          * @member {string} egret.TextField#textAlign
          */
-        _textAlign: string;
         textAlign: string;
         _setTextAlign(value: string): void;
         /**
@@ -4249,26 +4484,42 @@ declare module egret {
          * 默认值为 VerticalAlign.TOP。
          * @member {string} egret.TextField#verticalAlign
          */
-        _verticalAlign: string;
         verticalAlign: string;
         _setVerticalAlign(value: string): void;
+        /**
+         * @private
+         */
         maxWidth: any;
         /**
          * 文本字段中最多可包含的字符数（即用户输入的字符数）。
          * 脚本可以插入比 maxChars 允许的字符数更多的文本；maxChars 属性仅表示用户可以输入多少文本。如果此属性的值为 0，则用户可以输入无限数量的文本。
          * 默认值为 0。
-         * @type {number}
-         * @private
          */
-        _maxChars: number;
         maxChars: number;
         _setMaxChars(value: number): void;
-        _scrollV: number;
+        /**
+         * 文本在文本字段中的垂直位置。scrollV 属性可帮助用户定位到长篇文章的特定段落，还可用于创建滚动文本字段。
+         * 垂直滚动的单位是行，而水平滚动的单位是像素。
+         * 如果显示的第一行是文本字段中的第一行，则 scrollV 设置为 1（而非 0）。
+         * @param value
+         */
         scrollV: number;
-        private _maxScrollV;
+        /**
+         * scrollV 的最大值
+         * @returns {number}
+         */
         maxScrollV: number;
+        /**
+         * @private
+         */
         selectionBeginIndex: number;
+        /**
+         * @private
+         */
         selectionEndIndex: number;
+        /**
+         * @private
+         */
         caretIndex: number;
         _setSelection(beginIndex: number, endIndex: number): void;
         /**
@@ -4277,15 +4528,13 @@ declare module egret {
          * 默认值为 0。
          * @member {number} egret.TextField#lineSpacing
          */
-        _lineSpacing: number;
         lineSpacing: number;
         _setLineSpacing(value: number): void;
         _getLineHeight(): number;
         /**
-         * 文本行数。【只读】
+         * 文本行数。
          * @member {number} egret.TextField#numLines
          */
-        _numLines: number;
         numLines: number;
         /**
          * 表示字段是否为多行文本字段。注意，此属性仅在type为TextFieldType.INPUT时才有效。
@@ -4293,15 +4542,85 @@ declare module egret {
          * 默认值为 false。
          * @member {boolean} egret.TextField#multiline
          */
-        _multiline: boolean;
         multiline: boolean;
         _setMultiline(value: boolean): void;
+        /**
+         * @language en_US
+         * Indicates a user can enter into the text field character set. If you restrict property is null, you can enter any character. If you restrict property is an empty string, you can not enter any character. If you restrict property is a string of characters, you can enter only characters in the string in the text field. The string is scanned from left to right. You can use a hyphen (-) to specify a range. Only restricts user interaction; a script may put any text into the text field. <br/>
+         * If the string of characters caret (^) at the beginning, all characters are initially accepted, then the string are excluded from receiving ^ character. If the string does not begin with a caret (^) to, any characters are initially accepted and then a string of characters included in the set of accepted characters. <br/>
+         * The following example allows only uppercase characters, spaces, and numbers in the text field: <br/>
+         * My_txt.restrict = "A-Z 0-9"; <br/>
+         * The following example includes all characters except lowercase letters: <br/>
+         * My_txt.restrict = "^ a-z"; <br/>
+         * If you need to enter characters \ ^, use two backslash "\\ -" "\\ ^": <br/>
+         * Can be used anywhere in the string ^ to rule out including characters and switch between characters, but can only be used to exclude a ^. The following code includes only uppercase letters except uppercase Q: <br/>
+         * My_txt.restrict = "A-Z ^ Q"; <br/>
+         * @version Egret 2.4
+         * @platform Web,Native
+         * @default null
+         */
+        /**
+         * @language zh_CN
+         * 表示用户可输入到文本字段中的字符集。如果 restrict 属性的值为 null，则可以输入任何字符。如果 restrict 属性的值为空字符串，则不能输入任何字符。如果 restrict 属性的值为一串字符，则只能在文本字段中输入该字符串中的字符。从左向右扫描该字符串。可以使用连字符 (-) 指定一个范围。只限制用户交互；脚本可将任何文本放入文本字段中。<br/>
+         * 如果字符串以尖号 (^) 开头，则先接受所有字符，然后从接受字符集中排除字符串中 ^ 之后的字符。如果字符串不以尖号 (^) 开头，则最初不接受任何字符，然后将字符串中的字符包括在接受字符集中。<br/>
+         * 下例仅允许在文本字段中输入大写字符、空格和数字：<br/>
+         * my_txt.restrict = "A-Z 0-9";<br/>
+         * 下例包含除小写字母之外的所有字符：<br/>
+         * my_txt.restrict = "^a-z";<br/>
+         * 如果需要输入字符 \ ^，请使用2个反斜杠 "\\-" "\\^" ：<br/>
+         * 可在字符串中的任何位置使用 ^，以在包含字符与排除字符之间进行切换，但是最多只能有一个 ^ 用来排除。下面的代码只包含除大写字母 Q 之外的大写字母：<br/>
+         * my_txt.restrict = "A-Z^Q";<br/>
+         * @version Egret 2.4
+         * @platform Web,Native
+         * @default null
+         */
+        restrict: string;
+        _setWidth(value: number): void;
+        _setHeight(value: number): void;
+        private _bgGraphics;
+        /**
+         * 指定文本字段是否具有边框。
+         * 如果为 true，则文本字段具有边框。如果为 false，则文本字段没有边框。
+         * 使用 borderColor 属性来设置边框颜色。
+         * 默认值为 false。
+         * @member {boolean} egret.TextField#border
+         */
+        border: boolean;
+        /**
+         * 文本字段边框的颜色。默认值为 0x000000（黑色）。
+         * 即使当前没有边框，也可检索或设置此属性，但只有当文本字段已将 border 属性设置为 true 时，才可以看到颜色。
+         * @member {number} egret.TextField#borderColor
+         */
+        borderColor: number;
+        /**
+         * 指定文本字段是否具有背景填充。
+         * 如果为 true，则文本字段具有背景填充。如果为 false，则文本字段没有背景填充。
+         * 使用 backgroundColor 属性来设置文本字段的背景颜色。
+         * 默认值为 false。
+         * @member {boolean} egret.TextField#background
+         */
+        background: boolean;
+        /**
+         * 文本字段背景的颜色。默认值为 0xFFFFFF（白色）。
+         * 即使当前没有背景，也可检索或设置此属性，但只有当文本字段已将 background 属性设置为 true 时，才可以看到颜色。
+         * @member {number} egret.TextField#backgroundColor
+         */
+        backgroundColor: number;
+        private fillBackground();
+        /**
+         * @private
+         */
         setFocus(): void;
+        _TF_Props_: TextFieldProperties;
+        /**
+         * 创建一个 egret.TextField 对象
+         */
         constructor();
         _onRemoveFromStage(): void;
         _onAddToStage(): void;
         _updateBaseTransform(): void;
         _updateTransform(): void;
+        _draw(renderContext: RendererContext): void;
         /**
          * @see egret.DisplayObject._render
          * @param renderContext
@@ -4310,123 +4629,94 @@ declare module egret {
         /**
          * 测量显示对象坐标与大小
          */
-        _measureBounds(): Rectangle;
+        _measureBounds(): egret.Rectangle;
         private _isFlow;
         /**
-         *
+         * 设置富文本
+         * @param textArr 富文本数据
+         * @see http://edn.egret.com/cn/index.php/article/index/id/146
          */
-        textFlow: ITextElement[];
+        textFlow: Array<egret.ITextElement>;
         private changeToPassText(text);
         private _textArr;
         private _isArrayChanged;
         private setMiddleStyle(textArr);
-        _textMaxWidth: number;
+        /**
+         * 文本的宽度，以像素为单位。
+         * @member {number} egret.TextField#textWidth
+         */
         textWidth: number;
-        _textMaxHeight: number;
+        /**
+         * 文本的高度，以像素为单位。
+         * @member {number} egret.TextField#textHeight
+         */
         textHeight: number;
-        appendText(text: string): void;
-        appendElement(element: ITextElement): void;
+        /**
+         * 将 newText 参数指定的字符串追加到文本字段的文本的末尾。
+         * @method {number} egret.TextField#appendText
+         * @param newText {string} 要追加到现有文本末尾的字符串
+         */
+        appendText(newText: string): void;
+        /**
+         * 将 newElement 参数指定的文本内容追加到文本字段的文本的末尾。
+         * @method {number} egret.TextField#appendElement
+         * @param newElement {egret.ITextElement} 要追加到现有文本末尾的文本内容
+         */
+        appendElement(newElement: egret.ITextElement): void;
         private _linesArr;
-        _getLinesArr(): ILineElement[];
-        private measureText();
+        _getLinesArr(): Array<egret.ILineElement>;
+        /**
+         * @private
+         */
+        /**
+         * @private
+         */
+        wordWrap: boolean;
+        _isTyping: boolean;
         /**
          * @private
          * @param renderContext
          * @returns {Rectangle}
          */
         private drawText(renderContext);
-    }
-    interface ITextStyle {
-        textColor: number;
-        strokeColor: number;
-        size: number;
-        stroke: number;
-        bold: boolean;
-        italic: boolean;
-        fontFamily: string;
-    }
-    interface ITextElement {
-        text: string;
-        style: ITextStyle;
-    }
-    interface IWTextElement extends ITextElement {
-        width: number;
-    }
-    interface ILineElement {
-        width: number;
-        height: number;
-        elements: IWTextElement[];
+        private _addEvent();
+        private _removeEvent();
+        private onTapHandler(e);
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.HtmlTextParser
-     * @classdesc
-     *
+     * @classdesc 将html格式文本转换为可赋值给 egret.TextField#textFlow 属性的对象
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=146&terms1_id=25&terms2_id=33&t3_id=146 多种样式文本混合
+     * @includeExample egret/text/HtmlTextParser.ts
      */
     class HtmlTextParser {
+        /**
+         * 创建一个 egret.HtmlTextParser 对象
+         */
         constructor();
+        private _replaceArr;
+        private initReplaceArr();
+        private replaceSpecial(value);
         private resutlArr;
-        parser(htmltext: string): ITextElement[];
+        /**
+         * 将html格式文本转换为可赋值给 egret.TextField#textFlow 属性的对象
+         * @param htmltext {string} html文本
+         * @method egret.HtmlTextParser#parser
+         * @returns {Array<egret.ITextElement>} 可赋值给 egret.TextField#textFlow 属性的对象
+         */
+        parser(htmltext: string): Array<egret.ITextElement>;
         private addToResultArr(value);
         private changeStringToObject(str);
-        private addProperty(info, prV);
+        private getHeadReg();
+        private addProperty(info, head, value);
         private stackArray;
         private addToArray(infoStr);
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.TextFieldType
@@ -4446,52 +4736,32 @@ declare module egret {
         static INPUT: string;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.SpriteSheet
-     * @classdesc SpriteSheet是一张由多个子位图拼接而成的集合位图，它包含多个Texture对象。
-     * 每一个Texture都共享SpriteSheet的集合位图，但是指向它的不同的区域。
+     * @classdesc SpriteSheet 是一张由多个子位图拼接而成的集合位图，它包含多个 Texture 对象。
+     * 每一个 Texture 都共享 SpriteSheet 的集合位图，但是指向它的不同的区域。
      * 在WebGL / OpenGL上，这种做法可以显著提升性能
      * 同时，SpriteSheet可以很方便的进行素材整合，降低HTTP请求数量
      * SpriteSheet 格式的具体规范可以参见此文档  https://github.com/egret-labs/egret-core/wiki/Egret-SpriteSheet-Specification
-     *
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=135&terms1_id=25&terms2_id=31 纹理集的使用
+     * @includeExample egret/display/SpriteSheet.ts
      */
     class SpriteSheet extends HashObject {
+        /**
+         * 创建一个 egret.SpriteSheet 对象
+         * @param texture {Texture} 纹理
+         */
         constructor(texture: Texture);
         /**
          * 表示bitmapData.width
          */
-        _sourceWidth: number;
+        private _sourceWidth;
         /**
          * 表示bitmapData.height
          */
-        _sourceHeight: number;
+        private _sourceHeight;
         /**
          * 表示这个SpriteSheet的位图区域在bitmapData上的起始位置x。
          */
@@ -4503,332 +4773,392 @@ declare module egret {
         /**
          * 共享的位图数据
          */
-        private bitmapData;
+        private texture;
         /**
          * 纹理缓存字典
          */
         _textureMap: Object;
         /**
-         * 根据指定纹理名称获取一个缓存的Texture对象
+         * 根据指定纹理名称获取一个缓存的 Texture 对象
          * @method egret.SpriteSheet#getTexture
-         * @param name {string} 缓存这个Texture对象所使用的名称
-         * @returns {egret.Texture} Texture对象
+         * @param name {string} 缓存这个 Texture 对象所使用的名称
+         * @returns {egret.Texture} Texture 对象
          */
         getTexture(name: string): Texture;
         /**
-         * 为SpriteSheet上的指定区域创建一个新的Texture对象并缓存它
+         * 为 SpriteSheet 上的指定区域创建一个新的 Texture 对象并缓存它
          * @method egret.SpriteSheet#createTexture
-         * @param name {string} 缓存这个Texture对象所使用的名称，如果名称已存在，将会覆盖之前的Texture对象
-         * @param bitmapX {number} 纹理区域在bitmapData上的起始坐标x
-         * @param bitmapY {number} 纹理区域在bitmapData上的起始坐标y
-         * @param bitmapWidth {number} 纹理区域在bitmapData上的宽度
-         * @param bitmapHeight {number} 纹理区域在bitmapData上的高度
-         * @param offsetX {number} 原始位图的非透明区域x起始点
-         * @param offsetY {number} 原始位图的非透明区域y起始点
-         * @param textureWidth {number} 原始位图的高度，若不传入，则使用bitmapWidth的值。
-         * @param textureHeight {number} 原始位图的宽度，若不传入，这使用bitmapHeight值。
-         * @returns {egret.Texture} 创建的Texture对象
+         * @param name {string} 缓存这个 Texture 对象所使用的名称，如果名称已存在，将会覆盖之前的 Texture 对象
+         * @param bitmapX {number} 纹理区域在 bitmapData 上的起始坐标x
+         * @param bitmapY {number} 纹理区域在 bitmapData 上的起始坐标y
+         * @param bitmapWidth {number} 纹理区域在 bitmapData 上的宽度
+         * @param bitmapHeight {number} 纹理区域在 bitmapData 上的高度
+         * @param offsetX {number} 原始位图的非透明区域 x 起始点
+         * @param offsetY {number} 原始位图的非透明区域 y 起始点
+         * @param textureWidth {number} 原始位图的高度，若不传入，则使用 bitmapWidth 的值。
+         * @param textureHeight {number} 原始位图的宽度，若不传入，则使用 bitmapHeight 的值。
+         * @returns {egret.Texture} 创建的 Texture 对象
          */
         createTexture(name: string, bitmapX: number, bitmapY: number, bitmapWidth: number, bitmapHeight: number, offsetX?: number, offsetY?: number, textureWidth?: number, textureHeight?: number): Texture;
+        /**
+         * 销毁 SpriteSheet 对象所持有的纹理对象
+         * @method egret.SpriteSheet#dispose
+         */
+        dispose(): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
-     * @classdesc
-     * TextInput 已废弃，请使用TextField代替，并设置type为TextFieldType.INPUT
-     * @extends egret.TextField
-     * @deprecated
+     * @private
      */
-    class TextInput extends TextField {
-        constructor();
-        /**
-         * 请使用TextField.text设置
-         * @deprecated
-         * @param value
-         */
-        setText(value: string): void;
-        /**
-         * 请使用TextInput.text获取
-         * @deprecated
-         * @returns {string}
-         */
-        getText(): string;
-        /**
-         * 请使用TextInput.displayAsPassword设置
-         * @deprecated
-         * @param value
-         */
-        setTextType(type: string): void;
-        /**
-         * 请使用TextInput.displayAsPassword获取
-         * @deprecated
-         * @returns {string}
-         */
-        getTextType(): string;
-    }
-}
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-declare module egret {
     class InputController extends HashObject {
         private stageText;
-        private _isFocus;
         private _text;
-        private _isFirst;
+        private _isFocus;
         constructor();
         init(text: TextField): void;
         _addStageText(): void;
         _removeStageText(): void;
         _getText(): string;
         _setText(value: string): void;
-        private onFocusHandler(event);
-        private onBlurHandler(event);
+        private focusHandler(event);
+        private blurHandler(event);
         private onMouseDownHandler(event);
         private onStageDownHandler(event);
-        private showText();
-        private hideText();
         private updateTextHandler(event);
         private resetText();
+        _hideInput(): void;
         _updateTransform(): void;
         _updateProperties(): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
-    class BitmapTextSpriteSheet extends SpriteSheet {
-        constructor(texture: Texture, fntText: string);
+    /**
+     * @classdesc
+     * @class egret.BitmapFont
+     * 位图字体,是一个字体的纹理集，通常作为BitmapText.font属性的值。
+     * @see http://bbs.egret-labs.org/thread-918-1-1.html TextureMerger
+     * @see http://bbs.egret-labs.org/forum.php?mod=viewthread&tid=251 文本(含位图字体具体用法)
+     * @extends egret.SpriteSheet
+     * @includeExample egret/text/BitmapFont.ts
+     */
+    class BitmapFont extends SpriteSheet {
+        /**
+         * 创建一个 egret.BitmapFont 对象
+         * @param texture {egret.Texture} 使用TextureMerger生成的纹理集
+         * @param config {any} 使用TextureMerger生成的配置数据
+         */
+        constructor(texture: Texture, config: any);
         private charList;
+        /**
+         * 通过 name 属性获取对应纹理
+         * @param name {string} name属性
+         * @method egret.BitmapFont#getTexture
+         * @returns {egret.Texture}
+         */
         getTexture(name: string): Texture;
+        private firstCharHeight;
+        _getFirstCharHeight(): number;
         private parseConfig(fntText);
         private getConfigByKey(configText, key);
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.MovieClip
-     * @classdesc 影片剪辑，可以通过影片剪辑播放序列帧动画。
-     * @extends egret.DisplayObjectContainer
+     * @classdesc 影片剪辑，可以通过影片剪辑播放序列帧动画。MovieClip 类从以下类继承而来：DisplayObject 和 EventDispatcher。不同于 DisplayObject 对象，MovieClip 对象拥有一个时间轴。
+     * @extends egret.DisplayObject
+     * @event egret.Event.COMPLETE 动画播放完成。
+     * @event egret.Event.LOOP_COMPLETE 动画循环播放完成。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=151&terms1_id=25&terms2_id=34 MovieClip序列帧动画
+     * @includeExample egret/display/MovieClip.ts
      */
-    class MovieClip extends DisplayObjectContainer {
-        private delegate;
+    class MovieClip extends DisplayObject {
+        private _isAddedToStage;
+        private static renderFilter;
+        _textureToRender: Texture;
+        _movieClipData: MovieClipData;
+        private _frames;
+        private _totalFrames;
+        _frameLabels: any[];
+        private _frameIntervalTime;
+        _eventPool: string[];
+        private _isPlaying;
+        private _isStopped;
+        private _playTimes;
+        _currentFrameNum: number;
+        _nextFrameNum: number;
+        private _displayedKeyFrameNum;
+        private _passedTime;
         /**
-         * 动画的播放帧频
-         * @member {number} egret.MovieClip#frameRate
+         * 创建一个 egret.MovieClip 对象。创建 MovieClip 之后，调用舞台上的显示对象容器的addElement方法。
+         * @method egret.MovieClip#constructor
+         * @param movieClipData {MovieClipData} 被引用的 MovieClipData 对象
          */
-        frameRate: number;
-        constructor(data: any, texture?: Texture);
+        constructor(movieClipData?: MovieClipData);
+        _init(): void;
+        _reset(): void;
+        private _initFrame();
+        _render(renderContext: RendererContext): void;
+        _measureBounds(): egret.Rectangle;
+        _onAddToStage(): void;
+        _onRemoveFromStage(): void;
         /**
-         * 播放指定动画
-         * @method egret.MovieClip#gotoAndPlay
-         * @param frameName {string} 指定帧的帧名称
-
+         * 返回帧标签为指定字符串的FrameLabel对象
+         * @method egret.MovieClip#getFrameLabelByName
+         * @param labelName {string} 帧标签名
+         * @param ignoreCase {boolean} 是否忽略大小写，可选参数，默认false
+         * @returns {egret.FrameLabel} FrameLabel对象
          */
-        gotoAndPlay(frameName: string): void;
+        _getFrameLabelByName(labelName: string, ignoreCase?: boolean): FrameLabel;
         /**
-         * 播放并暂停指定动画
-         * @method egret.MovieClip#gotoAndStop
-         * @param frameName {string} 指定帧的帧名称
-
+         * 返回指定序号的帧的FrameLabel对象
+         * @method egret.MovieClip#getFrameLabelByFrame
+         * @param frame {number} 帧序号
+         * @returns {egret.FrameLabel} FrameLabel对象
          */
-        gotoAndStop(frameName: string): void;
+        _getFrameLabelByFrame(frame: number): FrameLabel;
         /**
-         * 暂停动画
+         * 返回指定序号的帧对应的FrameLabel对象，如果当前帧没有标签，则返回前面最近的有标签的帧的FrameLabel对象
+         * @method egret.MovieClip#getFrameLabelForFrame
+         * @param frame {number} 帧序号
+         * @returns {egret.FrameLabel} FrameLabel对象
+         */
+        _getFrameLabelForFrame(frame: number): FrameLabel;
+        /**
+         * 继续播放当前动画
+         * @method egret.MovieClip#play
+         * @param playTimes {number} 播放次数。 参数为整数，可选参数，>=1：设定播放次数，<0：循环播放，默认值 0：不改变播放次数(MovieClip初始播放次数设置为1)，
+         */
+        play(playTimes?: number): void;
+        /**
+         * 暂停播放动画
          * @method egret.MovieClip#stop
          */
         stop(): void;
         /**
-         * @method egret.MovieClip#dispose
+         * 将播放头移到前一帧并停止
+         * @method egret.MovieClip#prevFrame
          */
-        dispose(): void;
+        prevFrame(): void;
         /**
-         * 方法名改为 dispose
-         * @method egret.MovieClip#release
-         * @deprecated
+         * 跳到后一帧并停止
+         * @method egret.MovieClip#prevFrame
          */
-        release(): void;
+        nextFrame(): void;
         /**
-         * @method egret.MovieClip#getCurrentFrameIndex
-         * @deprecated
-         * @returns {number}
+         * 将播放头移到指定帧并播放
+         * @method egret.MovieClip#gotoAndPlay
+         * @param frame {any} 指定帧的帧号或帧标签
+         * @param playTimes {number} 播放次数。 参数为整数，可选参数，>=1：设定播放次数，<0：循环播放，默认值 0：不改变播放次数，
          */
-        getCurrentFrameIndex(): number;
+        gotoAndPlay(frame: any, playTimes?: number): void;
         /**
-         * 获取当前影片剪辑的帧频数
-         * @method egret.MovieClip#getTotalFrame
-         * @deprecated
-         * @returns {number}
+         * 将播放头移到指定帧并停止
+         * @method egret.MovieClip#gotoAndPlay
+         * @param frame {any} 指定帧的帧号或帧标签
          */
-        getTotalFrame(): number;
+        gotoAndStop(frame: any): void;
+        private _gotoFrame(frame);
+        private _advanceTime(advancedTime);
+        _advanceFrame(): void;
+        private _constructFrame();
+        private _handlePendingEvent();
         /**
-         * @method egret.MovieClip#setInterval
-         * @deprecated
-         * @param value {number}
+         * MovieClip 实例中帧的总数
+         * @member {number} egret.MovieClip#totalFrames
          */
-        setInterval(value: number): void;
+        totalFrames: number;
         /**
-         * @method egret.MovieClip#getIsPlaying
-         * @deprecated
-         * @returns {boolean}
+         * MovieClip 实例当前播放的帧的序号
+         * @member {number} egret.MovieClip#currentFrame
          */
-        getIsPlaying(): boolean;
-    }
-    interface MovieClipDelegate {
-        gotoAndPlay(frameName: string): void;
-        gotoAndStop(frameName: string): void;
-        stop(): void;
-        dispose(): void;
-        setMovieClip(movieclip: MovieClip): void;
-    }
-    class DefaultMovieClipDelegate implements MovieClipDelegate {
-        data: any;
-        private _frameData;
-        private _totalFrame;
-        private _spriteSheet;
-        private _passTime;
-        private _currentFrameIndex;
-        private _currentFrameName;
-        private _isPlaying;
-        private movieClip;
-        private bitmap;
-        constructor(data: any, texture: Texture);
-        setMovieClip(movieClip: MovieClip): void;
-        gotoAndPlay(frameName: string): void;
-        gotoAndStop(frameName: string): void;
-        stop(): void;
-        dispose(): void;
-        private checkHasFrame(name);
-        private update(advancedTime);
-        private playNextFrame(needShow?);
-        private getTexture(name);
+        currentFrame: number;
+        /**
+         * MovieClip 实例当前播放的帧的标签。如果当前帧没有标签，则 currentFrameLabel返回null。
+         * @member {number} egret.MovieClip#currentFrame
+         */
+        currentFrameLabel: string;
+        /**
+         * 当前播放的帧对应的标签，如果当前帧没有标签，则currentLabel返回包含标签的先前帧的标签。如果当前帧和先前帧都不包含标签，currentLabel返回null。
+         * @member {number} egret.MovieClip#currentFrame
+         */
+        currentLabel: string;
+        /**
+         * MovieClip 实例的帧频
+         * @member {number} egret.MovieClip#frameRate
+         */
+        frameRate: number;
+        /**
+         * MovieClip 实例当前是否正在播放
+         * @member {boolean} egret.MovieClip#isPlaying
+         */
+        isPlaying: boolean;
+        /**
+         * MovieClip数据源
+         * @member {any} egret.MovieClip#movieClipData
+         */
+        movieClipData: MovieClipData;
+        private _setMovieClipData(value);
+        private setPlayTimes(value);
+        private setIsStopped(value);
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
+declare module egret {
+    /**
+     * @private
+     */
+    class FrameLabel extends EventDispatcher {
+        private _name;
+        private _frame;
+        constructor(name: string, frame: number);
+        /**
+         * 标签名
+         * @member {string} egret.FrameLabel#name
+         */
+        name: string;
+        /**
+         * 标签所在帧序号
+         * @member {number} egret.FrameLabel#frame
+         */
+        frame: number;
+        /**
+         * 复制当前帧标签对象
+         * @method egret.FrameLabel#clone
+         */
+        clone(): FrameLabel;
+    }
+}
+
+declare module egret {
+    /**
+     * @class egret.MovieClipData
+     * @classdesc 使用 MovieClipData 类，您可以创建 MovieClip 对象和处理 MovieClip 对象的数据。MovieClipData 一般由MovieClipDataFactory生成
+     * @extends egret.HashObject
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=151&terms1_id=25&terms2_id=34 MovieClip序列帧动画
+     */
+    class MovieClipData extends HashObject {
+        /**
+         * MovieClip数据
+         */
+        _mcData: any;
+        /**
+         * 总帧数
+         */
+        numFrames: number;
+        /**
+         * 帧数据列表
+         */
+        frames: any[];
+        /**
+         * 帧标签列表
+         */
+        labels: any[];
+        /**
+         * 帧率
+         */
+        frameRate: number;
+        /**
+         * 纹理数据
+         */
+        textureData: any;
+        /**
+         * 纹理集
+         */
+        spriteSheet: SpriteSheet;
+        /**
+         * 创建一个 egret.MovieClipData 对象
+         */
+        constructor();
+        _init(mcData: any, textureData: any, spriteSheet: SpriteSheet): void;
+        /**
+         * 根据指定帧序号获取该帧对应的关键帧数据
+         * @method egret.MovieClipData#getKeyFrameData
+         * @param frame {number} 帧序号
+         * @returns {any} 帧数据对象
+         */
+        getKeyFrameData(frame: number): any;
+        /**
+         * 根据指定帧序号获取该帧对应的Texture对象
+         * @method egret.MovieClipData#getTextureByFrame
+         * @param frame {number} 帧序号
+         * @returns {egret.Texture} Texture对象
+         */
+        getTextureByFrame(frame: number): Texture;
+        private getTextureByResName(resName);
+        _isDataValid(): boolean;
+        _isTextureValid(): boolean;
+        _fillMCData(mcData: any): void;
+        private _fillFramesData(framesData);
+        private _fillFrameLabelsData(frameLabelsData);
+        /**
+         * MovieClip数据源
+         * @member {any} egret.MovieClip#dataSource
+         */
+        mcData: MovieClipData;
+        private _setMCData(value);
+    }
+}
+
+declare module egret {
+    /**
+     * @class egret.MovieClipDataFactory
+     * @classdesc 使用 MovieClipDataFactory 类，可以生成 MovieClipData 对象用于创建MovieClip
+     * @extends egret.EventDispatcher
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=151&terms1_id=25&terms2_id=34 MovieClip序列帧动画
+     */
+    class MovieClipDataFactory extends EventDispatcher {
+        /**
+         * 是否开启缓存
+         * @member {boolean} egret.MovieClipDataFactory#enableCache
+         */
+        enableCache: boolean;
+        _mcDataSet: any;
+        _spriteSheet: SpriteSheet;
+        _mcDataCache: any;
+        /**
+         * 创建一个 egret.MovieClipDataFactory 对象
+         * @param movieClipDataSet {any} MovieClip数据集，该数据集必须由Egret官方工具生成
+         * @param texture {Texture} 纹理
+         */
+        constructor(movieClipDataSet?: any, texture?: Texture);
+        /**
+         * 清空缓存
+         * @method egret.MovieClipDataFactory#clearCache
+         */
+        clearCache(): void;
+        /**
+         * 根据名字生成一个MovieClipData实例。可以用于创建MovieClip。
+         * @method egret.MovieClipDataFactory#generateMovieClipData
+         * @param movieClipName {string} MovieClip名字. 可选参数，默认为"", 相当于取第一个MovieClip数据
+         * @returns {MovieClipData} 生成的MovieClipData对象
+         */
+        generateMovieClipData(movieClipName?: string): MovieClipData;
+        private _findFromCache(movieClipName, cache);
+        private _fillData(movieClipName, movieClip, cache);
+        /**
+         * MovieClip数据集
+         * @member {any} egret.MovieClipDataFactory#mcDataSet
+         */
+        mcDataSet: any;
+        /**
+         * MovieClip需要使用的纹理图
+         * @member {Texture} egret.MovieClipDataFactory#texture
+         */
+        texture: Texture;
+        /**
+         * 由纹理图生成的精灵表
+         * @member {SpriteSheet} egret.MovieClipDataFactory#spriteSheet
+         */
+        spriteSheet: SpriteSheet;
+        private setTexture(value);
+    }
+}
+
 declare module egret {
     /**
      * @classdesc
@@ -4837,6 +5167,8 @@ declare module egret {
      */
     class StageText extends EventDispatcher {
         constructor();
+        _textfield: egret.TextField;
+        _setTextField(textfield: egret.TextField): void;
         /**
          * @returns {string}
          */
@@ -4853,14 +5185,7 @@ declare module egret {
          * @returns {string}
          */
         _getTextType(): string;
-        /**
-         * @param x {number}
-         * @param y {number}
-         * @param width {number}
-         * @param height {number}
-         */
-        _open(x: number, y: number, width?: number, height?: number): void;
-        _show(): void;
+        _show(multiline: boolean, size: number, width: number, height: number): void;
         _add(): void;
         _remove(): void;
         _hide(): void;
@@ -4882,49 +5207,37 @@ declare module egret {
         _setItalic(value: boolean): void;
         _textAlign: string;
         _setTextAlign(value: string): void;
+        _verticalAlign: string;
+        _setVerticalAlign(value: string): void;
         _visible: boolean;
         _setVisible(value: boolean): void;
+        _width: number;
         _setWidth(value: number): void;
+        _height: number;
         _setHeight(value: number): void;
         _multiline: boolean;
         _setMultiline(value: boolean): void;
         _maxChars: number;
         _setMaxChars(value: number): void;
         _resetStageText(): void;
+        _initElement(x: number, y: number, cX: number, cY: number): void;
+        _removeInput(): void;
         static create(): StageText;
+        /**
+         * @private
+         *
+         */
+        $onBlur(): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.URLRequestMethod
      * @classdesc URLRequestMethod 类提供了一些值，这些值可指定在将数据发送到服务器时，
      * URLRequest 对象应使用 POST 方法还是 GET 方法。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=162&terms1_id=25&terms2_id=37 POST与GET
+     * @includeExample egret/net/URLRequestMethod.ts
      */
     class URLRequestMethod {
         /**
@@ -4939,41 +5252,19 @@ declare module egret {
         static POST: string;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.URLLoaderDataFormat
      * @classdesc URLLoaderDataFormat 类提供了一些用于指定如何接收已下载数据的值。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=161&terms1_id=25&terms2_id=37 读取不同数据格式
+     * @includeExample egret/net/URLLoaderDataFormat.ts
      */
     class URLLoaderDataFormat {
         /**
          * 指定以原始二进制数据形式接收下载的数据。
          * @constant {string} egret.URLLoaderDataFormat.BINARY
+         * @platform Web
          */
         static BINARY: string;
         /**
@@ -4998,42 +5289,19 @@ declare module egret {
         static SOUND: string;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.URLVariables
      * @classdesc
      * 使用 URLVariables 类可以在应用程序和服务器之间传输变量。
      * 将 URLVariables 对象与 URLLoader 类的方法、URLRequest 类的 data 属性一起使用。
-     * @extends egret.HashObject
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=163&terms1_id=25&terms2_id=37 发送带参数的请求
+     * @includeExample egret/net/URLVariables.ts
      */
     class URLVariables extends HashObject {
         /**
+         * 创建一个 egret.URLVariables 对象
          * @method egret.URLVariables#constructor
          * @param source {String} 包含名称/值对的 URL 编码的字符串。
          */
@@ -5046,7 +5314,7 @@ declare module egret {
         /**
          * 将变量字符串转换为此 URLVariables.variables 对象的属性。
          * @method egret.URLVariables#decode
-         * @param source {string}
+         * @param source {string} 包含名称/值对的 URL 编码的字符串。
          */
         decode(source: string): void;
         /**
@@ -5054,43 +5322,50 @@ declare module egret {
          * @method egret.URLVariables#toString
          */
         toString(): string;
+        private encodeValue(key, value);
+        private encodeArray(key, value);
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
+declare module egret {
+    /**
+     * @class egret.URLRequestHeader
+     * @classdesc
+     * URLRequestHeader 对象封装了一个 HTTP 请求标头并由一个名称/值对组成。URLRequestHeader 对象在 URLRequest 类的 requestHeaders 属性中使用。
+     * 注意：由于浏览器兼容性原因，在 html5 中并未实现
+     * @includeExample egret/net/URLRequestHeader.ts
+     */
+    class URLRequestHeader {
+        /**
+         * HTTP 请求标头名称，如 Content-Type
+         * @member {string} egret.URLRequestHeader#name
+         */
+        name: string;
+        /**
+         * 与 name 属性相关联的值，如 text/plain
+         * @member {string} egret.URLRequestHeader#value
+         */
+        value: string;
+        /**
+         * 创建一个 egret.URLRequestHeader 对象
+         * @param name HTTP 请求标头名称
+         * @param value 与 name 属性相关联的值
+         */
+        constructor(name: string, value: string);
+    }
+}
+
 declare module egret {
     /**
      * @class egret.URLRequest
      * @classdesc URLRequest 类可捕获单个 HTTP 请求中的所有信息。
      * @extends egret.HashObject
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=160&terms1_id=25&terms2_id=37 构建通信请求
+     * @includeExample egret/net/URLRequest.ts
      */
     class URLRequest extends HashObject {
         /**
-         * 实例化一个URLRequest对象
+         * 创建一个 egret.URLRequest 对象
          * @method egret.URLRequest#constructor
          * @param url {string} 进行网络请求的地址
          */
@@ -5118,45 +5393,31 @@ declare module egret {
          * @member {string} egret.URLRequest#url
          */
         url: string;
+        /**
+         * 要追加到 HTTP 请求的 HTTP 请求标头的数组。该数组由 URLRequestHeader 对象组成。
+         * 数组中的每一对象必须是包含一个名称字符串和一个值字符串的 URLRequestHeader 对象。
+         * 由于浏览器兼容性原因，该属性在 html5 中并未实现
+         * @member {Array} egret.URLRequest#requestHeaders
+         */
+        requestHeaders: Array<URLRequestHeader>;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.URLLoader
      * @classdesc
      * URLLoader 类以文本、二进制数据或 URL 编码变量的形式从 URL 下载数据。在下载文本文件、XML 或其他用于动态数据驱动应用程序的信息时，它很有用。
-     * URLLoader 对象会先从 URL 中下载所有数据，然后才将数据用于应用程序中的代码。它会发出有关下载进度的通知，
-     * 通过 bytesLoaded 和 bytesTotal 属性以及已调度的事件，可以监视下载进度。
+     * URLLoader 对象会先从 URL 中下载所有数据，然后才将数据用于应用程序中的代码。
      * @extends egret.EventDispatcher
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=160&terms1_id=25&terms2_id=37 构建通信请求
+     * @event egret.Event.COMPLETE 加载完成后调度。
+     * @event egret.IOErrorEvent.IO_ERROR 加载错误后调度。
+     * @includeExample egret/net/URLLoader.ts
      */
     class URLLoader extends EventDispatcher {
         /**
+         * 创建一个 egret.URLLoader 对象
          * @method egret.URLLoader#constructor
          * @param request {URLRequest} 一个 URLRequest 对象，指定要下载的 URL。
          * 如果省略该参数，则不开始加载操作。如果已指定参数，则立即开始加载操作
@@ -5190,34 +5451,10 @@ declare module egret {
          */
         load(request: URLRequest): void;
         _status: number;
+        __recycle(): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.Texture
@@ -5225,44 +5462,55 @@ declare module egret {
      * 在HTML5中，资源是一个HTMLElement对象
      * 在OpenGL / WebGL中，资源是一个提交GPU后获取的纹理id
      * Texture类封装了这些底层实现的细节，开发者只需要关心接口即可
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=135&terms1_id=25&terms2_id=31 纹理集的使用
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=123&terms1_id=25&terms2_id=30 获取资源的几种方式
+     * @includeExample egret/display/Texture.ts
      */
     class Texture extends HashObject {
-        webGLTexture: any;
+        /**
+         * 创建一个 egret.Texture 对象
+         */
         constructor();
         /**
-         * 表示这个纹理在bitmapData上的x起始位置
+         * 表示这个纹理在 bitmapData 上的 x 起始位置
          */
         _bitmapX: number;
         /**
-         * 表示这个纹理在bitmapData上的y起始位置
+         * 表示这个纹理在 bitmapData 上的 y 起始位置
          */
         _bitmapY: number;
         /**
-         * 表示这个纹理在bitmapData上的宽度
+         * 表示这个纹理在 bitmapData 上的宽度
          */
         _bitmapWidth: number;
         /**
-         * 表示这个纹理在bitmapData上的高度
+         * 表示这个纹理在 bitmapData 上的高度
          */
         _bitmapHeight: number;
         /**
-         * 表示这个纹理显示了之后在x方向的渲染偏移量
+         * 表示这个纹理显示了之后在 x 方向的渲染偏移量
          */
         _offsetX: number;
         /**
-         * 表示这个纹理显示了之后在y方向的渲染偏移量
+         * 表示这个纹理显示了之后在 y 方向的渲染偏移量
          */
         _offsetY: number;
+        /**
+         * 纹理宽度
+         */
         _textureWidth: number;
         /**
          * 纹理宽度
          * @member {number} egret.Texture#textureWidth
          */
         textureWidth: number;
+        /**
+         * 纹理高度
+         */
         _textureHeight: number;
         /**
          * 纹理高度
-         * @member {number} egret.Texture#textureWidth
+         * @member {number} egret.Texture#textureHeight
          */
         textureHeight: number;
         /**
@@ -5274,11 +5522,6 @@ declare module egret {
          */
         _sourceHeight: number;
         _bitmapData: any;
-        /**
-         * 纹理对象中得位图数据
-         * @member {any} egret.Texture#bitmapData
-         */
-        bitmapData: any;
         _setBitmapData(value: any): void;
         /**
          * 获取某一点像素的颜色值
@@ -5286,81 +5529,137 @@ declare module egret {
          * @param x {number} 像素点的X轴坐标
          * @param y {number} 像素点的Y轴坐标
          * @returns {number} 指定像素点的颜色值
+         * @platform Web
          */
         getPixel32(x: number, y: number): number[];
+        /**
+         * 销毁纹理对象
+         * @method egret.Texture#dispose
+         */
+        dispose(): void;
+        _clone(): Texture;
+        /**
+         * @private
+         */
+        draw(context: any, sourceX: any, sourceY: any, sourceWidth: any, sourceHeight: any, destX: any, destY: any, destWidth: any, destHeight: any, renderType: any): void;
+        /**
+         * 转换成base64字符串，如果图片（或者包含的图片）跨域，则返回null。
+         * native只支持 "image/png" 和 "image/jpeg"；Web中由于各个浏览器的实现不一样，因此建议也只用这2种。
+         * @param type 转换的类型，如  "image/png"。
+         * @param rect 需要转换的区域
+         * @returns {any} base64字符串
+         * @version Egret 2.4
+         */
+        toDataURL(type: string, rect?: egret.Rectangle): string;
+        /**
+         * 裁剪指定区域并保存成图片。
+         * native只支持 "image/png" 和 "image/jpeg"；Web中由于各个浏览器的实现不一样，因此建议也只用这2种。
+         * @param type 转换的类型，如  "image/png"
+         * @param filePath 图片的名称的路径（主目录为游戏的私有空间，路径中不能有 "../"，Web只支持传名称。）
+         * @param rect 需要转换的区域
+         * @version Egret 2.4
+         * @platform Native
+         */
+        saveToFile(type: string, filePath: string, rect?: egret.Rectangle): void;
+        _drawForCanvas(context: CanvasRenderingContext2D, sourceX: any, sourceY: any, sourceWidth: any, sourceHeight: any, destX: any, destY: any, destWidth: any, destHeight: any, renderType: any): void;
+        _drawForNative(context: any, sourceX: any, sourceY: any, sourceWidth: any, sourceHeight: any, destX: any, destY: any, destWidth: any, destHeight: any, renderType: any): void;
+        _drawRepeatImageForNative(context: any, sourceX: any, sourceY: any, sourceWidth: any, sourceHeight: any, destX: any, destY: any, destWidth: any, destHeight: any, repeat: any): void;
+        _drawRepeatImageForCanvas(context: CanvasRenderingContext2D, sourceX: any, sourceY: any, sourceWidth: any, sourceHeight: any, destX: any, destY: any, destWidth: any, destHeight: any, repeat: any): void;
+        _disposeForCanvas(): void;
+        _disposeForNative(): void;
+        /**
+         * @private
+         */
+        static deleteWebGLTexture(texture: Texture): void;
+        /**
+         * @private
+         */
+        static createBitmapData(url: string, callback: (code: number, bitmapData: any) => void): void;
+        /**
+         * 当从其他站点加载一个图片时，指定是否启用跨域资源共享(CORS)，默认值为null。
+         * 可以设置为"anonymous","use-credentials"或null。
+         */
+        static crossOrigin: string;
+        static _createBitmapDataForCanvasAndWebGl(url: string, callback: (code: number, bitmapData: any) => void): void;
+        static _onLoad(url: any, bitmapData: any): void;
+        static _onError(url: any, bitmapData: any): void;
+        static _createBitmapDataForNative(url: string, callback: (code: number, bitmapData: any) => void): void;
+        private static _addToCallbackList(url, callback);
+        private static _bitmapDataFactory;
+        private static _bitmapCallbackMap;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+declare module egret_native {
+    module Texture {
+        function addTexture(filePath: string): any;
+        function addTextureAsyn(filePath: string, promise: any): any;
+        function addTextureUnsyn(filePath: string, promise: any): any;
+        function removeTexture(filePath: string): void;
+    }
+}
+
 declare module egret {
     /**
      * @class egret.RenderTexture
      * @classdesc
      * RenderTexture 是动态纹理类，他实现了将显示对象及其子对象绘制成为一个纹理的功能
      * @extends egret.Texture
+     * @includeExample egret/display/RenderTexture.ts
      */
     class RenderTexture extends Texture {
-        private renderContext;
-        constructor();
-        private static identityRectangle;
         /**
-         * 将制定显示对象绘制为一个纹理
-         * @method egret.RenderTexture#drawToTexture
-         * @param displayObject {egret.DisplayObject}
+         * @private
          */
-        drawToTexture(displayObject: DisplayObject): boolean;
+        renderContext: any;
+        /**
+         * 创建一个 egret.RenderTexture 对象
+         */
+        constructor();
+        /**
+         * @private
+         */
+        init(): void;
+        /**
+         * @private
+         */
+        static identityRectangle: egret.Rectangle;
+        /**
+         * 将指定显示对象绘制为一个纹理
+         * @method egret.RenderTexture#drawToTexture
+         * @param displayObject {egret.DisplayObject} 需要绘制的显示对象
+         * @param clipBounds {egret.Rectangle} 绘制矩形区域
+         * @param scale {number} 缩放比例
+         */
+        drawToTexture(displayObject: egret.DisplayObject, clipBounds?: Rectangle, scale?: number): boolean;
+        /**
+         * @private
+         */
+        setSize(width: number, height: number): void;
+        /**
+         * @private
+         */
+        begin(): void;
+        /**
+         * @private
+         */
+        end(): void;
+        /**
+         * 销毁 RenderTexture 对象
+         * @method egret.RenderTexture#dispose
+         */
+        dispose(): void;
+        private static _pool;
+        /**
+         * @private
+         */
+        static create(): RenderTexture;
+        /**
+         * @private
+         */
+        static release(value: RenderTexture): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.RendererContext
@@ -5376,14 +5675,23 @@ declare module egret {
          * @member egret.RendererContext#renderCost
          */
         renderCost: number;
+        _matrixA: number;
+        _matrixB: number;
+        _matrixC: number;
+        _matrixD: number;
+        _matrixTx: number;
+        _matrixTy: number;
         /**
          * 绘制纹理的缩放比率，默认值为1
          * @member egret.RendererContext#texture_scale_factor
          */
+        _texture_scale_factor: number;
         texture_scale_factor: number;
+        _setTextureScaleFactor(value: number): void;
         /**
          * 是否对图像使用平滑处理
          * 该特性目前只支持Canvas
+         * @platform Web
          */
         static imageSmoothingEnabled: boolean;
         private profiler;
@@ -5420,11 +5728,26 @@ declare module egret {
          */
         drawImage(texture: Texture, sourceX: any, sourceY: any, sourceWidth: any, sourceHeight: any, destX: any, destY: any, destWidth: any, destHeight: any, repeat?: string): void;
         /**
+         * 绘制9宫图片
+         * @method egret.RendererContext#drawImageScale9
+         * @param texture {Texture}
+         * @param sourceX {any}
+         * @param sourceY {any}
+         * @param sourceWidth {any}
+         * @param sourceHeight {any}
+         * @param destX {any}
+         * @param destY {any}
+         * @param destWidth {any}
+         * @param destHeigh {any}
+         */
+        drawImageScale9(texture: Texture, sourceX: any, sourceY: any, sourceWidth: any, sourceHeight: any, offX: any, offY: any, destWidth: any, destHeight: any, rect: any): boolean;
+        _addOneDraw(): void;
+        /**
          * 变换Context的当前渲染矩阵
          * @method egret.RendererContext#setTransform
          * @param matrix {egret.Matri}
          */
-        setTransform(matrix: Matrix): void;
+        setTransform(matrix: egret.Matrix): void;
         /**
          * 设置渲染alpha
          * @method egret.RendererContext#setAlpha
@@ -5437,7 +5760,7 @@ declare module egret {
          * @method egret.RendererContext#setupFont
          * @param textField {TextField}
          */
-        setupFont(textField: TextField, style?: ITextStyle): void;
+        setupFont(textField: TextField, style?: egret.ITextStyle): void;
         /**
          * 测量文本
          * @method egret.RendererContext#measureText
@@ -5455,43 +5778,35 @@ declare module egret {
          * @param y {number}
          * @param maxWidth {numbe}
          */
-        drawText(textField: TextField, text: string, x: number, y: number, maxWidth: number, style?: ITextStyle): void;
+        drawText(textField: egret.TextField, text: string, x: number, y: number, maxWidth: number, style?: egret.ITextStyle): void;
         strokeRect(x: any, y: any, w: any, h: any, color: any): void;
         pushMask(mask: Rectangle): void;
         popMask(): void;
         onRenderStart(): void;
         onRenderFinish(): void;
-        setGlobalColorTransform(colorTransformMatrix: number[]): void;
+        createLinearGradient(x0: number, y0: number, x1: number, y1: number): CanvasGradient;
+        createRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number): CanvasGradient;
+        setGlobalFilters(filterData: Array<Filter>): void;
+        drawCursor(x1: number, y1: number, x2: number, y2: number): void;
         static createRendererContext(canvas: any): RendererContext;
+        static blendModesForGL: any;
+        private static initBlendMode();
+        /**
+         * 设置 gl 模式下的blendMode，canvas模式下不会生效
+         * @method egret.RendererContext#registerBlendModeForGL
+         * @param key {string} 键值
+         * @param src {number} 源颜色因子
+         * @param dst {number} 目标颜色因子
+         * @param override {boolean} 是否覆盖
+         */
+        static registerBlendModeForGL(key: string, src: number, dst: number, override?: boolean): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
+    /**
+     * @private
+     */
     class InteractionMode {
         /**
          * 使用鼠标交互模式。
@@ -5507,32 +5822,7 @@ declare module egret {
         static mode: string;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      *
@@ -5544,7 +5834,7 @@ declare module egret {
         private _currentTouchTarget;
         maxTouches: number;
         private touchDownTarget;
-        touchingIdentifiers: any[];
+        touchingIdentifiers: Array<any>;
         constructor();
         /**
          * 启动触摸检测
@@ -5560,32 +5850,7 @@ declare module egret {
         onTouchEnd(x: number, y: number, identifier: number): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.NetContext
@@ -5597,148 +5862,93 @@ declare module egret {
         constructor();
         proceed(loader: URLLoader): void;
         static _getUrl(request: URLRequest): string;
-        getChangeList(): any[];
+        getChangeList(): Array<any>;
+        /**
+         * 获取虚拟url
+         * @param url
+         * @returns {string}
+         */
+        getVirtualUrl(url: string): string;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @classdesc
      * @extends egret.HashObject
+     * @private
      */
     class DeviceContext extends HashObject {
-        /**
-         * @member egret.DeviceContext#frameRate
-         */
-        frameRate: number;
-        /**
-         * @method egret.DeviceContext#constructor
-         */
         constructor();
-        /**
-         * @method egret.DeviceContext#executeMainLoop
-         * @param callback {Function}
-         * @param thisObject {any}
-         */
         executeMainLoop(callback: Function, thisObject: any): void;
+        setFrameRate(frameRate: number): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
+    /**
+     * @includeExample egret/context/external/ExternalInterface.ts
+     */
     class ExternalInterface {
-        constructor();
         /**
          * 将信息传递给 Egret 外层容器。
          * 如果该容器是 HTML 页，则此方法不可用。
          * 如果该容器是某个 App 容器，该容器将处理该事件。
          * @method egret.ExternalInterface#call
-         * @param functionName {string}
-         * @param value {string}
+         * @param functionName {string} 用于调用函数的名称
+         * @param value {string} 传递的函数的参数
          */
         static call(functionName: string, value: string): void;
         /**
          * 添加外层容器调用侦听，该容器将传递一个字符串给 Egret 容器
          * 如果该容器是 HTML 页，则此方法不可用。
          * @method egret.ExternalInterface#addCallBack
-         * @param functionName {string}
-         * @param listener {Function}
+         * @param functionName {string} 用于调用函数的名称
+         * @param listener {Function} 要调用的函数
          */
         static addCallback(functionName: string, listener: Function): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * 这个类是HTML5的WebWrapper的第一个版本
+     * @private
      */
     class Browser extends HashObject {
         private static instance;
         private trans;
         private ua;
         static getInstance(): Browser;
+        webPSupport: boolean;
         /**
          * @deprecated
          * @returns {boolean}
          */
         isMobile: boolean;
+        /**
+         * 判断是否是ios
+         * @returns {boolean}
+         */
+        isIOS(): boolean;
+        /**
+         * 获取ios版本
+         * @returns {string}
+         */
+        getIOSVersion(): string;
         constructor();
-        private _getHeader(tempStyle);
-        private _getTrans();
+        getUserAgent(): string;
+        private header;
+        /**
+         * 获取当前浏览器对应style类型
+         * @type {string}
+         */
+        getTrans(style: string, judge?: boolean): string;
+        /**
+         * 获取当前浏览器的类型
+         * @returns {string}
+         */
+        private getHeader(style);
         $new(x: any): any;
         $(x: any): any;
         translate(a: any): string;
@@ -5747,160 +5957,109 @@ declare module egret {
         skew(a: any): string;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-declare module egret.localStorage {
+
+declare module egret {
     /**
-     * 读取数据
-     * @method egret.localStorage.getItem
-     * @param key {string} 要读取的键名称
+     * @includeExample egret/context/localStorage/localStorage.ts
      */
-    function getItem(key: string): string;
-    /**
-     * 保存数据
-     * @method egret.localStorage.setItem
-     * @param key {string} 要保存的键名称
-     * @param value {string} 要保存的值
-     * @returns {boolean} 数据保存是否成功
-     */
-    function setItem(key: string, value: string): boolean;
-    /**
-     * 删除数据
-     * @method egret.localStorage.removeItem
-     * @param key {string} 要删除的键名称
-     */
-    function removeItem(key: string): void;
-    /**
-     * 将所有数据清空
-     * @method egret.localStorage.clear
-     */
-    function clear(): void;
+    class localStorage {
+        /**
+         * 读取数据
+         * @method egret.localStorage.getItem
+         * @param key {string} 要读取的键名称
+         */
+        static getItem(key: string): string;
+        /**
+         * 保存数据
+         * @method egret.localStorage.setItem
+         * @param key {string} 要保存的键名称
+         * @param value {string} 要保存的值
+         * @returns {boolean} 数据保存是否成功
+         */
+        static setItem(key: string, value: string): boolean;
+        /**
+         * 删除数据
+         * @method egret.localStorage.removeItem
+         * @param key {string} 要删除的键名称
+         */
+        static removeItem(key: string): void;
+        /**
+         * 将所有数据清空
+         * @method egret.localStorage.clear
+         */
+        static clear(): void;
+    }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * @class egret.XML
      * @classdesc
      * XML文件解析工具，它将XML文件解析为标准的JSON对象返回。
      * 用法类似JSON.parse(),传入一个XML字符串给XML.parse()，将能得到一个标准JSON对象。
-     * 示例：<root value="abc">
+     * 示例：
+     * <pre>
+     *      <root value="abc">
      *          <item value="item0"/>
      *          <item value="item1"/>
-     *       </root>
+     *      </root>
+     * </pre>
      * 将解析为:
-     * {"name":"root","$value":"abc","children":[{"name":"item","$value":"item0"},{"name":"item","$value":"item0"}]};
+     * <pre>
+     *      {
+     *          "name": "root",
+     *          "$value": "abc",
+     *          "children": [
+     *              {"name": "item", "$value": "item0"},
+     *              {"name": "item", "$value": "item1"}
+     *          ]
+     *      }
+     * </pre>
      * 其中XML上的属性节点都使用$+"属性名"的方式表示,子节点都存放在children属性的列表里，name表示节点名称。
+     * @includeExample egret/utils/XML.ts
      */
     class XML {
         /**
          * 解析一个XML字符串为JSON对象。
          * @method egret.XML.parse
          * @param value {string} 要解析的XML字符串。
-         * @returns {any}
+         * @returns {any} 解析完后的JSON对象
+         * @platform Web
          */
         static parse(value: string): any;
         private static parseNode(node);
         /**
+         *
          * 查找xml上符合节点路径的所有子节点。
          * @method egret.XML.findChildren
          * @param xml {any} 要查找的XML节点。
          * @param path {string} 子节点路径，例如"item.node"
          * @param result {egret.Array<any>} 可选参数，传入一个数组用于存储查找的结果。这样做能避免重复创建对象。
-         * @returns {any}
+         * @returns {any} 节点路径的所有子节点
+         * @platform Web
          */
-        static findChildren(xml: any, path: string, result?: any[]): any[];
+        static findChildren(xml: any, path: string, result?: Array<any>): Array<any>;
         /**
+         * @private
          * @method egret.XML.findByPath
          * @param xml {any}
          * @param path {string}
          * @param result {egret.Array<any>}
+         * @platform Web
          */
-        static findByPath(xml: any, path: string, result: any[]): void;
+        private static findByPath(xml, path, result);
         /**
          * 获取一个XML节点上的所有属性名列表
          * @method egret.XML.getAttributes
          * @param xml {any} 要查找的XML节点。
          * @param result {egret.Array<any>} 可选参数，传入一个数组用于存储查找的结果。这样做能避免重复创建对象。
-         * @returns {string}
+         * @returns {string} 节点上的所有属性名列表
+         * @platform Web
          */
-        static getAttributes(xml: any, result?: any[]): string[];
+        static getAttributes(xml: any, result?: Array<any>): Array<string>;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     /**
      * Endian 类中包含一些值，它们表示用于表示多字节数字的字节顺序。
@@ -5926,212 +6085,291 @@ declare module egret {
      * @class egret.ByteArray
      * @classdesc
      * ByteArray 类提供用于优化读取、写入以及处理二进制数据的方法和属性。
-     * 注意：ByteArray 类适用于需要在字节层访问数据的高级开发人员。
-     * 内存中的数据是一个压缩字节数组（数据类型的最紧凑表示形式），但可以使用标准数组访问运算符来操作 ByteArray 类的实例。
+     * 注意：ByteArray 类适用于需要在字节层访问数据的高级 开发人员。
+     * @includeExample egret/utils/ByteArray.ts
      */
     class ByteArray {
+        private static SIZE_OF_BOOLEAN;
+        private static SIZE_OF_INT8;
+        private static SIZE_OF_INT16;
+        private static SIZE_OF_INT32;
+        private static SIZE_OF_UINT8;
+        private static SIZE_OF_UINT16;
+        private static SIZE_OF_UINT32;
+        private static SIZE_OF_FLOAT32;
+        private static SIZE_OF_FLOAT64;
+        private BUFFER_EXT_SIZE;
+        private data;
+        private _position;
+        private write_position;
         /**
-         * 将文件指针的当前位置（以字节为单位）移动或返回到 ByteArray 对象中。
-         * 下一次调用读取方法时将在此位置开始读取，或者下一次调用写入方法时将在此位置开始写入。
+         * 更改或读取数据的字节顺序；egret.Endian.BIG_ENDIAN 或 egret.Endian.LITTLE_ENDIAN。
+         * @default egret.Endian.BIG_ENDIAN
+         * @member egret.ByteArray#endian
+         */
+        endian: string;
+        /**
+         * 创建一个 egret.ByteArray 对象以引用指定的 ArrayBuffer 对象
+         * @param buffer {ArrayBuffer} 数据源
+         */
+        constructor(buffer?: ArrayBuffer);
+        private _setArrayBuffer(buffer);
+        /**
+         * @private
+         */
+        buffer: ArrayBuffer;
+        /**
+         * @private
+         */
+        dataView: DataView;
+        /**
+         * @private
+         */
+        bufferOffset: number;
+        /**
+         * 将文件指针的当前位置（以字节为单位）移动或返回到 ByteArray 对象中。下一次调用读取方法时将在此位置开始读取，或者下一次调用写入方法时将在此位置开始写入。
          * @member {number} egret.ByteArray#position
          */
         position: number;
         /**
          * ByteArray 对象的长度（以字节为单位）。
-         * 如果将长度设置为大于当前长度的值，则用零填充字节数组的右侧；如果将长度设置为小于当前长度的值，将会截断该字节数组。
+         * 如果将长度设置为大于当前长度的值，则用零填充字节数组的右侧。
+         * 如果将长度设置为小于当前长度的值，将会截断该字节数组。
          * @member {number} egret.ByteArray#length
          */
         length: number;
-        private _mode;
-        private maxlength;
-        private arraybytes;
-        private unalignedarraybytestemp;
-        private _endian;
-        private isLittleEndian;
         /**
-         * 默认表示多字节数字的字节顺序的常量
-         * @constant {string} egret.ByteArray.DEFAULT_ENDIAN
-         */
-        static DEFAULT_ENDIAN: string;
-        constructor();
-        /**
-         * 更改或读取数据的字节顺序。
-         * 请使用egret.Endian.BIG_ENDIAN 或 egret.Endian.LITTLE_ENDIAN表示。
-         * @member {string} egret.ByteArray#endian
-         */
-        endian: string;
-        /**
-         * @param n {number}
-         */
-        ensureWriteableSpace(n: number): void;
-        /**
-         * @param aBuffer {egret.ArrayBuffer}
-         */
-        setArrayBuffer(aBuffer: ArrayBuffer): void;
-        /**
-         * 可从字节数组的当前位置到数组末尾读取的数据的字节数。【只读】
+         * 可从字节数组的当前位置到数组末尾读取的数据的字节数。
          * 每次访问 ByteArray 对象时，将 bytesAvailable 属性与读取方法结合使用，以确保读取有效的数据。
-         * @method egret.ByteArray#getBytesAvailable
-         * @returns {number}
+         * @member {number} egret.ByteArray#bytesAvailable
          */
         bytesAvailable: number;
         /**
-         * @method egret.ByteArray#ensureSpace
-         * @param n {number}
+         * 清除字节数组的内容，并将 length 和 position 属性重置为 0。
+         * @method egret.ByteArray#clear
          */
-        ensureSpace(n: number): void;
+        clear(): void;
         /**
-         * 在字节流中写入一个字节。
-         * 使用参数的低 8 位。忽略高 24 位。
-         * @method egret.ByteArray#writeByte
-         * @param b {number}  一个 32 位整数。低 8 位将被写入字节流。
+         * 从字节流中读取布尔值。读取单个字节，如果字节非零，则返回 true，否则返回 false
+         * @return 如果字节不为零，则返回 true，否则返回 false
+         * @method egret.ByteArray#readBoolean
          */
-        writeByte(b: number): void;
+        readBoolean(): boolean;
         /**
-         * 从字节流中读取带符号的字节。
-         * 返回值的范围是从 -128 到 127。
+         * 从字节流中读取带符号的字节
+         * @return 介于 -128 和 127 之间的整数
          * @method egret.ByteArray#readByte
-         * @returns {number} 介于 -128 和 127 之间的整数。
          */
         readByte(): number;
         /**
-         * 从字节流中读取 length 参数指定的数据字节数。从 offset 指定的位置开始，将字节读入 bytes 参数指定的 ByteArray 对象中，并将字节写入目标 ByteArray 中。
+         * 从字节流中读取 length 参数指定的数据字节数。从 offset 指定的位置开始，将字节读入 bytes 参数指定的 ByteArray 对象中，并将字节写入目标 ByteArray 中
+         * @param bytes 要将数据读入的 ByteArray 对象
+         * @param offset bytes 中的偏移（位置），应从该位置写入读取的数据
+         * @param length 要读取的字节数。默认值 0 导致读取所有可用的数据
          * @method egret.ByteArray#readBytes
-         * @param bytes {egret.ByteArray} 要将数据读入的 ByteArray 对象。
-         * @param offset {number} bytes 中的偏移（位置），应从该位置写入读取的数据。
-         * @param length {number} 要读取的字节数。默认值 0 导致读取所有可用的数据。
-
          */
         readBytes(bytes: ByteArray, offset?: number, length?: number): void;
         /**
-         * 在字节流中写入一个无符号的字节。
-         * @method egret.ByteArray#writeUnsignedByte
-         * @param b {number} 介于 0 到 255 之间的无符号字节。
-         */
-        writeUnsignedByte(b: number): void;
-        /**
-         * 从字节流中读取无符号的字节。
-         * 返回值的范围是从 0 到 255。
-         * @method egret.ByteArray#readUnsignedByte
-         * @returns {number} 介于 0 到 255 之间的无符号字节。
-         */
-        readUnsignedByte(): number;
-        /**
-         *在字节流中写入一个无符号的 16 位整数。
-         * @method egret.ByteArray#writeUnsignedShort
-         * @param b {number}  介于 0 到 65535 之间的无符号整数。
-         */
-        writeUnsignedShort(b: number): void;
-        /**
-         * 从字节流中读取一个由 length 参数指定的 UTF-8 字节序列，并返回一个字符串。
-         * @method egret.ByteArray#readUTFBytes
-         * @param len {number} 指明 UTF-8 字节长度的无符号短整型数。
-         * @returns {string} 由指定长度的 UTF-8 字节组成的字符串。
-         */
-        readUTFBytes(len: number): string;
-        /**
-         * 从字节流中读取一个带符号的 32 位整数。
-         * 返回值的范围是从 -2147483648 到 2147483647。
-         * @method egret.ByteArray#readInt
-         * @returns {number} 介于 -2147483648 到 2147483647 之间的整数。
-         */
-        readInt(): number;
-        /**
-         * 从字节流中读取一个带符号的 16 位整数。
-         * 返回值的范围是从 -32768 到 32767。
-         * @method egret.ByteArray#readShort
-         * @returns {number} 介于 -32768 到 32767 之间的整数。
-         */
-        readShort(): number;
-        /**
-         * 从字节流中读取一个 IEEE 754 双精度（64 位）浮点数。
+         * 从字节流中读取一个 IEEE 754 双精度（64 位）浮点数
+         * @return 双精度（64 位）浮点数
          * @method egret.ByteArray#readDouble
-         * @returns {number} 返回双精度（64 位）浮点数。
          */
         readDouble(): number;
         /**
-         * 从字节流中读取一个无符号的 16 位整数。
-         * 返回值的范围是从 0 到 65535。
-         * @method egret.ByteArray#readUnsignedShort
-         * @returns {number} 介于 0 到 65535 之间的无符号整数。
+         * 从字节流中读取一个 IEEE 754 单精度（32 位）浮点数
+         * @return 单精度（32 位）浮点数
+         * @method egret.ByteArray#readFloat
          */
-        readUnsignedShort(): number;
+        readFloat(): number;
         /**
-         * 在字节流中写入一个无符号的 32 位整数。
-         * @method egret.ByteArray#writeUnsignedInt
-         * @param b {number} 介于 0 和 4294967295 之间的无符号整数。
+         * 从字节流中读取一个带符号的 32 位整数
+         * @return 介于 -2147483648 和 2147483647 之间的 32 位带符号整数
+         * @method egret.ByteArray#readFloat
          */
-        writeUnsignedInt(b: number): void;
+        readInt(): number;
         /**
-         * 从字节流中读取一个无符号的 32 位整数。
-         * 返回值的范围是从 0 到 4294967295。
+         * 使用指定的字符集从字节流中读取指定长度的多字节字符串
+         * @param length 要从字节流中读取的字节数
+         * @param charSet 表示用于解释字节的字符集的字符串。可能的字符集字符串包括 "shift-jis"、"cn-gb"、"iso-8859-1"”等
+         * @return UTF-8 编码的字符串
+         * @method egret.ByteArray#readMultiByte
+         */
+        /**
+         * 从字节流中读取一个带符号的 16 位整数
+         * @return 介于 -32768 和 32767 之间的 16 位带符号整数
+         * @method egret.ByteArray#readShort
+         */
+        readShort(): number;
+        /**
+         * 从字节流中读取无符号的字节
+         * @return 介于 0 和 255 之间的 32 位无符号整数
+         * @method egret.ByteArray#readUnsignedByte
+         */
+        readUnsignedByte(): number;
+        /**
+         * 从字节流中读取一个无符号的 32 位整数
+         * @return 介于 0 和 4294967295 之间的 32 位无符号整数
          * @method egret.ByteArray#readUnsignedInt
-         *  @returns {number} 介于 0 和 4294967295 之间的 32 位无符号整数。
          */
         readUnsignedInt(): number;
         /**
-         * 在字节流中写入一个 IEEE 754 单精度（32 位）浮点数。
-         * @method egret.ByteArray#writeFloat
-         * @param b {number} 单精度（32 位）浮点数。
+         * 从字节流中读取一个无符号的 16 位整数
+         * @return 介于 0 和 65535 之间的 16 位无符号整数
+         * @method egret.ByteArray#readUnsignedShort
          */
-        writeFloat(b: number): void;
+        readUnsignedShort(): number;
         /**
-         * 从字节流中读取一个 IEEE 754 单精度（32 位）浮点数。
-         * @method egret.ByteArray#readFloat
-         * @returns {number} 单精度（32 位）浮点数。
+         * 从字节流中读取一个 UTF-8 字符串。假定字符串的前缀是无符号的短整型（以字节表示长度）
+         * @return UTF-8 编码的字符串
+         * @method egret.ByteArray#readUTF
          */
-        readFloat(): number;
+        readUTF(): string;
+        /**
+         * 从字节流中读取一个由 length 参数指定的 UTF-8 字节序列，并返回一个字符串
+         * @param length 指明 UTF-8 字节长度的无符号短整型数
+         * @return 由指定长度的 UTF-8 字节组成的字符串
+         * @method egret.ByteArray#readUTFBytes
+         */
+        readUTFBytes(length: number): string;
+        /**
+         * 写入布尔值。根据 value 参数写入单个字节。如果为 true，则写入 1，如果为 false，则写入 0
+         * @param value 确定写入哪个字节的布尔值。如果该参数为 true，则该方法写入 1；如果该参数为 false，则该方法写入 0
+         * @method egret.ByteArray#writeBoolean
+         */
+        writeBoolean(value: boolean): void;
+        /**
+         * 在字节流中写入一个字节
+         * 使用参数的低 8 位。忽略高 24 位
+         * @param value 一个 32 位整数。低 8 位将被写入字节流
+         * @method egret.ByteArray#writeByte
+         */
+        writeByte(value: number): void;
+        /**
+         * 将指定字节数组 bytes（起始偏移量为 offset，从零开始的索引）中包含 length 个字节的字节序列写入字节流
+         * 如果省略 length 参数，则使用默认长度 0；该方法将从 offset 开始写入整个缓冲区。如果还省略了 offset 参数，则写入整个缓冲区
+         * 如果 offset 或 length 超出范围，它们将被锁定到 bytes 数组的开头和结尾
+         * @param bytes ByteArray 对象
+         * @param offset 从 0 开始的索引，表示在数组中开始写入的位置
+         * @param length 一个无符号整数，表示在缓冲区中的写入范围
+         * @method egret.ByteArray#writeBytes
+         */
+        writeBytes(bytes: ByteArray, offset?: number, length?: number): void;
+        /**
+         * 在字节流中写入一个 IEEE 754 双精度（64 位）浮点数
+         * @param value 双精度（64 位）浮点数
+         * @method egret.ByteArray#writeDouble
+         */
+        writeDouble(value: number): void;
+        /**
+         * 在字节流中写入一个 IEEE 754 单精度（32 位）浮点数
+         * @param value 单精度（32 位）浮点数
+         * @method egret.ByteArray#writeFloat
+         */
+        writeFloat(value: number): void;
+        /**
+         * 在字节流中写入一个带符号的 32 位整数
+         * @param value 要写入字节流的整数
+         * @method egret.ByteArray#writeInt
+         */
+        writeInt(value: number): void;
+        /**
+         * 使用指定的字符集将多字节字符串写入字节流
+         * @param value 要写入的字符串值
+         * @param charSet 表示要使用的字符集的字符串。可能的字符集字符串包括 "shift-jis"、"cn-gb"、"iso-8859-1"”等
+         * @method egret.ByteArray#writeMultiByte
+         */
+        /**
+         * 在字节流中写入一个 16 位整数。使用参数的低 16 位。忽略高 16 位
+         * @param value 32 位整数，该整数的低 16 位将被写入字节流
+         * @method egret.ByteArray#writeShort
+         */
+        writeShort(value: number): void;
+        /**
+         * 在字节流中写入一个无符号的 32 位整数
+         * @param value 要写入字节流的无符号整数
+         * @method egret.ByteArray#writeUnsignedInt
+         */
+        writeUnsignedInt(value: number): void;
+        /**
+         * 将 UTF-8 字符串写入字节流。先写入以字节表示的 UTF-8 字符串长度（作为 16 位整数），然后写入表示字符串字符的字节
+         * @param value 要写入的字符串值
+         * @method egret.ByteArray#writeUTF
+         */
+        writeUTF(value: string): void;
+        /**
+         * 将 UTF-8 字符串写入字节流。类似于 writeUTF() 方法，但 writeUTFBytes() 不使用 16 位长度的词为字符串添加前缀
+         * @param value 要写入的字符串值
+         * @method egret.ByteArray#writeUTFBytes
+         */
+        writeUTFBytes(value: string): void;
+        toString(): string;
+        /**
+         * 将 Uint8Array 写入字节流
+         * @param bytes 要写入的Uint8Array
+         * @param validateBuffer
+         */
+        _writeUint8Array(bytes: Uint8Array, validateBuffer?: boolean): void;
+        /**
+         * @private
+         */
+        validate(len: number): boolean;
+        /**********************/
+        /**********************/
+        private validateBuffer(len, needReplace?);
+        /**
+         * UTF-8 Encoding/Decoding
+         */
+        private encodeUTF8(str);
+        private decodeUTF8(data);
+        private encoderError(code_point);
+        private decoderError(fatal, opt_code_point?);
+        private EOF_byte;
+        private EOF_code_point;
+        private inRange(a, min, max);
+        private div(n, d);
+        private stringToCodePoints(string);
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
+declare module egret {
+    /**
+     * 获取浏览器或者Runtime参数，如果没有设置返回空字符串
+     * 在浏览器中相当于获取url中参数，在Runtime获取对应setOption参数
+     * @method egret.getOption
+     * @param key {string} 参数key
+     * @private
+     */
+    function getOption(key: string): string;
+}
+
 declare module egret {
     /**
      * @class egret.Tween
      * @classdesc
      * Tween是Egret的动画缓动类
      * @extends egret.EventDispatcher
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=150&terms1_id=25&terms2_id=34 Tween缓动动画
+     * @includeExample egret/tween/Tween.ts
      */
     class Tween extends EventDispatcher {
         /**
          * 不做特殊处理
          * @constant {number} egret.Tween.NONE
+         * @private
          */
-        static NONE: number;
+        private static NONE;
         /**
          * 循环
          * @constant {number} egret.Tween.LOOP
+         * @private
          */
-        static LOOP: number;
+        private static LOOP;
         /**
          * 倒序
          * @constant {number} egret.Tween.REVERSE
+         * @private
          */
-        static REVERSE: number;
+        private static REVERSE;
         private static _tweens;
         private static IGNORE;
         private static _plugins;
@@ -6153,42 +6391,49 @@ declare module egret {
         private _stepPosition;
         private passive;
         /**
-         * 激活一个显示对象，对其添加 Tween 动画
-         * @method egret.Tween.get
-         * @param target {egret.DisplayObject} 要激活的显示对象
+         * 激活一个对象，对其添加 Tween 动画
+         * @param target {any} 要激活 Tween 的对象
+         * @param props {any} 参数，支持loop(循环播放) onChange(变化函数) onChangeObj(变化函数作用域)
+         * @param pluginData {any} 暂未实现
+         * @param override {boolean} 是否移除对象之前添加的tween，默认值false
          */
         static get(target: any, props?: any, pluginData?: any, override?: boolean): Tween;
         /**
-         * 删除一个显示对象上的全部 Tween 动画
+         * 删除一个对象上的全部 Tween 动画
          * @method egret.Tween.removeTweens
-         * @param target {egret.DisplayObject}
+         * @param target  需要移除 Tween 的对象
          */
         static removeTweens(target: any): void;
         /**
-         * 暂停某个元件的所有缓动
-         * @param target
+         * 暂停某个对象的所有 Tween
+         * @param target 要暂停 Tween 的对象
          */
         static pauseTweens(target: any): void;
         /**
-         * 继续播放某个元件的所有缓动
-         * @param target
+         * 继续播放某个对象的所有缓动
+         * @param target 要继续播放 Tween 的对象
          */
         static resumeTweens(target: any): void;
         private static tick(delta, paused?);
         private static _register(tween, value);
         /**
-         * @method egret.Tween.removeAllTweens
+         * 删除所有 Tween
          */
         static removeAllTweens(): void;
+        /**
+         * 创建一个 egret.Tween 对象
+         * @private
+         */
         constructor(target: any, props: any, pluginData: any);
         private initialize(target, props, pluginData);
         private setPosition(value, actionsMode?);
         private _runActions(startPos, endPos, includeStart?);
         private _updateTargetProps(step, ratio);
         /**
+         * 设置是否暂停
          * @method egret.Tween#setPaused
-         * @param value {boolean}
-         * @returns {egret.Tween}
+         * @param value {boolean} 是否暂停
+         * @returns Tween对象本身
          */
         setPaused(value: boolean): Tween;
         private _cloneProps(props);
@@ -6200,8 +6445,8 @@ declare module egret {
          * 等待指定毫秒后执行下一个动画
          * @method egret.Tween#wait
          * @param duration {number} 要等待的时间，以毫秒为单位
-         * @param passive {boolean}
-         * @returns {egret.Tween}
+         * @param passive {boolean} 等待期间属性是否会更新
+         * @returns Tween对象本身
          */
         wait(duration: number, passive?: boolean): Tween;
         /**
@@ -6210,65 +6455,53 @@ declare module egret {
          * @param props {Object} 对象的属性集合
          * @param duration {number} 持续时间
          * @param ease {egret.Ease} 缓动算法
-         * @returns {egret.Tween}
+         * @returns {egret.Tween} Tween对象本身
          */
-        to(props: any, duration: number, ease?: any): Tween;
+        to(props: any, duration?: number, ease?: Function): Tween;
         /**
          * 执行回调函数
          * @method egret.Tween#call
-         * @param callback {Function}
-         * @param thisObj {Object}
-         * @param params {Object}
-         * @returns {egret.Tween}
+         * @param callback {Function} 回调方法
+         * @param thisObj {any} 回调方法this作用域
+         * @param params {Array<any>} 回调方法参数
+         * @returns {egret.Tween} Tween对象本身
          */
-        call(callback: Function, thisObj?: any, params?: any): Tween;
+        call(callback: Function, thisObj?: any, params?: Array<any>): Tween;
+        /**
+         * 设置当前target的属性，并返回当前tween对象
+         * @param props {any} 参数
+         * @param target {any} 要激活 Tween 的对象
+         * @returns {Tween} 当前tween对象
+         */
         set(props: any, target?: any): Tween;
         /**
+         * 执行
          * @method egret.Tween#play
-         * @param tween {egret.Tween}
-         * @returns {egret.Tween}
+         * @param tween {egret.Tween} 需要操作的 Tween 对象，默认this
+         * @returns {egret.Tween} Tween对象本身
          */
         play(tween?: Tween): Tween;
         /**
+         * 暂停
          * @method egret.Tween#pause
-         * @param tween {egret.Tween}
-         * @returns {egret.Tween}
+         * @param tween {egret.Tween} 需要操作的 Tween 对象，默认this
+         * @returns {egret.Tween} Tween对象本身
          */
         pause(tween?: Tween): Tween;
         /**
          * @method egret.Tween#tick
          * @param delta {number}
+         * @private
          */
         tick(delta: number): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
+    /**
+     * 缓动函数集合，使用不同的缓动函数使得动画按照对应的方程进行
+     * @see http://bbs.egret-labs.org/thread-392-1-1.html Tween和Ease
+     */
     class Ease {
         constructor();
         static get(amount: any): Function;
@@ -6310,986 +6543,222 @@ declare module egret {
         static elasticInOut: Function;
     }
 }
+
 /**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * Created by yjtx on 15-5-18.
  */
+declare module egret {
+    /**
+     * @private
+     */
+    interface IAudio {
+        _setCurrentTime(value: number): void;
+        _getCurrentTime(): number;
+        _setVolume(value: number): void;
+        _getVolume(): number;
+        _setLoop(value: boolean): void;
+        _play(type?: string): void;
+        _pause(): void;
+        _load(): void;
+        _preload(type: string, callback?: Function, thisObj?: any): void;
+        _addEventListener(type: string, listener: Function, useCapture?: boolean): void;
+        _removeEventListener(type: string, listener: Function, useCapture?: boolean): void;
+        _destroy(): void;
+    }
+}
+
 declare module egret {
     /**
      * @class egret.Sound
      * @classdesc Sound 类允许您在应用程序中使用声音。
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=157&terms1_id=25&terms2_id=36 播放音频
+     * @event egret.SoundEvent.SOUND_COMPLETE 在声音完成播放后调度。
+     * @includeExample egret/media/Sound.ts
      */
-    class Sound {
+    class Sound extends egret.EventDispatcher {
+        /**
+         * 背景音乐
+         * @constant egret.Sound.MUSIC
+         */
         static MUSIC: string;
+        /**
+         * 音效
+         * @constant egret.Sound.EFFECT
+         */
         static EFFECT: string;
+        /**
+         * @private
+         * @deprecated
+         * @type {string}
+         */
         path: string;
+        /**
+         * 创建一个 egret.Sound 对象
+         */
         constructor();
         /**
          * audio音频对象
          * @member {any} egret.Sound#audio
          */
         private audio;
+        /**
+         * 类型，默认为 egret.Sound.EFFECT。
+         * 在 native 和 runtime 环境下，背景音乐同时只能播放一个，音效长度尽量不要太长。
+         * @member {any} egret.Sound#audio
+         */
         type: string;
         /**
-         * 播放声音
-         * @method egret.Sound#play
-         * @param loop {boolean} 是否循环播放，默认为false
+         * 当播放声音时，position 属性表示声音文件中当前播放的位置（以毫秒为单位）。
+         * h5支持，native不支持
+         * @returns {number}
+         * @platform Web
          */
-        play(loop?: boolean): void;
+        position: number;
+        /**
+         * 播放声音
+         * @param loop  是否循环播放，默认为false
+         * @param position  是否从刚开始播放 h5支持，native不支持
+         */
+        play(loop?: boolean, position?: number): void;
+        private _pauseTime;
+        /**
+         * 声音停止播放
+         */
+        stop(): void;
         /**
          * 暂停声音
-         * @method egret.Sound#pause
          */
         pause(): void;
         /**
+         * 继续从上次暂停的位置播放
+         * h5支持，native不支持
+         * @platform Web
+         */
+        resume(): void;
+        /**
+         * @private
          * 重新加载声音
-         * @method egret.Sound#load
+         * @deprecated
          */
         load(): void;
+        private _listeners;
         /**
          * 添加事件监听
+         * h5支持，native不支持
          * @param type 事件类型
          * @param listener 监听函数
+         * @param thisObj 侦听函数绑定的this对象
+         * @platform Web,Native
          */
-        addEventListener(type: string, listener: Function): void;
+        addEventListener(type: string, listener: Function, thisObject: any): void;
         /**
          * 移除事件监听
+         * h5支持，native不支持
          * @param type 事件类型
          * @param listener 监听函数
+         * @param thisObj 侦听函数绑定的this对象
+         * @platform Web,Native
          */
-        removeEventListener(type: string, listener: Function): void;
+        removeEventListener(type: string, listener: Function, thisObject: any): void;
+        private getVirtualType(type);
         /**
+         * 音量范围从 0（静音）至 1（最大音量）。
+         * h5支持，native不支持
+         * @returns number
+         * @platform Web
+         */
+        volume: number;
+        /**
+         * @private
+         * @deprecated
          * 设置音量
          * @param value 值需大于0 小于等于 1
          */
         setVolume(value: number): void;
         /**
+         * @private
+         * @deprecated
          * 获取当前音量值
          * @returns number
          */
         getVolume(): number;
-        preload(type: string): void;
-        _setAudio(value: any): void;
+        /**
+         * 将声音文件加载到内存，
+         * native中使用，html5里为空实现
+         * @param type 声音类型
+         * @param callback 回调函数
+         * @param thisObj 侦听函数绑定的this对象
+         */
+        preload(type: string, callback?: Function, thisObj?: any): void;
+        _setAudio(value: IAudio): void;
+        /**
+         * 释放当前音频
+         * native中使用，html5里为空实现
+         */
+        destroy(): void;
     }
 }
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+
 declare module egret {
     class NumberUtils {
-        static isNumber(value: any): Boolean;
+        /**
+         * @private
+         */
+        static isNumber(value: any): boolean;
+        /**
+         * 得到对应角度值的sin近似值
+         * @param value {number} 角度值
+         * @returns {number} sin值
+         */
+        static sin(value: number): number;
+        private static sinInt(value);
+        /**
+         * 得到对应角度值的cos近似值
+         * @param value {number} 角度值
+         * @returns {number} cos值
+         */
+        static cos(value: number): number;
+        private static cosInt(value);
     }
 }
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-declare module RES {
+declare var egret_sin_map: {};
+declare var egret_cos_map: {};
+
+declare module egret {
     /**
-     * @class RES.ResourceEvent
-     * @classdesc
-     * @extends egret.Event
+     * @private
      */
-    class ResourceEvent extends egret.Event {
-        /**
-         * 一个加载项加载失败事件。
-         * @constant {string} RES.ResourceEvent.ITEM_LOAD_ERROR
-         */
-        static ITEM_LOAD_ERROR: string;
-        /**
-         * 配置文件加载并解析完成事件
-         * @constant {string} RES.ResourceEvent.CONFIG_COMPLETE
-         */
-        static CONFIG_COMPLETE: string;
-        /**
-         * 延迟加载组资源加载进度事件
-         * @constant {string} RES.ResourceEvent.GROUP_PROGRESS
-         */
-        static GROUP_PROGRESS: string;
-        /**
-         * 延迟加载组资源加载完成事件
-         * @constant {string} RES.ResourceEvent.GROUP_COMPLETE
-         */
-        static GROUP_COMPLETE: string;
-        /**
-         * 构造函数
-         * @method RES.ResourceEvent#constructor
-         * @param type {string}
-         * @param bubbles {boolean}
-         * @param cancelable {boolean}
-         */
-        constructor(type: string, bubbles?: boolean, cancelable?: boolean);
-        /**
-         * 已经加载的文件数
-         * @member {number} RES.ResourceEvent#itemsLoaded
-         */
-        itemsLoaded: number;
-        /**
-         * 要加载的总文件数
-         * @member {number} RES.ResourceEvent#itemsTotal
-         */
-        itemsTotal: number;
-        /**
-         * 资源组名
-         * @member {string} RES.ResourceEvent#groupName
-         */
-        groupName: string;
-        /**
-         * 一次加载项加载结束的项信息对象
-         * @member {egret.ResourceItem} RES.ResourceEvent#resItem
-         */
-        resItem: ResourceItem;
-        /**
-         * 使用指定的EventDispatcher对象来抛出事件对象。抛出的对象将会缓存在对象池上，供下次循环复用。
-         * @method RES.ResourceEvent.dispatchResourceEvent
-         * @param target {egret.IEventDispatcher}
-         * @param type {string}
-         * @param groupName {string}
-         * @param resItem {egret.ResourceItem}
-         * @param itemsLoaded {number}
-         * @param itemsTotal {number}
-         */
-        static dispatchResourceEvent(target: egret.IEventDispatcher, type: string, groupName?: string, resItem?: ResourceItem, itemsLoaded?: number, itemsTotal?: number): void;
-    }
-}
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-declare module RES {
-    /**
-     * @class RES.ResourceItem
-     * @classdesc
-     */
-    class ResourceItem {
-        /**
-         * XML文件
-         * @constant {string} RES.ResourceItem.TYPE_XML
-         */
-        static TYPE_XML: string;
-        /**
-         * 图片文件
-         * @constant {string} RES.ResourceItem.TYPE_IMAGE
-         */
-        static TYPE_IMAGE: string;
-        /**
-         * 二进制流文件
-         * @constant {string} RES.ResourceItem.TYPE_BIN
-         */
-        static TYPE_BIN: string;
-        /**
-         * 文本文件(解析为字符串)
-         * @constant {string} RES.ResourceItem.TYPE_TEXT
-         */
-        static TYPE_TEXT: string;
-        /**
-         * JSON文件
-         * @constant {string} RES.ResourceItem.TYPE_JSON
-         */
-        static TYPE_JSON: string;
-        /**
-         * SpriteSheet文件
-         * @constant {string} RES.ResourceItem.TYPE_SHEET
-         */
-        static TYPE_SHEET: string;
-        /**
-         * BitmapTextSpriteSheet文件
-         * @constant {string} RES.ResourceItem.TYPE_FONT
-         */
-        static TYPE_FONT: string;
-        /**
-         * 声音文件
-         * @constant {string} RES.ResourceItem.TYPE_SOUND
-         */
-        static TYPE_SOUND: string;
-        /**
-         * 构造函数
-         * @method RES.ResourceItem#constructor
-         * @param name {string} 加载项名称
-         * @param url {string} 要加载的文件地址
-         * @param type {string} 加载项文件类型
-         */
-        constructor(name: string, url: string, type: string);
-        /**
-         * 加载项名称
-         * @member {string} RES.ResourceItem#name
-         */
-        name: string;
-        /**
-         * 要加载的文件地址
-         * @member {string} RES.ResourceItem#url
-         */
-        url: string;
-        /**
-         * 加载项文件类型
-         * @member {string} RES.ResourceItem#type
-         */
-        type: string;
-        /**
-         * 所属组名
-         * @member {string} RES.ResourceItem#groupName
-         */
-        groupName: string;
-        /**
-         * 被引用的原始数据对象
-         * @member {any} RES.ResourceItem#data
-         */
-        data: any;
-        private _loaded;
-        /**
-         * 加载完成的标志
-         * @member {boolean} RES.ResourceItem#loaded
-         */
-        loaded: boolean;
-        /**
-         * @method RES.ResourceItem#toString
-         * @returns {string}
-         */
-        toString(): string;
-    }
-}
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-declare module RES {
-    /**
-     * @class RES.ResourceConfig
-     * @classdesc
-     */
-    class ResourceConfig {
+    class PromiseObject {
+        private static promiseObjectList;
+        onSuccessFunc: Function;
+        onSuccessThisObject: any;
+        onErrorFunc: Function;
+        onErrorThisObject: any;
+        downloadingSizeFunc: Function;
+        downloadingSizeThisObject: any;
         constructor();
-        /**
-         * 根据组名获取组加载项列表
-         * @method RES.ResourceConfig#getGroupByName
-         * @param name {string} 组名
-         * @returns {Array<egret.ResourceItem>}
-         */
-        getGroupByName(name: string): ResourceItem[];
-        /**
-         * 根据组名获取原始的组加载项列表
-         * @method RES.ResourceConfig#getRawGroupByName
-         * @param name {string} 组名
-         * @returns {Array<any>}
-         */
-        getRawGroupByName(name: string): any[];
-        /**
-         * 创建自定义的加载资源组,注意：此方法仅在资源配置文件加载完成后执行才有效。
-         * 可以监听ResourceEvent.CONFIG_COMPLETE事件来确认配置加载完成。
-         * @method RES.ResourceConfig#createGroup
-         * @param name {string} 要创建的加载资源组的组名
-         * @param keys {egret.Array<string>} 要包含的键名列表，key对应配置文件里的name属性或sbuKeys属性的一项或一个资源组名。
-         * @param override {boolean} 是否覆盖已经存在的同名资源组,默认false。
-         * @returns {boolean}
-         */
-        createGroup(name: string, keys: string[], override?: boolean): boolean;
-        /**
-         * 一级键名字典
-         */
-        private keyMap;
-        /**
-         * 加载组字典
-         */
-        private groupDic;
-        /**
-         * 解析一个配置文件
-         * @method RES.ResourceConfig#parseConfig
-         * @param data {any} 配置文件数据
-         * @param folder {string} 加载项的路径前缀。
-         */
-        parseConfig(data: any, folder: string): void;
-        /**
-         * 添加一个二级键名到配置列表。
-         * @method RES.ResourceConfig#addSubkey
-         * @param subkey {string} 要添加的二级键名
-         * @param name {string} 二级键名所属的资源name属性
-         */
-        addSubkey(subkey: string, name: string): void;
-        /**
-         * 添加一个加载项数据到列表
-         */
-        private addItemToKeyMap(item);
-        /**
-         * 获取加载项的name属性
-         * @method RES.ResourceConfig#getType
-         * @param key {string} 对应配置文件里的name属性或sbuKeys属性的一项。
-         * @returns {string}
-         */
-        getName(key: string): string;
-        /**
-         * 获取加载项类型。
-         * @method RES.ResourceConfig#getType
-         * @param key {string} 对应配置文件里的name属性或sbuKeys属性的一项。
-         * @returns {string}
-         */
-        getType(key: string): string;
-        getRawResourceItem(key: string): any;
-        /**
-         * 获取加载项信息对象
-         * @method RES.ResourceConfig#getResourceItem
-         * @param key {string} 对应配置文件里的key属性或sbuKeys属性的一项。
-         * @returns {egret.ResourceItem}
-         */
-        getResourceItem(key: string): ResourceItem;
-        /**
-         * 转换Object数据为ResourceItem对象
-         */
-        private parseResourceItem(data);
+        static create(): any;
+        private onSuccess(...args);
+        private onError(...args);
+        private downloadingSize(...args);
+        private destroy();
     }
 }
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-declare module RES {
+
+declare module egret {
     /**
-     * @class RES.ResourceLoader
-     * @classdesc
-     * @extends egret.EventDispatcher
+     * @private
      */
-    class ResourceLoader extends egret.EventDispatcher {
+    interface IVersionController {
+        fetchVersion(): void;
+        checkIsNewVersion(url: string): boolean;
+        saveVersion(url: string): void;
         /**
-         * 构造函数
-         * @method RES.ResourceLoader#constructor
+         * 获取所有有变化的文件
+         * @returns {Array<string>}
          */
-        constructor();
-        /**
-         * 最大并发加载数
-         */
-        thread: number;
-        /**
-         * 正在加载的线程计数
-         */
-        private loadingCount;
-        /**
-         * 一项加载结束回调函数。无论加载成功或者出错都将执行回调函数。示例：callBack(resItem:ResourceItem):void;
-         * @member {Function} RES.ResourceLoader#callBack
-         */
-        callBack: Function;
-        /**
-         * RES单例的引用
-         * @member {any} RES.ResourceLoader#resInstance
-         */
-        resInstance: any;
-        /**
-         * 当前组加载的项总个数,key为groupName
-         */
-        private groupTotalDic;
-        /**
-         * 已经加载的项个数,key为groupName
-         */
-        private numLoadedDic;
-        /**
-         * 正在加载的组列表,key为groupName
-         */
-        private itemListDic;
-        /**
-         * 优先级队列,key为priority，value为groupName列表
-         */
-        private priorityQueue;
-        /**
-         * 检查指定的组是否正在加载中
-         * @method RES.ResourceLoader#isGroupInLoading
-         * @param groupName {string}
-         * @returns {boolean}
-         */
-        isGroupInLoading(groupName: string): boolean;
-        /**
-         * 开始加载一组文件
-         * @method RES.ResourceLoader#loadGroup
-         * @param list {egret.Array<ResourceItem>} 加载项列表
-         * @param groupName {string} 组名
-         * @param priority {number} 加载优先级
-         */
-        loadGroup(list: ResourceItem[], groupName: string, priority?: number): void;
-        /**
-         * 延迟加载队列
-         */
-        private lazyLoadList;
-        /**
-         * 加载一个文件
-         * @method RES.ResourceLoader#loadItem
-         * @param resItem {egret.ResourceItem} 要加载的项
-         */
-        loadItem(resItem: ResourceItem): void;
-        /**
-         * 资源解析库字典类
-         */
-        private analyzerDic;
-        /**
-         * 加载下一项
-         */
-        private next();
-        /**
-         * 当前应该加载同优先级队列的第几列
-         */
-        private queueIndex;
-        /**
-         * 获取下一个待加载项
-         */
-        private getOneResourceItem();
-        /**
-         * 加载结束
-         */
-        private onItemComplete(resItem);
-        /**
-         * 从优先级队列中移除指定的组名
-         */
-        private removeGroupName(groupName);
+        getChangeList(): Array<string>;
+        getVirtualUrl(url: string): string;
     }
 }
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-declare module RES {
-    class AnalyzerBase extends egret.HashObject {
-        constructor();
-        private resourceConfig;
-        /**
-         * 添加一个二级键名到配置列表。
-         * @method RES.ResourceConfig#addSubkey
-         * @param subkey {string} 要添加的二级键名
-         * @param name {string} 二级键名所属的资源name属性
-         */
-        addSubkey(subkey: string, name: string): void;
-        /**
-         * 加载一个资源文件
-         * @param resItem 加载项信息
-         * @param compFunc 加载完成回调函数,示例:compFunc(resItem:ResourceItem):void;
-         * @param thisObject 加载完成回调函数的this引用
-         */
-        loadFile(resItem: ResourceItem, compFunc: Function, thisObject: any): void;
-        /**
-         * 同步方式获取解析完成的数据
-         * @param name 对应配置文件里的name属性。
-         */
-        getRes(name: string): any;
-        /**
-         * 销毁某个资源文件的二进制数据,返回是否删除成功。
-         * @param name 配置文件中加载项的name属性
-         */
-        destroyRes(name: string): boolean;
-        /**
-         * 读取一个字符串里第一个点之前的内容。
-         * @param name {string} 要读取的字符串
-         */
-        static getStringPrefix(name: string): string;
-        /**
-         * 读取一个字符串里第一个点之后的内容。
-         * @param name {string} 要读取的字符串
-         */
-        static getStringTail(name: string): string;
-    }
-}
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-declare module RES {
-    class BinAnalyzer extends AnalyzerBase {
-        /**
-         * 构造函数
-         */
-        constructor();
-        /**
-         * 字节流数据缓存字典
-         */
-        fileDic: any;
-        /**
-         * 加载项字典
-         */
-        resItemDic: any[];
-        /**
-         * @inheritDoc
-         */
-        loadFile(resItem: ResourceItem, compFunc: Function, thisObject: any): void;
-        _dataFormat: string;
-        /**
-         * URLLoader对象池
-         */
-        recycler: egret.Recycler;
-        /**
-         * 获取一个URLLoader对象
-         */
-        private getLoader();
-        /**
-         * 一项加载结束
-         */
-        onLoadFinish(event: egret.Event): void;
-        /**
-         * 解析并缓存加载成功的数据
-         */
-        analyzeData(resItem: ResourceItem, data: any): void;
-        /**
-         * @inheritDoc
-         */
-        getRes(name: string): any;
-        /**
-         * @inheritDoc
-         */
-        hasRes(name: string): boolean;
-        /**
-         * @inheritDoc
-         */
-        destroyRes(name: string): boolean;
-    }
-}
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-declare module RES {
-    class ImageAnalyzer extends BinAnalyzer {
-        constructor();
-        /**
-         * 解析并缓存加载成功的数据
-         */
-        analyzeData(resItem: ResourceItem, data: any): void;
-    }
-}
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-declare module RES {
-    class JsonAnalyzer extends BinAnalyzer {
-        constructor();
-        /**
-         * 解析并缓存加载成功的数据
-         */
-        analyzeData(resItem: ResourceItem, data: any): void;
-    }
-}
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-declare module RES {
-    class TextAnalyzer extends BinAnalyzer {
-        constructor();
-    }
-}
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-declare module RES {
-    /**
-     * SpriteSheet解析器
-     */
-    class SheetAnalyzer extends BinAnalyzer {
-        constructor();
-        /**
-         * @inheritDoc
-         */
-        getRes(name: string): any;
-        /**
-         * 一项加载结束
-         */
-        onLoadFinish(event: egret.Event): void;
-        sheetMap: any;
-        private textureMap;
-        /**
-         * 解析并缓存加载成功的数据
-         */
-        analyzeData(resItem: ResourceItem, data: any): void;
-        private getRelativePath(url, file);
-        parseSpriteSheet(texture: egret.Texture, data: any, name: string): egret.SpriteSheet;
-    }
-}
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-declare module RES {
-    class FontAnalyzer extends SheetAnalyzer {
-        constructor();
-        /**
-         * 解析并缓存加载成功的数据
-         */
-        analyzeData(resItem: ResourceItem, data: any): void;
-        private getTexturePath(url, fntText);
-    }
-}
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-declare module RES {
-    class SoundAnalyzer extends BinAnalyzer {
-        constructor();
-        analyzeData(resItem: ResourceItem, data: any): void;
-    }
-}
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-declare module RES {
-    class XMLAnalyzer extends BinAnalyzer {
-        constructor();
-        /**
-         * 解析并缓存加载成功的数据
-         */
-        analyzeData(resItem: ResourceItem, data: any): void;
-    }
-}
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-declare module RES {
-    /**
-     * 加载配置文件并解析
-     * @method RES.loadConfig
-     * @param url {string} 配置文件路径(resource.json的路径)
-     * @param resourceRoot {string} 资源根路径。配置中的所有url都是这个路径的相对值。最终url是这个字符串与配置里资源项的url相加的值。
-     * @param type {string} 配置文件的格式。确定要用什么解析器来解析配置文件。默认"json"
-     */
-    function loadConfig(url: string, resourceRoot?: string, type?: string): void;
-    /**
-     * 根据组名加载一组资源
-     * @method RES.loadGroup
-     * @param name {string} 要加载资源组的组名
-     * @param priority {number} 加载优先级,可以为负数,默认值为0。
-     * 低优先级的组必须等待高优先级组完全加载结束才能开始，同一优先级的组会同时加载。
-     */
-    function loadGroup(name: string, priority?: number): void;
-    /**
-     * 检查某个资源组是否已经加载完成
-     * @method RES.isGroupLoaded
-     * @param name {string} 组名
-     * @returns {boolean}
-     */
-    function isGroupLoaded(name: string): boolean;
-    /**
-     * 根据组名获取组加载项列表
-     * @method RES.getGroupByName
-     * @param name {string} 组名
-     * @returns {egret.ResourceItem}
-     */
-    function getGroupByName(name: string): ResourceItem[];
-    /**
-     * 创建自定义的加载资源组,注意：此方法仅在资源配置文件加载完成后执行才有效。
-     * 可以监听ResourceEvent.CONFIG_COMPLETE事件来确认配置加载完成。
-     * @method RES.createGroup
-     * @param name {string} 要创建的加载资源组的组名
-     * @param keys {egret.Array<string>} 要包含的键名列表，key对应配置文件里的name属性或sbuKeys属性的一项或一个资源组名。
-     * @param override {boolean} 是否覆盖已经存在的同名资源组,默认false。
-     * @returns {boolean}
-     */
-    function createGroup(name: string, keys: string[], override?: boolean): boolean;
-    /**
-     * 检查配置文件里是否含有指定的资源
-     * @method RES.hasRes
-     * @param key {string} 对应配置文件里的name属性或sbuKeys属性的一项。
-     * @returns {boolean}
-     */
-    function hasRes(key: string): boolean;
-    /**
-     * 同步方式获取缓存的已经加载成功的资源。<br/>
-     * @method RES.getRes
-     * @param key {string} 对应配置文件里的name属性或sbuKeys属性的一项。
-     * @returns {any}
-     */
-    function getRes(key: string): any;
-    /**
-     * 异步方式获取配置里的资源。只要是配置文件里存在的资源，都可以通过异步方式获取。
-     * @method RES.getResAsync
-     * @param key {string} 对应配置文件里的name属性或sbuKeys属性的一项。
-     * @param compFunc {Function} 回调函数。示例：compFunc(data,key):void。
-     * @param thisObject {any} 回调函数的this引用
-     */
-    function getResAsync(key: string, compFunc: Function, thisObject: any): void;
-    /**
-     * 通过完整URL方式获取外部资源。
-     * @method RES.getResByUrl
-     * @param url {string} 要加载文件的外部路径。
-     * @param compFunc {Function} 回调函数。示例：compFunc(data,url):void。
-     * @param thisObject {any} 回调函数的this引用
-     * @param type {string} 文件类型(可选)。请使用ResourceItem类中定义的静态常量。若不设置将根据文件扩展名生成。
-     */
-    function getResByUrl(url: string, compFunc: Function, thisObject: any, type?: string): void;
-    /**
-     * 销毁单个资源文件或一组资源的缓存数据,返回是否删除成功。
-     * @method RES.destroyRes
-     * @param name {string} 配置文件中加载项的name属性或资源组名
-     * @returns {boolean}
-     */
-    function destroyRes(name: string): boolean;
-    /**
-     * 设置最大并发加载线程数量，默认值是2.
-     * @method RES.setMaxLoadingThread
-     * @param thread {number} 要设置的并发加载数。
-     */
-    function setMaxLoadingThread(thread: number): void;
-    /**
-     * 添加事件侦听器,参考ResourceEvent定义的常量。
-     * @method RES.addEventListener
-     * @param type {string} 事件的类型。
-     * @param listener {Function} 处理事件的侦听器函数。此函数必须接受 Event 对象作为其唯一的参数，并且不能返回任何结果，
-     * 如下面的示例所示： function(evt:Event):void 函数可以有任何名称。
-     * @param thisObject {any} 侦听函数绑定的this对象
-     * @param useCapture {boolean} 确定侦听器是运行于捕获阶段还是运行于目标和冒泡阶段。如果将 useCapture 设置为 true，
-     * 则侦听器只在捕获阶段处理事件，而不在目标或冒泡阶段处理事件。如果 useCapture 为 false，则侦听器只在目标或冒泡阶段处理事件。
-     * 要在所有三个阶段都侦听事件，请调用 addEventListener 两次：一次将 useCapture 设置为 true，一次将 useCapture 设置为 false。
-     * @param priority {number} 事件侦听器的优先级。优先级由一个带符号的 32 位整数指定。数字越大，优先级越高。优先级为 n 的所有侦听器会在
-     * 优先级为 n -1 的侦听器之前得到处理。如果两个或更多个侦听器共享相同的优先级，则按照它们的添加顺序进行处理。默认优先级为 0。
-     */
-    function addEventListener(type: string, listener: Function, thisObject: any, useCapture?: boolean, priority?: number): void;
-    /**
-     * 移除事件侦听器,参考ResourceEvent定义的常量。
-     * @method RES.removeEventListener
-     * @param type {string} 事件名
-     * @param listener {Function} 侦听函数
-     * @param thisObject {any} 侦听函数绑定的this对象
-     * @param useCapture {boolean} 是否使用捕获，这个属性只在显示列表中生效。
-     */
-    function removeEventListener(type: string, listener: Function, thisObject: any, useCapture?: boolean): void;
-}
+

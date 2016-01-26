@@ -1,26 +1,31 @@
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-2015, Egret Technology Inc.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 var particle;
 (function (_particle) {
     var ParticleSystem = (function (_super) {
@@ -64,12 +69,13 @@ var particle;
              * @member {number} particle.ParticleSystem#particleClass
              */
             this.particleClass = null;
-            this.transform = new egret.Matrix();
+            this.transformForRender = new egret.Matrix();
             this._texture_to_render = texture;
             this.emissionRate = emissionRate;
             this.texture = texture;
         }
-        ParticleSystem.prototype.getParticle = function () {
+        var __egretProto__ = ParticleSystem.prototype;
+        __egretProto__.getParticle = function () {
             var result;
             if (this._pool.length) {
                 result = this._pool.pop();
@@ -82,7 +88,7 @@ var particle;
             }
             return result;
         };
-        ParticleSystem.prototype.removeParticle = function (particle) {
+        __egretProto__.removeParticle = function (particle) {
             var index = this.particles.indexOf(particle);
             if (index != -1) {
                 particle.reset();
@@ -95,7 +101,7 @@ var particle;
                 return false;
             }
         };
-        ParticleSystem.prototype.initParticle = function (particle) {
+        __egretProto__.initParticle = function (particle) {
             particle.x = this.emitterX;
             particle.y = this.emitterY;
             particle.currentTime = 0;
@@ -105,7 +111,7 @@ var particle;
          * 开始创建粒子
          * @param duration {number} 粒子出现总时间
          */
-        ParticleSystem.prototype.start = function (duration) {
+        __egretProto__.start = function (duration) {
             if (duration === void 0) { duration = -1; }
             if (this.emissionRate != 0) {
                 this.emissionTime = duration;
@@ -116,7 +122,7 @@ var particle;
          * 停止创建粒子
          * @param clear {boolean} 是否清除掉现有粒子
          */
-        ParticleSystem.prototype.stop = function (clear) {
+        __egretProto__.stop = function (clear) {
             if (clear === void 0) { clear = false; }
             this.emissionTime = 0;
             egret.Ticker.getInstance().unregister(this.update, this);
@@ -124,7 +130,7 @@ var particle;
                 this.clear();
             }
         };
-        ParticleSystem.prototype.update = function (dt) {
+        __egretProto__.update = function (dt) {
             //粒子数很少的时候可能会错过添加粒子的时机
             if (this.emissionTime == -1 || this.emissionTime > 0) {
                 this.frameTime += dt;
@@ -152,13 +158,14 @@ var particle;
                 }
                 else {
                     this.removeParticle(particle);
-                    if (this.numParticles == 0 && this.emissionTime == 0) {
-                        this.dispatchEventWith(egret.Event.COMPLETE);
-                    }
                 }
             }
+            if (this.numParticles == 0 && this.emissionTime == 0) {
+                this.stop();
+                this.dispatchEventWith(egret.Event.COMPLETE);
+            }
         };
-        ParticleSystem.prototype.setCurrentParticles = function (num) {
+        __egretProto__.setCurrentParticles = function (num) {
             for (var i = this.numParticles; i < num && this.numParticles < this.maxParticles; i++) {
                 this.addOneParticle();
             }
@@ -167,19 +174,19 @@ var particle;
          * 更换粒子纹理
          * @param texture {egret.Texture} 新的纹理
          */
-        ParticleSystem.prototype.changeTexture = function (texture) {
+        __egretProto__.changeTexture = function (texture) {
             if (this.texture != texture) {
                 this.texture = texture;
                 this._texture_to_render = texture;
             }
         };
-        ParticleSystem.prototype.clear = function () {
+        __egretProto__.clear = function () {
             while (this.particles.length) {
                 this.removeParticle(this.particles[0]);
             }
             this.numParticles = 0;
         };
-        ParticleSystem.prototype.addOneParticle = function () {
+        __egretProto__.addOneParticle = function () {
             //todo 这里可能需要返回成功与否
             var particle = this.getParticle();
             this.initParticle(particle);
@@ -188,10 +195,10 @@ var particle;
                 this.numParticles++;
             }
         };
-        ParticleSystem.prototype.advanceParticle = function (particle, dt) {
+        __egretProto__.advanceParticle = function (particle, dt) {
             particle.y -= dt / 6;
         };
-        ParticleSystem.prototype._render = function (renderContext) {
+        __egretProto__._render = function (renderContext) {
             if (this.numParticles > 0) {
                 var renderFilter = egret.RenderFilter.getInstance();
                 //todo 考虑不同粒子使用不同的texture，或者使用egret.SpriteSheet
@@ -207,9 +214,10 @@ var particle;
                 var particle;
                 for (var i = 0; i < this.numParticles; i++) {
                     particle = this.particles[i];
-                    this.transform.identityMatrix(this._worldTransform);
-                    this.transform.appendTransform(particle.x, particle.y, particle.scale, particle.scale, particle.rotation, 0, 0, 0, 0);
-                    renderContext.setTransform(this.transform);
+                    this.transformForRender.identityMatrix(this._worldTransform);
+                    this.transformForRender.appendTransform(particle.x, particle.y, particle.scale, particle.scale, particle.rotation, 0, 0, textureW / 2, textureH / 2);
+                    renderContext.setTransform(this.transformForRender);
+                    renderContext.setAlpha(particle.alpha, egret.BlendMode.NORMAL);
                     renderFilter.drawImage(renderContext, this, bitmapX, bitmapY, bitmapWidth, bitmapHeight, offsetX, offsetY, textureW, textureH);
                 }
             }

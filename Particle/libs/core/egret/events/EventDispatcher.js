@@ -1,62 +1,71 @@
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-2015, Egret Technology Inc.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 var egret;
 (function (egret) {
     /**
      *
      * @class egret.EventDispatcher
      * @classdesc
-     * EventDispatcher是egret的事件派发器类，负责进行事件的发送和侦听。
+     * EventDispatcher 是 Egret 的事件派发器类，负责进行事件的发送和侦听。
      *
      * 事件目标是事件如何通过显示列表层次结构这一问题的焦点。当发生鼠标单击、触摸或按键等事件时，
      * 引擎会将事件对象调度到从显示列表根开始的事件流中。然后该事件对象在显示列表中前进，直到到达事件目标，
      * 然后从这一点开始其在显示列表中的回程。在概念上，到事件目标的此往返行程被划分为三个阶段：
      * 捕获阶段包括从根到事件目标节点之前的最后一个节点的行程，目标阶段仅包括事件目标节点，冒泡阶段包括回程上遇到的任何后续节点到显示列表的根。
-     *
-     * @extends egret.HashObject
-     * @implements egret.IEventDispatcher
-     *
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=115&terms1_id=25&terms2_id=29 事件侦听器
+     * @includeExample egret/events/EventDispatcher.ts
      */
     var EventDispatcher = (function (_super) {
         __extends(EventDispatcher, _super);
         /**
-         * EventDispatcher 类是可调度事件的所有类的基类。EventDispatcher 类实现 IEventDispatcher 接口
-         * ，并且是 DisplayObject 类的基类。EventDispatcher 类允许显示列表上的任何对象都是一个事件目标，
-         * 同样允许使用 IEventDispatcher 接口的方法。
+         * 创建一个 egret.EventDispatcher 对象
+         * EventDispatcher 类是可调度事件的所有类的基类。
+         * EventDispatcher 类实现 IEventDispatcher 接口 ，并且是 DisplayObject 类的基类。
+         * EventDispatcher 类允许显示列表上的任何对象都是一个事件目标，同样允许使用 IEventDispatcher 接口的方法。
          */
         function EventDispatcher(target) {
             if (target === void 0) { target = null; }
             _super.call(this);
+            /**
+             * 事件抛出对象
+             */
+            this._eventTarget = null;
+            /**
+             * 引擎内部调用
+             * @private
+             */
+            this._eventsMap = null;
+            /**
+             * 引擎内部调用
+             * @private
+             */
+            this._captureEventsMap = null;
             if (target) {
                 this._eventTarget = target;
             }
@@ -64,6 +73,7 @@ var egret;
                 this._eventTarget = this;
             }
         }
+        var __egretProto__ = EventDispatcher.prototype;
         /**
          * 添加事件侦听器
          * @method egret.EventDispatcher#addEventListener
@@ -77,7 +87,7 @@ var egret;
          * @param  priority {number} 事件侦听器的优先级。优先级由一个带符号的 32 位整数指定。数字越大，优先级越高。优先级为 n 的所有侦听器会在
          * 优先级为 n -1 的侦听器之前得到处理。如果两个或更多个侦听器共享相同的优先级，则按照它们的添加顺序进行处理。默认优先级为 0。
          */
-        EventDispatcher.prototype.addEventListener = function (type, listener, thisObject, useCapture, priority) {
+        __egretProto__.addEventListener = function (type, listener, thisObject, useCapture, priority) {
             if (useCapture === void 0) { useCapture = false; }
             if (priority === void 0) { priority = 0; }
             if (typeof useCapture === "undefined") {
@@ -87,7 +97,7 @@ var egret;
                 priority = 0;
             }
             if (!listener) {
-                egret.Logger.fatal("addEventListener侦听函数不能为空");
+                egret.$error(1010);
             }
             var eventMap;
             if (useCapture) {
@@ -109,13 +119,13 @@ var egret;
         /**
          * 在一个事件列表中按优先级插入事件对象
          */
-        EventDispatcher.prototype._insertEventBin = function (list, listener, thisObject, priority, display) {
+        __egretProto__._insertEventBin = function (list, listener, thisObject, priority, display) {
             if (display === void 0) { display = undefined; }
             var insertIndex = -1;
             var length = list.length;
             for (var i = 0; i < length; i++) {
                 var bin = list[i];
-                if (bin.listener === listener && bin.thisObject === thisObject && bin.display === display) {
+                if (bin.listener == listener && bin.thisObject == thisObject && bin.display == display) {
                     return false;
                 }
                 if (insertIndex == -1 && bin.priority < priority) {
@@ -142,7 +152,7 @@ var egret;
          * @param thisObject {any} 侦听函数绑定的this对象
          * @param useCapture {boolean} 是否使用捕获，这个属性只在显示列表中生效。
          */
-        EventDispatcher.prototype.removeEventListener = function (type, listener, thisObject, useCapture) {
+        __egretProto__.removeEventListener = function (type, listener, thisObject, useCapture) {
             if (useCapture === void 0) { useCapture = false; }
             var eventMap = useCapture ? this._captureEventsMap : this._eventsMap;
             if (!eventMap)
@@ -159,12 +169,13 @@ var egret;
         /**
          * 在一个事件列表中按优先级插入事件对象
          */
-        EventDispatcher.prototype._removeEventBin = function (list, listener, thisObject, display) {
+        __egretProto__._removeEventBin = function (list, listener, thisObject, display, fromIdx) {
             if (display === void 0) { display = undefined; }
+            if (fromIdx === void 0) { fromIdx = 0; }
             var length = list.length;
-            for (var i = 0; i < length; i++) {
+            for (var i = fromIdx; i < length; i++) {
                 var bin = list[i];
-                if (bin.listener === listener && bin.thisObject === thisObject && bin.display === display) {
+                if (bin.listener == listener && bin.thisObject == thisObject && bin.display == display) {
                     list.splice(i, 1);
                     return true;
                 }
@@ -178,8 +189,8 @@ var egret;
          * @returns {boolean}
          * @stable A
          */
-        EventDispatcher.prototype.hasEventListener = function (type) {
-            return (this._eventsMap && this._eventsMap[type] || this._captureEventsMap && this._captureEventsMap[type]);
+        __egretProto__.hasEventListener = function (type) {
+            return !!(this._eventsMap && this._eventsMap[type] || this._captureEventsMap && this._captureEventsMap[type]);
         };
         /**
          * 检查是否用此 EventDispatcher 对象或其任何始祖为指定事件类型注册了事件侦听器。将指定类型的事件调度给此
@@ -190,7 +201,7 @@ var egret;
          * @param type {string} 事件类型
          * @returns {boolean} 是否注册过监听器，如果注册过返回true，反之返回false
          */
-        EventDispatcher.prototype.willTrigger = function (type) {
+        __egretProto__.willTrigger = function (type) {
             return this.hasEventListener(type);
         };
         /**
@@ -199,13 +210,13 @@ var egret;
          * @param event {egret.Event} 调度到事件流中的 Event 对象。如果正在重新分派事件，则会自动创建此事件的一个克隆。 在调度了事件后，其 _eventTarget 属性将无法更改，因此您必须创建此事件的一个新副本以能够重新调度。
          * @returns {boolean} 如果成功调度了事件，则值为 true。值 false 表示失败或对事件调用了 preventDefault()。
          */
-        EventDispatcher.prototype.dispatchEvent = function (event) {
+        __egretProto__.dispatchEvent = function (event) {
             event._reset();
             event._target = this._eventTarget;
             event._currentTarget = this._eventTarget;
             return this._notifyListener(event);
         };
-        EventDispatcher.prototype._notifyListener = function (event) {
+        __egretProto__._notifyListener = function (event) {
             var eventMap = event._eventPhase == 1 ? this._captureEventsMap : this._eventsMap;
             if (!eventMap) {
                 return true;
@@ -235,7 +246,7 @@ var egret;
          * @param bubbles {boolean} 是否冒泡，默认false
          * @param data {any}附加数据(可选)
          */
-        EventDispatcher.prototype.dispatchEventWith = function (type, bubbles, data) {
+        __egretProto__.dispatchEventWith = function (type, bubbles, data) {
             if (bubbles === void 0) { bubbles = false; }
             egret.Event.dispatchEvent(this, type, bubbles, data);
         };

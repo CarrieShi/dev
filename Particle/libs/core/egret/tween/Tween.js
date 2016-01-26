@@ -1,35 +1,31 @@
-/**
- * Copyright (c) 2014,Egret-Labs.org
- * All rights reserved.
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the Egret-Labs.org nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY EGRET-LABS.ORG AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL EGRET-LABS.ORG AND CONTRIBUTORS BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-2015, Egret Technology Inc.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 var egret;
 (function (egret) {
     /**
@@ -37,9 +33,15 @@ var egret;
      * @classdesc
      * Tween是Egret的动画缓动类
      * @extends egret.EventDispatcher
+     * @see http://edn.egret.com/cn/index.php?g=&m=article&a=index&id=150&terms1_id=25&terms2_id=34 Tween缓动动画
+     * @includeExample egret/tween/Tween.ts
      */
     var Tween = (function (_super) {
         __extends(Tween, _super);
+        /**
+         * 创建一个 egret.Tween 对象
+         * @private
+         */
         function Tween(target, props, pluginData) {
             _super.call(this);
             this._target = null;
@@ -58,10 +60,13 @@ var egret;
             this.passive = false;
             this.initialize(target, props, pluginData);
         }
+        var __egretProto__ = Tween.prototype;
         /**
-         * 激活一个显示对象，对其添加 Tween 动画
-         * @method egret.Tween.get
-         * @param target {egret.DisplayObject} 要激活的显示对象
+         * 激活一个对象，对其添加 Tween 动画
+         * @param target {any} 要激活 Tween 的对象
+         * @param props {any} 参数，支持loop(循环播放) onChange(变化函数) onChangeObj(变化函数作用域)
+         * @param pluginData {any} 暂未实现
+         * @param override {boolean} 是否移除对象之前添加的tween，默认值false
          */
         Tween.get = function (target, props, pluginData, override) {
             if (props === void 0) { props = null; }
@@ -73,9 +78,9 @@ var egret;
             return new Tween(target, props, pluginData);
         };
         /**
-         * 删除一个显示对象上的全部 Tween 动画
+         * 删除一个对象上的全部 Tween 动画
          * @method egret.Tween.removeTweens
-         * @param target {egret.DisplayObject}
+         * @param target  需要移除 Tween 的对象
          */
         Tween.removeTweens = function (target) {
             if (!target.tween_count) {
@@ -91,8 +96,8 @@ var egret;
             target.tween_count = 0;
         };
         /**
-         * 暂停某个元件的所有缓动
-         * @param target
+         * 暂停某个对象的所有 Tween
+         * @param target 要暂停 Tween 的对象
          */
         Tween.pauseTweens = function (target) {
             if (!target.tween_count) {
@@ -106,8 +111,8 @@ var egret;
             }
         };
         /**
-         * 继续播放某个元件的所有缓动
-         * @param target
+         * 继续播放某个对象的所有缓动
+         * @param target 要继续播放 Tween 的对象
          */
         Tween.resumeTweens = function (target) {
             if (!target.tween_count) {
@@ -136,7 +141,7 @@ var egret;
             var tweens = Tween._tweens;
             if (value) {
                 if (target) {
-                    target.tween_count = target.tween_count ? target.tween_count + 1 : 1;
+                    target.tween_count = target.tween_count > 0 ? target.tween_count + 1 : 1;
                 }
                 tweens.push(tween);
                 if (!Tween._inited) {
@@ -158,7 +163,7 @@ var egret;
             }
         };
         /**
-         * @method egret.Tween.removeAllTweens
+         * 删除所有 Tween
          */
         Tween.removeAllTweens = function () {
             var tweens = Tween._tweens;
@@ -169,7 +174,7 @@ var egret;
             }
             tweens.length = 0;
         };
-        Tween.prototype.initialize = function (target, props, pluginData) {
+        __egretProto__.initialize = function (target, props, pluginData) {
             this._target = target;
             if (props) {
                 this._useTicks = props.useTicks;
@@ -195,7 +200,7 @@ var egret;
                 this.setPosition(props.position, Tween.NONE);
             }
         };
-        Tween.prototype.setPosition = function (value, actionsMode) {
+        __egretProto__.setPosition = function (value, actionsMode) {
             if (actionsMode === void 0) { actionsMode = 1; }
             if (value < 0) {
                 value = 0;
@@ -254,7 +259,7 @@ var egret;
             this.dispatchEventWith("change");
             return end;
         };
-        Tween.prototype._runActions = function (startPos, endPos, includeStart) {
+        __egretProto__._runActions = function (startPos, endPos, includeStart) {
             if (includeStart === void 0) { includeStart = false; }
             var sPos = startPos;
             var ePos = endPos;
@@ -276,7 +281,7 @@ var egret;
                 }
             }
         };
-        Tween.prototype._updateTargetProps = function (step, ratio) {
+        __egretProto__._updateTargetProps = function (step, ratio) {
             var p0, p1, v, v0, v1, arr;
             if (!step && ratio == 1) {
                 this.passive = false;
@@ -326,23 +331,24 @@ var egret;
             }
         };
         /**
+         * 设置是否暂停
          * @method egret.Tween#setPaused
-         * @param value {boolean}
-         * @returns {egret.Tween}
+         * @param value {boolean} 是否暂停
+         * @returns Tween对象本身
          */
-        Tween.prototype.setPaused = function (value) {
+        __egretProto__.setPaused = function (value) {
             this.paused = value;
             Tween._register(this, !value);
             return this;
         };
-        Tween.prototype._cloneProps = function (props) {
+        __egretProto__._cloneProps = function (props) {
             var o = {};
             for (var n in props) {
                 o[n] = props[n];
             }
             return o;
         };
-        Tween.prototype._addStep = function (o) {
+        __egretProto__._addStep = function (o) {
             if (o.d > 0) {
                 this._steps.push(o);
                 o.t = this.duration;
@@ -350,7 +356,7 @@ var egret;
             }
             return this;
         };
-        Tween.prototype._appendQueueProps = function (o) {
+        __egretProto__._appendQueueProps = function (o) {
             var arr, oldValue, i, l, injectProps;
             for (var n in o) {
                 if (this._initQueueProps[n] === undefined) {
@@ -384,12 +390,12 @@ var egret;
             }
             return this._curQueueProps;
         };
-        Tween.prototype._addAction = function (o) {
+        __egretProto__._addAction = function (o) {
             o.t = this.duration;
             this._actions.push(o);
             return this;
         };
-        Tween.prototype._set = function (props, o) {
+        __egretProto__._set = function (props, o) {
             for (var n in props) {
                 o[n] = props[n];
             }
@@ -398,10 +404,10 @@ var egret;
          * 等待指定毫秒后执行下一个动画
          * @method egret.Tween#wait
          * @param duration {number} 要等待的时间，以毫秒为单位
-         * @param passive {boolean}
-         * @returns {egret.Tween}
+         * @param passive {boolean} 等待期间属性是否会更新
+         * @returns Tween对象本身
          */
-        Tween.prototype.wait = function (duration, passive) {
+        __egretProto__.wait = function (duration, passive) {
             if (duration == null || duration <= 0) {
                 return this;
             }
@@ -414,9 +420,9 @@ var egret;
          * @param props {Object} 对象的属性集合
          * @param duration {number} 持续时间
          * @param ease {egret.Ease} 缓动算法
-         * @returns {egret.Tween}
+         * @returns {egret.Tween} Tween对象本身
          */
-        Tween.prototype.to = function (props, duration, ease) {
+        __egretProto__.to = function (props, duration, ease) {
             if (ease === void 0) { ease = undefined; }
             if (isNaN(duration) || duration < 0) {
                 duration = 0;
@@ -426,37 +432,45 @@ var egret;
         /**
          * 执行回调函数
          * @method egret.Tween#call
-         * @param callback {Function}
-         * @param thisObj {Object}
-         * @param params {Object}
-         * @returns {egret.Tween}
+         * @param callback {Function} 回调方法
+         * @param thisObj {any} 回调方法this作用域
+         * @param params {Array<any>} 回调方法参数
+         * @returns {egret.Tween} Tween对象本身
          */
-        Tween.prototype.call = function (callback, thisObj, params) {
+        __egretProto__.call = function (callback, thisObj, params) {
             if (thisObj === void 0) { thisObj = undefined; }
             if (params === void 0) { params = undefined; }
             return this._addAction({ f: callback, p: params ? params : [], o: thisObj ? thisObj : this._target });
         };
-        Tween.prototype.set = function (props, target) {
+        /**
+         * 设置当前target的属性，并返回当前tween对象
+         * @param props {any} 参数
+         * @param target {any} 要激活 Tween 的对象
+         * @returns {Tween} 当前tween对象
+         */
+        __egretProto__.set = function (props, target) {
             if (target === void 0) { target = null; }
             return this._addAction({ f: this._set, o: this, p: [props, target ? target : this._target] });
         };
         /**
+         * 执行
          * @method egret.Tween#play
-         * @param tween {egret.Tween}
-         * @returns {egret.Tween}
+         * @param tween {egret.Tween} 需要操作的 Tween 对象，默认this
+         * @returns {egret.Tween} Tween对象本身
          */
-        Tween.prototype.play = function (tween) {
+        __egretProto__.play = function (tween) {
             if (!tween) {
                 tween = this;
             }
             return this.call(tween.setPaused, tween, [false]);
         };
         /**
+         * 暂停
          * @method egret.Tween#pause
-         * @param tween {egret.Tween}
-         * @returns {egret.Tween}
+         * @param tween {egret.Tween} 需要操作的 Tween 对象，默认this
+         * @returns {egret.Tween} Tween对象本身
          */
-        Tween.prototype.pause = function (tween) {
+        __egretProto__.pause = function (tween) {
             if (!tween) {
                 tween = this;
             }
@@ -465,8 +479,9 @@ var egret;
         /**
          * @method egret.Tween#tick
          * @param delta {number}
+         * @private
          */
-        Tween.prototype.tick = function (delta) {
+        __egretProto__.tick = function (delta) {
             if (this.paused) {
                 return;
             }
@@ -475,16 +490,19 @@ var egret;
         /**
          * 不做特殊处理
          * @constant {number} egret.Tween.NONE
+         * @private
          */
         Tween.NONE = 0;
         /**
          * 循环
          * @constant {number} egret.Tween.LOOP
+         * @private
          */
         Tween.LOOP = 1;
         /**
          * 倒序
          * @constant {number} egret.Tween.REVERSE
+         * @private
          */
         Tween.REVERSE = 2;
         Tween._tweens = [];

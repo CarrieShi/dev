@@ -1,32 +1,38 @@
-/**
- * Copyright (c) Egret-Labs.org. Permission is hereby granted, free of charge,
- * to any person obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom
- * the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
- * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-2015, Egret Technology Inc.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
 var RES;
 (function (RES) {
     /**
      * @class RES.ResourceLoader
      * @classdesc
      * @extends egret.EventDispatcher
+     * @private
      */
     var ResourceLoader = (function (_super) {
         __extends(ResourceLoader, _super);
@@ -45,6 +51,16 @@ var RES;
              */
             this.loadingCount = 0;
             /**
+             * 一项加载结束回调函数。无论加载成功或者出错都将执行回调函数。示例：callBack(resItem:ResourceItem):void;
+             * @member {Function} RES.ResourceLoader#callBack
+             */
+            this.callBack = null;
+            /**
+             * RES单例的引用
+             * @member {any} RES.ResourceLoader#resInstance
+             */
+            this.resInstance = null;
+            /**
              * 当前组加载的项总个数,key为groupName
              */
             this.groupTotalDic = {};
@@ -56,6 +72,13 @@ var RES;
              * 正在加载的组列表,key为groupName
              */
             this.itemListDic = {};
+            /**
+             * 加载失败的组,key为groupName
+             */
+            this.groupErrorDic = {};
+            this.retryTimesDic = {};
+            this.maxRetryTimes = 3;
+            this.failedList = new Array();
             /**
              * 优先级队列,key为priority，value为groupName列表
              */
@@ -73,13 +96,14 @@ var RES;
              */
             this.queueIndex = 0;
         }
+        var __egretProto__ = ResourceLoader.prototype;
         /**
          * 检查指定的组是否正在加载中
          * @method RES.ResourceLoader#isGroupInLoading
          * @param groupName {string}
          * @returns {boolean}
          */
-        ResourceLoader.prototype.isGroupInLoading = function (groupName) {
+        __egretProto__.isGroupInLoading = function (groupName) {
             return this.itemListDic[groupName] !== undefined;
         };
         /**
@@ -89,13 +113,13 @@ var RES;
          * @param groupName {string} 组名
          * @param priority {number} 加载优先级
          */
-        ResourceLoader.prototype.loadGroup = function (list, groupName, priority) {
+        __egretProto__.loadGroup = function (list, groupName, priority) {
             if (priority === void 0) { priority = 0; }
             if (this.itemListDic[groupName] || !groupName)
                 return;
             if (!list || list.length == 0) {
-                egret.Logger.warning("RES加载了不存在或空的资源组：\"" + groupName + "\"");
-                var event = new RES.ResourceEvent(RES.ResourceEvent.GROUP_COMPLETE);
+                egret.$warn(2001, groupName);
+                var event = new RES.ResourceEvent(RES.ResourceEvent.GROUP_LOAD_ERROR);
                 event.groupName = groupName;
                 this.dispatchEvent(event);
                 return;
@@ -119,7 +143,7 @@ var RES;
          * @method RES.ResourceLoader#loadItem
          * @param resItem {egret.ResourceItem} 要加载的项
          */
-        ResourceLoader.prototype.loadItem = function (resItem) {
+        __egretProto__.loadItem = function (resItem) {
             this.lazyLoadList.push(resItem);
             resItem.groupName = "";
             this.next();
@@ -127,7 +151,7 @@ var RES;
         /**
          * 加载下一项
          */
-        ResourceLoader.prototype.next = function () {
+        __egretProto__.next = function () {
             while (this.loadingCount < this.thread) {
                 var resItem = this.getOneResourceItem();
                 if (!resItem)
@@ -148,7 +172,9 @@ var RES;
         /**
          * 获取下一个待加载项
          */
-        ResourceLoader.prototype.getOneResourceItem = function () {
+        __egretProto__.getOneResourceItem = function () {
+            if (this.failedList.length > 0)
+                return this.failedList.shift();
             var maxPriority = Number.NEGATIVE_INFINITY;
             for (var p in this.priorityQueue) {
                 maxPriority = Math.max(maxPriority, p);
@@ -177,23 +203,43 @@ var RES;
         /**
          * 加载结束
          */
-        ResourceLoader.prototype.onItemComplete = function (resItem) {
+        __egretProto__.onItemComplete = function (resItem) {
             this.loadingCount--;
             var groupName = resItem.groupName;
             if (!resItem.loaded) {
-                RES.ResourceEvent.dispatchResourceEvent(this.resInstance, RES.ResourceEvent.ITEM_LOAD_ERROR, groupName, resItem);
+                var times = this.retryTimesDic[resItem.name] || 1;
+                if (times > this.maxRetryTimes) {
+                    delete this.retryTimesDic[resItem.name];
+                    RES.ResourceEvent.dispatchResourceEvent(this.resInstance, RES.ResourceEvent.ITEM_LOAD_ERROR, groupName, resItem);
+                }
+                else {
+                    this.retryTimesDic[resItem.name] = times + 1;
+                    this.failedList.push(resItem);
+                    this.next();
+                    return;
+                }
             }
             if (groupName) {
                 this.numLoadedDic[groupName]++;
                 var itemsLoaded = this.numLoadedDic[groupName];
                 var itemsTotal = this.groupTotalDic[groupName];
+                if (!resItem.loaded) {
+                    this.groupErrorDic[groupName] = true;
+                }
                 RES.ResourceEvent.dispatchResourceEvent(this.resInstance, RES.ResourceEvent.GROUP_PROGRESS, groupName, resItem, itemsLoaded, itemsTotal);
                 if (itemsLoaded == itemsTotal) {
+                    var groupError = this.groupErrorDic[groupName];
                     this.removeGroupName(groupName);
                     delete this.groupTotalDic[groupName];
                     delete this.numLoadedDic[groupName];
                     delete this.itemListDic[groupName];
-                    RES.ResourceEvent.dispatchResourceEvent(this, RES.ResourceEvent.GROUP_COMPLETE, groupName);
+                    delete this.groupErrorDic[groupName];
+                    if (groupError) {
+                        RES.ResourceEvent.dispatchResourceEvent(this, RES.ResourceEvent.GROUP_LOAD_ERROR, groupName);
+                    }
+                    else {
+                        RES.ResourceEvent.dispatchResourceEvent(this, RES.ResourceEvent.GROUP_COMPLETE, groupName);
+                    }
                 }
             }
             else {
@@ -204,7 +250,7 @@ var RES;
         /**
          * 从优先级队列中移除指定的组名
          */
-        ResourceLoader.prototype.removeGroupName = function (groupName) {
+        __egretProto__.removeGroupName = function (groupName) {
             for (var p in this.priorityQueue) {
                 var queue = this.priorityQueue[p];
                 var length = queue.length;
