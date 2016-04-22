@@ -1,0 +1,24 @@
+.panel-group .panel .panel-body li {
+    list-style : none;
+    width: 50%;
+    float: left;
+    overflow:hidden;
+    white-space:nowrap;
+}
+.panel-group .panel .panel-body li label {
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    font-weight: 100 !important;
+}
+.clearfix {
+    margin-bottom: 15px;
+}
+.sub-title {
+    color: #777;
+    font-weight: 600;
+}
+.badge {
+    background-color: #777 !important;
+}

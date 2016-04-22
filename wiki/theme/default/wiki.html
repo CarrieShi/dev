@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex">
+	<title><?php echo $title; ?></title>
+	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link href="theme/css/markdown.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<div class="page-header">
+				<h2>
+					<a href="index.php">WIKI</a> <small>Let's make the life easy!</small>
+				</h2>
+			</div>
+			<div class="markdown-body">
+				<?php echo $markdown ?>	
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

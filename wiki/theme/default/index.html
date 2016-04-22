@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link href="theme/css/customer.css" rel="stylesheet">
+	<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<div class="page-header">
+				<h2>
+					<a href="index.php">WIKI</a> <small>Let's make the life easy!</small>
+				</h2>
+			</div>			
+
+			<div class="btn-group pull-right">
+				<button class="btn btn-default btn-open" type="button">
+					<em class="glyphicon glyphicon-folder-open"></em>&nbsp;&nbsp;展 开
+				</button> 
+				<button class="btn btn-default btn-close" type="button">
+					<em class="glyphicon glyphicon-folder-close"></em>&nbsp;&nbsp;折 叠
+				</button> 
+			</div>
+			<div class="clearfix"></div>
+			<!--========文件列表=========-->
+			<div class="panel-group" id="panel-811499">
+				<?php foreach($files as $dir => $items): ?>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-811499" href="#panel-element-<?php echo $dir; ?>">
+						 <span class="sub-title"><?php echo $dir; ?></span>
+						 <span class="badge pull-right"><?php echo count($items); ?></span> 
+						 </a>
+					</div>
+					<div id="panel-element-<?php echo $dir; ?>" class="panel-collapse collapse in">
+						<div class="panel-body">
+							<?php foreach($items as $item): ?>
+							<li>
+								<label class="col-sm-8"><a href="wiki.php?read=<?php echo $item['dir'] .'/' . $item['name']; ?>"><?php echo $item['title'];?></a></label>
+								<label class="col-sm-4 pull-right"><?php echo date('Y-m-d', $item['time']); ?></label>
+							</li>
+							<?php endforeach; ?>
+						</div>
+					</div>
+				</div>
+				<?php endforeach; ?>
+			</div>
+			<!--========文件列表 结束==========-->
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript">
+$('.btn-open').on('click', function() {
+	$('.panel-collapse').collapse('show');
+});
+$('.btn-close').on('click', function() {
+	$('.panel-collapse').collapse('hide');
+});
+</script>
+</html>
