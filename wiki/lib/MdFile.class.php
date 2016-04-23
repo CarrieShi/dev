@@ -19,13 +19,12 @@ class MdFile {
 	public function listFiles() {
 		foreach ($this->_md as $key => $val) {			
 			$path = pathinfo($val);
-			$dir = str_replace($this->_dir, '', $path['dirname']);
+			$dir = str_replace($this->_dir .'/', '', $path['dirname']);
 			$files[$dir][] = array(
 				'dir' => $dir,
 				'name' => str_replace('.md', '', $path['basename']),
 				'time' => filemtime($val),
 				);
-
 		}
 		return $files;
 	}
@@ -39,11 +38,9 @@ class MdFile {
 
 	public function getContent() {
 		$file = $this->_md[0];
-		$md = file_get_contents($file);
-		preg_match("|\# .*|",$md,$content);
-		$title = str_replace('# ','',$content[0]);
+		$content = file_get_contents($file);
 		$parse = new Parsedown();
-		$markdown = $parse->text($md);
+		$markdown = $parse->text($content);
 		return $markdown;
 	}
 }
