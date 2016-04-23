@@ -40,7 +40,7 @@
 						<div class="panel-body">
 							<?php foreach($items as $item): ?>
 							<li>
-								<label class="col-sm-8"><a href="wiki.php?read=<?php echo $item['dir'] .'/' . $item['name']; ?>"><?php echo $item['title'];?></a></label>
+								<label class="col-sm-8"><a href="wiki.php?read=<?php echo $item['dir'] .'/' . $item['name'] . '.md'; ?>"><?php echo $item['name'];?></a></label>
 								<label class="col-sm-4 pull-right"><?php echo date('Y-m-d', $item['time']); ?></label>
 							</li>
 							<?php endforeach; ?>
