@@ -4,8 +4,11 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="noindex">
 	<title><?php echo $title; ?></title>
-	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">	
+	<link href="theme/css/style.css" rel="stylesheet">
 	<link href="theme/css/markdown.css" rel="stylesheet">
+	<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>	
+	<script src="theme/js/backToTop.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -13,14 +16,21 @@
 		<div class="col-sm-8 col-sm-offset-2">
 			<div class="page-header">
 				<h2>
-					<a href="index.php">WIKI</a> <small>Let's make the life easy!</small>
+					<a href="index.php">WIKI</a> <small>Let's make the life easier!</small>
 				</h2>
 			</div>
 			<div class="markdown-body">
 				<?php echo $markdown ?>	
 			</div>
 		</div>
+		<!--=======back to top=========-->
+		<a href="#" class="back-to-top" title="Back to top">
+			<em class="glyphicon glyphicon-chevron-up"></em>
+		</a>
 	</div>
 </div>
+<script type="text/javascript">
+$('.back-to-top').backToTop();
+</script>
 </body>
 </html>

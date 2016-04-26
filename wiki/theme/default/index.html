@@ -3,7 +3,7 @@
 <head>
 	<title></title>
 	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-	<link href="theme/css/customer.css" rel="stylesheet">
+	<link href="theme/css/style.css" rel="stylesheet">
 	<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
 	<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
@@ -13,7 +13,7 @@
 		<div class="col-sm-8 col-sm-offset-2">
 			<div class="page-header">
 				<h2>
-					<a href="index.php">WIKI</a> <small>Let's make the life easy!</small>
+					<a href="index.php">WIKI</a> <small>Let's make the life easier!</small>
 				</h2>
 			</div>			
 
@@ -40,8 +40,8 @@
 						<div class="panel-body">
 							<?php foreach($items as $item): ?>
 							<li>
-								<label class="col-sm-8"><a href="wiki.php?read=<?php echo $item['dir'] .'/' . $item['name'] . '.md'; ?>"><?php echo $item['name'];?></a></label>
-								<label class="col-sm-4 pull-right"><?php echo date('Y-m-d', $item['time']); ?></label>
+								<label class="col-sm-8"><a href="wiki.php?read=<?php echo '/' . $item['dir'] .'/' . $item['name'] . '.md'; ?>"><?php echo $item['name'];?></a></label>
+								<label class="col-sm-4 pull-right"><?php echo date('m/d H:i', $item['time']); ?></label>
 							</li>
 							<?php endforeach; ?>
 						</div>
