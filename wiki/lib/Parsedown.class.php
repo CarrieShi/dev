@@ -340,14 +340,24 @@ class Parsedown
             $Block['complete'] = true;
             return $Block;
         }
-        $Block['element']['text']['text'] .= "\n".$Line['body'];;
+        $Block['element']['text']['text'] .= "\n".$Line['body'];
         return $Block;
     }
     protected function blockFencedCodeComplete($Block)
     {
         $text = $Block['element']['text']['text'];
-        $text = htmlspecialchars($text, ENT_NOQUOTES, 'UTF-8');
-        $Block['element']['text']['text'] = $text;
+        $class = empty($Block['element']['text']['attributes']['class']) ? '' : $Block['element']['text']['attributes']['class'];
+        if($class && strpos($class, 'language-') !== false) {
+            $language = explode('-', $class);
+            $Block['element']['text']['attributes']['class'] .= ' ' . $language[1];
+        }
+        // 代码高亮
+        // if($class && strpos($class, 'language-') !== false) {
+        //     $Block['element']['text']['text'] = highlight_string($text, true);
+        // } else {
+            $text = htmlspecialchars($text, ENT_NOQUOTES, 'UTF-8');
+            $Block['element']['text']['text'] = $text;
+        // }
         return $Block;
     }
     #

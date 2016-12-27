@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+	<style type="text/css">
+	.input-text, .output-text {
+		height: 600px;
+		width: 90%;
+	}
+	.output-text {
+		border: 1px solid #777;
+	}
+	</style>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-6">
+			<textarea class="input-text"></textarea>
+		</div>
+		<div class="col-md-6">
+			<div class="output-text"></div>
+		</div>
+		<div class="html-text col-md-12"></div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('.input-text').bind('input propertychange', function(event){
+		$data = $(this).val();
+		
+		$.post('edit.php', {param:$data}, function($data) {
+			$('.output-text').html($data);
+		});
+	});
+</script>
+</body>
+</html>

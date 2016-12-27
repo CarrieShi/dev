@@ -468,7 +468,7 @@
   font-size: 100%;
   word-break: normal;
   white-space: pre;
-  background: transparent;
+  /*background: transparent;*/
   border: 0;
 }
 
@@ -482,7 +482,10 @@
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: #f7f7f7;
+  /*background-color: #f7f7f7;*/
+  /*highlight*/ 
+  background: #343C3C;
+  /*color: #d1d9e1;*/
   border-radius: 3px;
 }
 
